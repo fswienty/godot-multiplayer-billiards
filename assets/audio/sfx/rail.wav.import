@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rail.wav-23f244f523026fea3d54047d18ece94c.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/rail.wav"
+dest_files=[ "res://.import/rail.wav-23f244f523026fea3d54047d18ece94c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

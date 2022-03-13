@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ball_hit.wav-e73e7645dc325c6b0c8bd32365d96723.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/ball_hit.wav"
+dest_files=[ "res://.import/ball_hit.wav-e73e7645dc325c6b0c8bd32365d96723.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

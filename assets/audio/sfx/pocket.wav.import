@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pocket.wav-88839d9373ccbd46847132e4b6b5d8eb.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/pocket.wav"
+dest_files=[ "res://.import/pocket.wav-88839d9373ccbd46847132e4b6b5d8eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

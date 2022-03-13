@@ -1,0 +1,97 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://scripts/pool/ball.gd"
+}, {
+"base": "Area2D",
+"class": "BallInHand",
+"language": "GDScript",
+"path": "res://scripts/pool/ball_in_hand.gd"
+}, {
+"base": "Node2D",
+"class": "BallManager8Ball",
+"language": "GDScript",
+"path": "res://scripts/pool/ball_manager_8_ball.gd"
+}, {
+"base": "Node2D",
+"class": "GameManager8Ball",
+"language": "GDScript",
+"path": "res://scripts/pool/game_manager_8_ball.gd"
+}, {
+"base": "Area2D",
+"class": "Pocket",
+"language": "GDScript",
+"path": "res://scripts/pool/pocket.gd"
+}, {
+"base": "Node",
+"class": "QueueController",
+"language": "GDScript",
+"path": "res://scripts/pool/queue_controller.gd"
+} ]
+_global_script_class_icons={
+"Ball": "",
+"BallInHand": "",
+"BallManager8Ball": "",
+"GameManager8Ball": "",
+"Pocket": "",
+"QueueController": ""
+}
+
+[application]
+
+config/name="MultiplayerBilliards"
+run/main_scene="res://Game.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Lobby="*res://scripts/autoload/lobby.gd"
+BallTextures="*res://scripts/autoload/ball_textures.gd"
+SoundManager="*res://scripts/autoload/sound_manager.gd"
+Enums="*res://scripts/autoload/enums.gd"
+
+[debug]
+
+gdscript/warnings/unused_variable=false
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[global]
+
+mip=false
+
+[input]
+
+lmb={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+rmb={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+2d/default_gravity=0
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
