@@ -10,27 +10,28 @@ onready var ball_in_hand: BallInHand = $BallInHand
 
 
 func initialize():
+	ball_in_hand.initialize()
 	ball_placer.place_balls(ball_holder)
 	cue_ball = _get_cue_ball()
-	ball_in_hand.global_position = Vector2(9999990, 9999990)
+	if cue_ball == null:
+		printerr("cue ball not found!")
 
 
-# func _physics_process(_delta):
-# 	if balls_active:
-# 		var states: Array = []
-# 		for ball in ball_holder.get_children():
-# 			states.append([ball.global_position, ball.current_velocity])
-# 		rpc_unreliable("_set_ball_state", states)
+func _physics_process(_delta):
+	if balls_active:
+		rpc_unreliable("_set_ball_states", _get_ball_states())
 
-# remote func _set_ball_state(states: Array):
-# 	var balls: Array = ball_holder.get_children()
-# 	if balls.size() != states.size():
-# 		print("ERROR: balls array is not the same size as states array!")
-# 		return
-# 	for i in range(balls.size()):
-# 		balls[i].linear_velocity = Vector2.ZERO
-# 		balls[i].global_position = states[i][0]
-# 		balls[i].current_velocity = states[i][1]
+
+remote func _set_ball_states(states: Array):
+	var balls: Array = ball_holder.get_children()
+	print("balls size: ", balls.size(), " states size: ", states.size())
+	if balls.size() != states.size():
+		printerr("balls array is not the same size as states array!")
+		return
+	for i in range(balls.size()):
+		balls[i].linear_velocity = Vector2.ZERO
+		balls[i].global_position = states[i][0]
+		balls[i].current_velocity = states[i][1]
 
 
 func check_all_pocketed(type) -> bool:
@@ -44,16 +45,14 @@ func hit_cue_ball(impulse: Vector2):
 	cue_ball.impulse = impulse
 
 
-func hide_cue_ball():
-	cue_ball.is_active = true
-	cue_ball.global_position = Vector2(9999999, 9999999)
-
-
 func update_ball_in_hand() -> bool:
+	if cue_ball.global_position != Constants.cue_ball_inactive_pos:
+		cue_ball.global_position = Constants.cue_ball_inactive_pos
+		rpc_unreliable("_set_ball_states", _get_ball_states())
 	var res = ball_in_hand.run()
 	if res.placed:
-		ball_in_hand.remove()
 		cue_ball.global_position = res.pos
+		rpc_unreliable("_set_ball_states", _get_ball_states())
 		return true
 	return false
 
@@ -64,17 +63,18 @@ func remove(ball_: Ball):
 			ball.queue_free()
 
 
-func set_balls_active(is_active_: bool):
-	# balls_active = is_active_
-	for ball in ball_holder.get_children():
-		ball.is_active = is_active_
-
-
 func are_balls_still() -> bool:
 	for ball in ball_holder.get_children():
 		if ball.linear_velocity != Vector2.ZERO:
 			return false
 	return true
+
+
+func _get_ball_states() -> Array:
+	var states: Array = []
+	for ball in ball_holder.get_children():
+		states.append([ball.global_position, ball.current_velocity])
+	return states
 
 
 func _get_cue_ball() -> Ball:

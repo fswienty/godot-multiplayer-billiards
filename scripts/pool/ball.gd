@@ -7,7 +7,6 @@ signal ball_hit
 var number: int = -1
 var type = Enums.BallType.NONE
 var current_velocity: Vector2
-var is_active: bool = false
 var impulse: Vector2 = Vector2.ZERO
 
 
@@ -20,7 +19,7 @@ func initialize():
 func _physics_process(_delta):
 	if linear_velocity.length_squared() < 9:
 		linear_velocity = Vector2.ZERO
-	if is_active:
+	if impulse != Vector2.ZERO:
 		apply_central_impulse(impulse)
 		impulse = Vector2.ZERO
 		current_velocity = linear_velocity
@@ -28,14 +27,6 @@ func _physics_process(_delta):
 
 func _integrate_forces(_state):
 	rotation_degrees = 0
-	if is_active:
-		rpc_unreliable("_set_state", global_position, current_velocity)
-
-
-remote func _set_state(pos: Vector2, vel: Vector2):
-	global_position = pos
-	linear_velocity = Vector2.ZERO
-	current_velocity = vel
 
 
 func _set_texture():
@@ -107,7 +98,6 @@ func _on_Ball_body_entered(body: Node):
 func _on_PocketDetector_area_entered(area: Area2D):
 	if area.is_in_group("pocket"):
 		SoundManager.pocket_hit()
-		#TODO wut
 		emit_signal("ball_pocketed", self, area as Pocket)
 	else:
 		print("Unhandled _on_PocketDetector_area_entered() event: ", area.name)

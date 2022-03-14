@@ -7,7 +7,6 @@ var _err
 onready var connect_menu = $UI/ConnectMenu
 onready var lobby_8_ball = $UI/Lobby_8Ball
 onready var hud_8_ball = $UI/Hud_8Ball
-
 onready var game_8_ball = $Game_8Ball
 
 

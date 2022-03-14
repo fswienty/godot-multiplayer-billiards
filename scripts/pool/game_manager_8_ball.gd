@@ -72,7 +72,7 @@ func _physics_process(_delta):
 		queue_controller.run()
 	elif game_state == Enums.GameState.ROLLING:
 		if ball_manager.are_balls_still():
-			ball_manager.set_balls_active(false)
+			ball_manager.balls_active = false
 			var legal_play = _get_first_hit_legality() && !has_fouled
 			var go_again = legal_pocketing && legal_play
 			rpc("_on_balls_stopped", has_won, has_lost, legal_play)
@@ -83,7 +83,6 @@ func _physics_process(_delta):
 				game_state = Enums.GameState.WAITING
 				rpc("_on_turn_ended", legal_play)
 	elif game_state == Enums.GameState.BALLINHAND:
-		ball_manager.hide_cue_ball()
 		var placed: bool = ball_manager.update_ball_in_hand()
 		if placed:
 			game_state = Enums.GameState.QUEUE
@@ -103,16 +102,12 @@ func _set_next_player():
 		if next_player != null:
 			current_player_id = next_player
 	t1_turn = !t1_turn
-	print(
-		"t1: " + str(t1_player_ids),
-		" | t2: " + str(t2_player_ids) + " | current player: " + str(current_player_id)
-	)
 
 
 # called only on peer that takes the shot
 func _on_queue_hit(impulse: Vector2):
-	ball_manager.set_balls_active(true)
-	ball_manager.hit_cue_ball(impulse)
+	ball_manager.balls_active = true
+	ball_manager.cue_ball.impulse = impulse
 	game_state = Enums.GameState.ROLLING
 
 
@@ -134,7 +129,7 @@ remotesync func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: b
 	if (has_won_ and not legal_play) or has_lost_:
 		print("LOST!")
 		return
-	# TODO: do stuff to show winnig or losing team, go back to lobby
+	# TODO: turn of processing, do stuff to show winnig or losing team, go back to lobby
 
 	# reset for next turn
 	has_fouled = false
