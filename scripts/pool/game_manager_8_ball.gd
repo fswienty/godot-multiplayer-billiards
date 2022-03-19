@@ -252,18 +252,16 @@ func _get_opposite_pocket(pocket_location):
 
 func _check_last_non_8_ball(pocket: Pocket):
 	var t1_all_pocketed: bool = ball_manager.check_all_pocketed(t1_ball_type)
-	print("t1_all_pocketed: ", t1_all_pocketed)
 	var t1_needs_8_target: bool = t1_8_ball_target == Enums.PocketLocation.NONE
 	if t1_all_pocketed and t1_needs_8_target:
 		t1_8_ball_target = _get_opposite_pocket(pocket.location)
-		print(t1_all_pocketed and t1_needs_8_target, t1_8_ball_target)
+		print("t1_all_pocketed: ", t1_all_pocketed and t1_needs_8_target, t1_8_ball_target)
 
 	var t2_all_pocketed: bool = ball_manager.check_all_pocketed(t2_ball_type)
-	print("t2_all_pocketed: ", t2_all_pocketed)
 	var t2_needs_8_target: bool = t2_8_ball_target == Enums.PocketLocation.NONE
 	if t2_all_pocketed and t2_needs_8_target:
 		t2_8_ball_target = _get_opposite_pocket(pocket.location)
-		print(t2_all_pocketed and t2_needs_8_target, t2_8_ball_target)
+		print("t2_all_pocketed: ", t2_all_pocketed and t2_needs_8_target, t2_8_ball_target)
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):

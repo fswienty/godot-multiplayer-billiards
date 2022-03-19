@@ -23,7 +23,7 @@ func initialize(cue_ball_: Ball):
 
 func run():
 	if cue_ball == null:
-		print("ERROR: missing cue ball!")
+		printerr("missing cue ball!")
 		return
 	queue.show()
 	# get needed variables

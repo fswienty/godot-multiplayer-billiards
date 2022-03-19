@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=9 format=2]
+
+[ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui_theme/general/inactive.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui_theme/general/normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui_theme/general/hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui_theme/general/pressed.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[resource]
+default_font = SubResource( 1 )
+Button/colors/font_color_pressed = Color( 0.0745098, 0.698039, 0.113725, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 2 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = ExtResource( 4 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 5 )
+HSlider/styles/grabber_area = ExtResource( 3 )
+HSlider/styles/grabber_area_highlight = ExtResource( 3 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = ExtResource( 5 )
+LineEdit/styles/normal = ExtResource( 3 )
+LineEdit/styles/read_only = ExtResource( 2 )
+PanelContainer/styles/panel = ExtResource( 3 )
+ProgressBar/styles/bg = ExtResource( 3 )
+TabContainer/styles/panel = ExtResource( 3 )
+TabContainer/styles/tab_disabled = ExtResource( 2 )
+TabContainer/styles/tab_fg = ExtResource( 3 )
+TextEdit/styles/focus = SubResource( 4 )
+TextEdit/styles/normal = ExtResource( 3 )

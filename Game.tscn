@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/game_manager.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=9]
 [ext_resource path="res://scripts/pool/ball_in_hand.gd" type="Script" id=10]
 [ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=12]
+[ext_resource path="res://ui_theme/PlayerList.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scripts/pool/ball_placer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=15]
 
@@ -41,6 +43,7 @@ margin_left = -152.0
 margin_top = -92.0
 margin_right = 152.0
 margin_bottom = -62.0
+theme = ExtResource( 12 )
 placeholder_text = "Enter name"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,6 +58,7 @@ margin_left = -104.0
 margin_top = -34.0
 margin_right = 104.0
 margin_bottom = 14.0
+theme = ExtResource( 12 )
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,47 +73,23 @@ margin_left = -104.0
 margin_top = 36.0
 margin_right = 104.0
 margin_bottom = 84.0
+theme = ExtResource( 12 )
 text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Lobby_8Ball" type="Control" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 12 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerList" type="PanelContainer" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -125.0
-margin_top = -237.0
-margin_right = 125.0
-margin_bottom = -52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/PlayerList"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 243.0
-margin_bottom = 178.0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Label" type="Label" parent="UI/Lobby_8Ball/PlayerList/VBoxContainer"]
-margin_right = 236.0
-margin_bottom = 14.0
-text = "test 123 sdede"
+[node name="PlayerList" parent="UI/Lobby_8Ball" instance=ExtResource( 13 )]
 
 [node name="T1Label" type="Label" parent="UI/Lobby_8Ball"]
 anchor_top = 0.5
@@ -135,17 +115,17 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/T1List"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 244.0
-margin_bottom = 143.0
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 231.0
+margin_bottom = 145.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Label" type="Label" parent="UI/Lobby_8Ball/T1List/VBoxContainer"]
-margin_right = 237.0
-margin_bottom = 14.0
+margin_right = 211.0
+margin_bottom = 26.0
 text = "test 123 sdede"
 
 [node name="T2Label" type="Label" parent="UI/Lobby_8Ball"]
@@ -178,17 +158,17 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/T2List"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 243.0
-margin_bottom = 143.0
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 230.0
+margin_bottom = 145.0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Label" type="Label" parent="UI/Lobby_8Ball/T2List/VBoxContainer"]
-margin_right = 236.0
-margin_bottom = 14.0
+margin_right = 210.0
+margin_bottom = 26.0
 text = "test 123 sdede"
 
 [node name="T1Button" type="Button" parent="UI/Lobby_8Ball"]
@@ -252,10 +232,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -80.0
-margin_top = 164.0
-margin_right = 80.0
-margin_bottom = 178.0
+margin_left = -101.0
+margin_top = 159.0
+margin_right = 106.0
+margin_bottom = 185.0
 text = "Waiting for host to start..."
 __meta__ = {
 "_edit_use_anchors_": false
