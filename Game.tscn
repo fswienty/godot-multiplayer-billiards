@@ -1,26 +1,47 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/game_manager.gd" type="Script" id=2]
 [ext_resource path="res://scripts/menus/lobby_8_ball.gd" type="Script" id=3]
-[ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=4]
+[ext_resource path="res://scripts/menus/DEBUG_hud_8_ball.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Table.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/pool/game_manager_8_ball.gd" type="Script" id=6]
 [ext_resource path="res://assets/images/balls/cue_ball.png" type="Texture" id=7]
 [ext_resource path="res://scripts/pool/queue_controller.gd" type="Script" id=8]
-[ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/queue.png" type="Texture" id=9]
 [ext_resource path="res://scripts/pool/ball_in_hand.gd" type="Script" id=10]
 [ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=12]
-[ext_resource path="res://ui_theme/PlayerList.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scripts/pool/ball_placer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=15]
+[ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=16]
+[ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=17]
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+border_width_bottom = 2
+border_color = Color( 0, 0.647059, 0, 1 )
+shadow_size = 5
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_color = Color( 0, 0.647059, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 17 )
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 116.364
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
+DEBUG = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -34,45 +55,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerName" type="LineEdit" parent="UI/ConnectMenu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -152.0
-margin_top = -92.0
-margin_right = 152.0
-margin_bottom = -62.0
+[node name="CenterContainer" type="CenterContainer" parent="UI/ConnectMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ConnectMenu/CenterContainer"]
+margin_left = 362.0
+margin_top = 211.0
+margin_right = 662.0
+margin_bottom = 389.0
+rect_min_size = Vector2( 300, 0 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerName" type="LineEdit" parent="UI/ConnectMenu/CenterContainer/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 46.0
 theme = ExtResource( 12 )
 placeholder_text = "Enter name"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostButton" type="Button" parent="UI/ConnectMenu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -104.0
-margin_top = -34.0
-margin_right = 104.0
-margin_bottom = 14.0
+[node name="HostButton" type="Button" parent="UI/ConnectMenu/CenterContainer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 300.0
+margin_bottom = 112.0
 theme = ExtResource( 12 )
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="UI/ConnectMenu"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -104.0
-margin_top = 36.0
-margin_right = 104.0
-margin_bottom = 84.0
+[node name="JoinButton" type="Button" parent="UI/ConnectMenu/CenterContainer/VBoxContainer"]
+margin_top = 132.0
+margin_right = 300.0
+margin_bottom = 178.0
 theme = ExtResource( 12 )
 text = "Join"
 __meta__ = {
@@ -80,6 +103,7 @@ __meta__ = {
 }
 
 [node name="Lobby_8Ball" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 12 )
@@ -89,159 +113,170 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerList" parent="UI/Lobby_8Ball" instance=ExtResource( 13 )]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Lobby_8Ball"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 60
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="T1Label" type="Label" parent="UI/Lobby_8Ball"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 71.0
-margin_top = -120.0
-margin_right = 308.0
-margin_bottom = -75.0
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/MarginContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 964.0
+margin_bottom = 540.0
+custom_constants/separation = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeamPanelContainer" type="HBoxContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer"]
+margin_right = 904.0
+margin_bottom = 308.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1" type="VBoxContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer"]
+margin_right = 261.0
+margin_bottom = 308.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T1"]
+margin_right = 261.0
+margin_bottom = 26.0
 text = "Team 1"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="T1List" type="PanelContainer" parent="UI/Lobby_8Ball"]
-margin_left = 64.0
-margin_top = 225.0
-margin_right = 315.0
-margin_bottom = 375.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PlayerContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T1" instance=ExtResource( 13 )]
+margin_bottom = 252.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/T1List"]
-margin_left = 20.0
-margin_top = 5.0
-margin_right = 231.0
-margin_bottom = 145.0
+[node name="JoinButton" type="Button" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T1"]
+margin_top = 262.0
+margin_right = 261.0
+margin_bottom = 308.0
+size_flags_stretch_ratio = 2.43
+text = "Join Team 1"
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="UI/Lobby_8Ball/T1List/VBoxContainer"]
-margin_right = 211.0
-margin_bottom = 26.0
-text = "test 123 sdede"
+[node name="T0" type="VBoxContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer"]
+margin_left = 321.0
+margin_right = 582.0
+margin_bottom = 308.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="T2Label" type="Label" parent="UI/Lobby_8Ball"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -317.0
-margin_top = -120.0
-margin_right = -80.0
-margin_bottom = -75.0
+[node name="Label" type="Label" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T0"]
+margin_right = 261.0
+margin_bottom = 26.0
+text = "New Players"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T0" instance=ExtResource( 13 )]
+margin_bottom = 252.0
+
+[node name="DummyButton" type="Button" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T0"]
+margin_top = 262.0
+margin_right = 261.0
+margin_bottom = 308.0
+size_flags_stretch_ratio = 2.43
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="T2" type="VBoxContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer"]
+margin_left = 642.0
+margin_right = 904.0
+margin_bottom = 308.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T2"]
+margin_right = 262.0
+margin_bottom = 26.0
 text = "Team 2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T2" instance=ExtResource( 13 )]
+margin_right = 262.0
+margin_bottom = 252.0
+
+[node name="JoinButton" type="Button" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/TeamPanelContainer/T2"]
+margin_top = 262.0
+margin_right = 262.0
+margin_bottom = 308.0
+size_flags_stretch_ratio = 2.43
+text = "Join Team 2"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ControlsContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer"]
+margin_left = 302.0
+margin_top = 368.0
+margin_right = 602.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_constants/separation = 20
+
+[node name="WaitingLabel" type="Label" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/ControlsContainer"]
+visible = false
+margin_right = 300.0
+margin_bottom = 26.0
+size_flags_vertical = 1
+text = "Waiting for host to start..."
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2List" type="PanelContainer" parent="UI/Lobby_8Ball"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -324.0
-margin_top = -75.0
-margin_right = -74.0
-margin_bottom = 75.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lobby_8Ball/T2List"]
-margin_left = 20.0
-margin_top = 5.0
-margin_right = 230.0
-margin_bottom = 145.0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Label" type="Label" parent="UI/Lobby_8Ball/T2List/VBoxContainer"]
-margin_right = 210.0
-margin_bottom = 26.0
-text = "test 123 sdede"
-
-[node name="T1Button" type="Button" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -120.0
-margin_top = -25.0
-margin_right = -20.0
-margin_bottom = 25.0
-text = "< Team A"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="T2Button" type="Button" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 20.0
-margin_top = -25.0
-margin_right = 120.0
-margin_bottom = 25.0
-text = "Team B >"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RandomizeButton" type="Button" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = 52.0
-margin_right = 100.0
-margin_bottom = 102.0
+[node name="RandomizeButton" type="Button" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/ControlsContainer"]
+margin_right = 300.0
+margin_bottom = 46.0
 text = "Randomize Players"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = 148.0
-margin_right = 100.0
-margin_bottom = 198.0
-text = "Start"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StartButton" type="Button" parent="UI/Lobby_8Ball/MarginContainer/VBoxContainer/ControlsContainer"]
+margin_top = 66.0
+margin_right = 300.0
+margin_bottom = 112.0
+text = "Start Game"
 
-[node name="WaitingLabel" type="Label" parent="UI/Lobby_8Ball"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -101.0
-margin_top = 159.0
-margin_right = 106.0
-margin_bottom = 185.0
-text = "Waiting for host to start..."
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hud_8Ball" type="Control" parent="UI"]
+[node name="DEBUG_Hud_8Ball" type="Control" parent="UI"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -251,7 +286,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inset" type="Control" parent="UI/Hud_8Ball"]
+[node name="Inset" type="Control" parent="UI/DEBUG_Hud_8Ball"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
@@ -262,7 +297,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentPlayer" type="VBoxContainer" parent="UI/Hud_8Ball/Inset"]
+[node name="CurrentPlayer" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -131.5
@@ -272,7 +307,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer"]
+[node name="TeamLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
 margin_right = 263.0
 margin_bottom = 14.0
 text = "Current Team:"
@@ -280,7 +315,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Team" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer/TeamLabel"]
+[node name="Team" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/TeamLabel"]
 margin_left = 135.0
 margin_right = 262.0
 margin_bottom = 14.0
@@ -289,7 +324,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer"]
+[node name="NameLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
 margin_top = 18.0
 margin_right = 263.0
 margin_bottom = 32.0
@@ -298,7 +333,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer/NameLabel"]
+[node name="Name" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/NameLabel"]
 margin_left = 135.0
 margin_right = 262.0
 margin_bottom = 14.0
@@ -307,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameStateLabel" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer"]
+[node name="GameStateLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
 margin_top = 36.0
 margin_right = 263.0
 margin_bottom = 50.0
@@ -316,7 +351,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameState" type="Label" parent="UI/Hud_8Ball/Inset/CurrentPlayer/GameStateLabel"]
+[node name="GameState" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/GameStateLabel"]
 margin_left = 135.0
 margin_right = 262.0
 margin_bottom = 14.0
@@ -325,14 +360,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GeneralInfo" type="VBoxContainer" parent="UI/Hud_8Ball/Inset"]
+[node name="GeneralInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
 margin_right = 130.0
 margin_bottom = 111.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1TypeLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T1TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_right = 130.0
 margin_bottom = 14.0
 text = "Team 1 Ball Type:"
@@ -340,7 +375,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1Type" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T1TypeLabel"]
+[node name="T1Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1TypeLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -354,7 +389,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T1PocketedLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T1PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 18.0
 margin_right = 130.0
 margin_bottom = 32.0
@@ -363,7 +398,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1Pocketed" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T1PocketedLabel"]
+[node name="T1Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1PocketedLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -377,7 +412,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T1EightTargetLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T1EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 36.0
 margin_right = 130.0
 margin_bottom = 50.0
@@ -386,7 +421,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1EightTarget" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T1EightTargetLabel"]
+[node name="T1EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1EightTargetLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -400,12 +435,12 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="HSeparator" type="HSeparator" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="HSeparator" type="HSeparator" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 54.0
 margin_right = 130.0
 margin_bottom = 58.0
 
-[node name="T2TypeLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T2TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 62.0
 margin_right = 130.0
 margin_bottom = 76.0
@@ -414,7 +449,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2Type" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T2TypeLabel"]
+[node name="T2Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2TypeLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.10236
@@ -428,7 +463,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T2PocketedLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T2PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 80.0
 margin_right = 130.0
 margin_bottom = 94.0
@@ -437,7 +472,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2Pocketed" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T2PocketedLabel"]
+[node name="T2Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2PocketedLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -451,7 +486,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T2EightTargetLabel" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo"]
+[node name="T2EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 98.0
 margin_right = 130.0
 margin_bottom = 112.0
@@ -460,7 +495,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2EightTarget" type="Label" parent="UI/Hud_8Ball/Inset/GeneralInfo/T2EightTargetLabel"]
+[node name="T2EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2EightTargetLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -474,7 +509,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="TurnInfo" type="VBoxContainer" parent="UI/Hud_8Ball/Inset"]
+[node name="TurnInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -263.0
@@ -483,7 +518,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FirstHitLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="FirstHitLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_right = 263.0
 margin_bottom = 14.0
 text = "First Hit:"
@@ -491,7 +526,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FirstHit" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/FirstHitLabel"]
+[node name="FirstHit" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -500,7 +535,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="LegalPocketingLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="LegalPocketingLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_top = 18.0
 margin_right = 263.0
 margin_bottom = 32.0
@@ -509,7 +544,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LegalPocketing" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/LegalPocketingLabel"]
+[node name="LegalPocketing" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LegalPocketingLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -518,7 +553,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="FouledLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="FouledLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_top = 36.0
 margin_right = 263.0
 margin_bottom = 50.0
@@ -527,7 +562,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fouled" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/FouledLabel"]
+[node name="Fouled" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FouledLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -536,7 +571,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FirstHitLegalLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="FirstHitLegalLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_top = 54.0
 margin_right = 263.0
 margin_bottom = 68.0
@@ -545,7 +580,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FirstHitLegal" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/FirstHitLegalLabel"]
+[node name="FirstHitLegal" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLegalLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -554,7 +589,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WonLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="WonLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_top = 72.0
 margin_right = 263.0
 margin_bottom = 86.0
@@ -563,7 +598,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Won" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/WonLabel"]
+[node name="Won" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/WonLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -572,7 +607,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LostLabel" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo"]
+[node name="LostLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_top = 90.0
 margin_right = 263.0
 margin_bottom = 104.0
@@ -581,7 +616,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lost" type="Label" parent="UI/Hud_8Ball/Inset/TurnInfo/LostLabel"]
+[node name="Lost" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LostLabel"]
 margin_left = 133.0
 margin_right = 260.0
 margin_bottom = 14.0
@@ -590,8 +625,93 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Hud_8Ball" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 12 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
+anchor_right = 1.0
+margin_bottom = 55.0
+custom_styles/panel = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopContainer" type="HBoxContainer" parent="UI/Hud_8Ball/PanelContainer"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 1024.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+margin_right = 233.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Team 1"
+align = 2
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+margin_left = 253.0
+margin_right = 257.0
+margin_bottom = 45.0
+
+[node name="NameLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+margin_left = 277.0
+margin_right = 743.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = SubResource( 9 )
+text = "test 123 name"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+margin_left = 763.0
+margin_right = 767.0
+margin_bottom = 45.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BallTypesContainer" type="HBoxContainer" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+margin_left = 787.0
+margin_right = 1021.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="BallTypeLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer/BallTypesContainer"]
+margin_right = 87.0
+margin_bottom = 45.0
+size_flags_vertical = 1
+text = "Ball Type: "
+valign = 1
+
+[node name="BallTypeText" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer/BallTypesContainer"]
+margin_left = 91.0
+margin_right = 234.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Solilds"
+valign = 1
+
 [node name="Game_8Ball" type="Node2D" parent="."]
-position = Vector2( 512, 354 )
+position = Vector2( 512, 300 )
 script = ExtResource( 6 )
 ball_manager_np = NodePath("BallManager")
 queue_controller_np = NodePath("QueueController")
@@ -619,14 +739,14 @@ shape = SubResource( 8 )
 texture = ExtResource( 7 )
 
 [node name="QueueController" type="Node2D" parent="Game_8Ball"]
+position = Vector2( -146, 49 )
 script = ExtResource( 8 )
 force_mult = 5
 
 [node name="QueueSprite" type="Sprite" parent="Game_8Ball/QueueController"]
-position = Vector2( -72, -250 )
-scale = Vector2( 5, 0.1 )
+scale = Vector2( 0.35, 0.45 )
 texture = ExtResource( 9 )
-offset = Vector2( -32, 0 )
+offset = Vector2( -512, 0 )
 
 [node name="Node2D" type="Node2D" parent="Game_8Ball/QueueController/QueueSprite"]
 rotation = 1.5708
@@ -635,11 +755,7 @@ rotation = 1.5708
 points = PoolVector2Array( 0, 0, 0, -5000 )
 width = 1.0
 
-[connection signal="text_changed" from="UI/ConnectMenu/PlayerName" to="UI/ConnectMenu" method="_on_PlayerName_text_changed"]
-[connection signal="pressed" from="UI/ConnectMenu/HostButton" to="UI/ConnectMenu" method="_on_HostButton_pressed"]
-[connection signal="pressed" from="UI/ConnectMenu/JoinButton" to="UI/ConnectMenu" method="_on_JoinButton_pressed"]
-[connection signal="pressed" from="UI/Lobby_8Ball/T1Button" to="UI/Lobby_8Ball" method="_on_T1Button_pressed"]
-[connection signal="pressed" from="UI/Lobby_8Ball/T2Button" to="UI/Lobby_8Ball" method="_on_T2Button_pressed"]
-[connection signal="pressed" from="UI/Lobby_8Ball/RandomizeButton" to="UI/Lobby_8Ball" method="_on_RandomizeButton_pressed"]
-[connection signal="pressed" from="UI/Lobby_8Ball/StartButton" to="UI/Lobby_8Ball" method="_on_StartButton_pressed"]
+[connection signal="text_changed" from="UI/ConnectMenu/CenterContainer/VBoxContainer/PlayerName" to="UI/ConnectMenu" method="_on_PlayerName_text_changed"]
+[connection signal="pressed" from="UI/ConnectMenu/CenterContainer/VBoxContainer/HostButton" to="UI/ConnectMenu" method="_on_HostButton_pressed"]
+[connection signal="pressed" from="UI/ConnectMenu/CenterContainer/VBoxContainer/JoinButton" to="UI/ConnectMenu" method="_on_JoinButton_pressed"]
 [connection signal="ball_placed" from="Game_8Ball/BallManager/BallPlacer" to="Game_8Ball" method="_on_BallPlacer_ball_placed"]

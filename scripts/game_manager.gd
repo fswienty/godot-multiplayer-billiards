@@ -1,11 +1,13 @@
 extends Node
 
 export var DEBUG: bool = false
+export var DEBUG_HUD: bool = false
 
 var _err
 
 onready var connect_menu = $UI/ConnectMenu
 onready var lobby_8_ball = $UI/Lobby_8Ball
+onready var DEBUG_hud_8_ball = $UI/DEBUG_Hud_8Ball
 onready var hud_8_ball = $UI/Hud_8Ball
 onready var game_8_ball = $Game_8Ball
 
@@ -21,6 +23,7 @@ func _ready():
 		_err = Lobby.connect("game_started", self, "_on_game_started")
 		connect_menu.show()
 		lobby_8_ball.hide()
+		DEBUG_hud_8_ball.hide()
 		hud_8_ball.hide()
 		game_8_ball.hide()
 		game_8_ball.processing = false
@@ -30,6 +33,7 @@ func _on_entered_lobby():
 	connect_menu.hide()
 	lobby_8_ball.enter()
 	lobby_8_ball.show()
+	DEBUG_hud_8_ball.hide()
 	hud_8_ball.hide()
 
 
@@ -45,6 +49,12 @@ func _on_game_started(player_infos: Dictionary):
 	game_8_ball.processing = true
 
 	# init hud
-	hud_8_ball.show()
-	hud_8_ball.initialize(game_8_ball)
-	hud_8_ball.processing = true
+	if DEBUG_HUD:
+		hud_8_ball.hide()
+		DEBUG_hud_8_ball.show()
+		DEBUG_hud_8_ball.initialize(game_8_ball)
+		DEBUG_hud_8_ball.processing = true
+	else:
+		hud_8_ball.show()
+		hud_8_ball.initialize(game_8_ball)
+		hud_8_ball.processing = true

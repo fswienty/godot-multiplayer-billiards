@@ -211,13 +211,15 @@ func _assign_ball_types(ball: Ball):
 		else:
 			t1_ball_type = Enums.BallType.HALF
 			t2_ball_type = Enums.BallType.FULL
-	else:
+	elif ball.type == Enums.BallType.HALF:
 		if t1_turn:
 			t1_ball_type = Enums.BallType.HALF
 			t2_ball_type = Enums.BallType.FULL
 		else:
 			t1_ball_type = Enums.BallType.FULL
 			t2_ball_type = Enums.BallType.HALF
+	else:
+		printerr("cannot assign ", ball, " to a team")
 
 
 func _handle_pocketing(ball: Ball):

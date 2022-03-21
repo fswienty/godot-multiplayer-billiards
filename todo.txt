@@ -1,3 +1,8 @@
     first hit of other player -> no sound
     ball movement interpolation?
-    proper cue sprite
+
+    better line for queue
+    bottom hud bar with players and pocketed balls?
+    better shooting, less distance to fully charge
+    bug when pockting 8 ball first?
+    mark 8 hole at the end?
