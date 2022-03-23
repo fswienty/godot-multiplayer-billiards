@@ -3,9 +3,7 @@
 
     better line for queue
         put holes behind line
-        make line fixed insteadt of moving with queue sprite
         make line not show outside table bounds
     bottom hud bar with players and pocketed balls?
-    better shooting, less distance to fully charge
     bug when pockting 8 ball first?
     mark 8 hole at the end?

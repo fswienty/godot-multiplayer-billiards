@@ -746,7 +746,9 @@ texture = ExtResource( 7 )
 [node name="QueueController" type="Node2D" parent="Game_8Ball"]
 position = Vector2( -146, 49 )
 script = ExtResource( 8 )
-max_distance = 50.0
+distance_at_rest = 30.0
+max_distance = 100.0
+force_mult = 1000.0
 
 [node name="RotatingContainer" type="Node2D" parent="Game_8Ball/QueueController"]
 
@@ -761,7 +763,7 @@ offset = Vector2( -512, 0 )
 rotation = 1.5708
 z_index = 5
 z_as_relative = false
-points = PoolVector2Array( 0, 256, 0, -1500 )
+points = PoolVector2Array( 0, 0, 0, -1500 )
 width = 2.0
 default_color = Color( 0.294118, 0.835294, 1, 0.376471 )
 gradient = SubResource( 11 )
