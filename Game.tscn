@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/game_manager.gd" type="Script" id=2]
@@ -38,6 +38,9 @@ font_data = ExtResource( 17 )
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 116.364
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 0.431373, 1, 0.988235, 0.482353, 0.439216, 1, 0.960784, 0 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -634,7 +637,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
+[node name="TopBarContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
 anchor_right = 1.0
 margin_bottom = 55.0
 custom_styles/panel = SubResource( 10 )
@@ -642,7 +645,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopContainer" type="HBoxContainer" parent="UI/Hud_8Ball/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Hud_8Ball/TopBarContainer"]
 margin_left = 3.0
 margin_top = 5.0
 margin_right = 1024.0
@@ -654,7 +657,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 margin_right = 233.0
 margin_bottom = 45.0
 size_flags_horizontal = 3
@@ -663,12 +666,12 @@ text = "Team 1"
 align = 2
 valign = 1
 
-[node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+[node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 margin_left = 253.0
 margin_right = 257.0
 margin_bottom = 45.0
 
-[node name="NameLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+[node name="NameLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 margin_left = 277.0
 margin_right = 743.0
 margin_bottom = 45.0
@@ -680,7 +683,7 @@ text = "test 123 name"
 align = 1
 valign = 1
 
-[node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+[node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 margin_left = 763.0
 margin_right = 767.0
 margin_bottom = 45.0
@@ -688,20 +691,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BallTypesContainer" type="HBoxContainer" parent="UI/Hud_8Ball/PanelContainer/TopContainer"]
+[node name="BallTypesContainer" type="HBoxContainer" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 margin_left = 787.0
 margin_right = 1021.0
 margin_bottom = 45.0
 size_flags_horizontal = 3
 
-[node name="BallTypeLabel" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer/BallTypesContainer"]
+[node name="BallTypeLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer/BallTypesContainer"]
 margin_right = 87.0
 margin_bottom = 45.0
 size_flags_vertical = 1
 text = "Ball Type: "
 valign = 1
 
-[node name="BallTypeText" type="Label" parent="UI/Hud_8Ball/PanelContainer/TopContainer/BallTypesContainer"]
+[node name="BallTypeText" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer/BallTypesContainer"]
 margin_left = 91.0
 margin_right = 234.0
 margin_bottom = 45.0
@@ -719,6 +722,8 @@ queue_controller_np = NodePath("QueueController")
 [node name="Table" parent="Game_8Ball" instance=ExtResource( 5 )]
 
 [node name="BallManager" type="Node2D" parent="Game_8Ball"]
+z_index = 20
+z_as_relative = false
 script = ExtResource( 15 )
 
 [node name="BallHolder" type="Node2D" parent="Game_8Ball/BallManager"]
@@ -741,19 +746,25 @@ texture = ExtResource( 7 )
 [node name="QueueController" type="Node2D" parent="Game_8Ball"]
 position = Vector2( -146, 49 )
 script = ExtResource( 8 )
-force_mult = 5
+max_distance = 50.0
 
-[node name="QueueSprite" type="Sprite" parent="Game_8Ball/QueueController"]
+[node name="RotatingContainer" type="Node2D" parent="Game_8Ball/QueueController"]
+
+[node name="QueueSprite" type="Sprite" parent="Game_8Ball/QueueController/RotatingContainer"]
 scale = Vector2( 0.35, 0.45 )
+z_index = 30
+z_as_relative = false
 texture = ExtResource( 9 )
 offset = Vector2( -512, 0 )
 
-[node name="Node2D" type="Node2D" parent="Game_8Ball/QueueController/QueueSprite"]
+[node name="Line2D" type="Line2D" parent="Game_8Ball/QueueController/RotatingContainer"]
 rotation = 1.5708
-
-[node name="Line2D" type="Line2D" parent="Game_8Ball/QueueController/QueueSprite/Node2D"]
-points = PoolVector2Array( 0, 0, 0, -5000 )
-width = 1.0
+z_index = 5
+z_as_relative = false
+points = PoolVector2Array( 0, 256, 0, -1500 )
+width = 2.0
+default_color = Color( 0.294118, 0.835294, 1, 0.376471 )
+gradient = SubResource( 11 )
 
 [connection signal="text_changed" from="UI/ConnectMenu/CenterContainer/VBoxContainer/PlayerName" to="UI/ConnectMenu" method="_on_PlayerName_text_changed"]
 [connection signal="pressed" from="UI/ConnectMenu/CenterContainer/VBoxContainer/HostButton" to="UI/ConnectMenu" method="_on_HostButton_pressed"]

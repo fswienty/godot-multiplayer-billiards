@@ -3,9 +3,9 @@ extends Node
 var processing: bool = false
 var manager: GameManager8Ball
 
-onready var current_team: Label = $PanelContainer/TopContainer/TeamLabel
-onready var current_player: Label = $PanelContainer/TopContainer/NameLabel
-onready var ball_type: Label = $PanelContainer/TopContainer/BallTypesContainer/BallTypeText
+onready var current_team: Label = $TopBarContainer/HBoxContainer/TeamLabel
+onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
+onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
 
 
 func initialize(manager_: GameManager8Ball):
