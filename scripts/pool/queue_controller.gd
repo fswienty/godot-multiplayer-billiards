@@ -1,5 +1,5 @@
 class_name QueueController
-extends Node
+extends Node2D
 
 signal queue_hit
 
@@ -11,8 +11,8 @@ var dragged_distance: float = 0.0
 var start_hold_distance: float = 0.0
 var cue_ball: Ball
 
-onready var queue_container: Node2D = $RotatingContainer
-onready var queue: Sprite = $RotatingContainer/QueueSprite
+onready var queue: Sprite = $QueueSprite
+onready var line: Line2D = $LineMask/Line2D
 
 
 func initialize(cue_ball_: Ball):
@@ -23,16 +23,11 @@ func run():
 	if cue_ball == null:
 		printerr("missing cue ball!")
 		return
-	queue_container.show()
-	# get needed variables
+
+	var visible_: bool = true
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var ball_pos: Vector2 = cue_ball.global_position
 	var ball_to_mouse: Vector2 = mouse_pos - ball_pos
-	# set container
-	queue_container.global_position = ball_pos
-	queue_container.rotation = PI + ball_to_mouse.angle()
-	# set queue sprite
-	queue.position.x = -distance_at_rest
 
 	# handle dragging while lmb pressed
 	if Input.is_action_just_pressed("lmb"):
@@ -40,19 +35,27 @@ func run():
 	if Input.is_action_pressed("lmb"):
 		dragged_distance = ball_to_mouse.length() - start_hold_distance
 		dragged_distance = clamp(dragged_distance, 0, max_distance)
-		queue.position.x -= dragged_distance
 	if Input.is_action_just_released("lmb") and dragged_distance > 0:
 		var impulse: Vector2 = (
 			force_mult
 			* (dragged_distance / max_distance)
 			* -ball_to_mouse.normalized()
 		)
-		queue_container.hide()
+		dragged_distance = 0
+		visible_ = false
 		emit_signal("queue_hit", impulse)
-	rpc_unreliable("_set_state", queue.global_position, queue.rotation, queue_container.visible)
+
+	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
+	var line_pos = ball_pos
+	rpc_unreliable("_set_state", queue_pos, line_pos, ball_to_mouse.angle(), visible_)
 
 
-remote func _set_state(pos: Vector2, rot: float, visible: bool):
-	queue.global_position = pos
-	queue.rotation = rot
-	queue_container.visible = visible
+remotesync func _set_state(queue_pos: Vector2, line_pos: Vector2, rot: float, visible_: bool):
+	# set line
+	line.global_position = line_pos
+	line.rotation = -PI / 2 + rot
+	# set queue sprite
+	queue.global_position = queue_pos
+	queue.rotation = PI + rot
+	# set visibility
+	self.visible = visible_

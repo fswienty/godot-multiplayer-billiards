@@ -1,9 +1,7 @@
     first hit of other player -> no sound
     ball movement interpolation?
 
-    better line for queue
-        put holes behind line
-        make line not show outside table bounds
-    bottom hud bar with players and pocketed balls?
-    bug when pockting 8 ball first?
-    mark 8 hole at the end?
+    bottom hud bar with players and pocketed balls
+    bug when pockting 8 ball first
+    mark 8 hole at the end
+    background
