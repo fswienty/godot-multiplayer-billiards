@@ -1,6 +1,8 @@
 class_name GameManager8Ball
 extends Node2D
 
+signal ball_pocketed
+
 export(NodePath) var ball_manager_np
 export(NodePath) var queue_controller_np
 
@@ -184,6 +186,7 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 	# handle pocketing
 	_handle_pocketing(ball)
+	emit_signal("ball_pocketed")
 	ball_manager.remove(ball)
 
 	# check if the pocketed ball was the last non-8-ball for some team

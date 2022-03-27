@@ -30,43 +30,7 @@ func _integrate_forces(_state):
 
 
 func _set_texture():
-	var texture
-	match number:
-		0:
-			texture = BallTextures.tex_cue_ball
-		1:
-			texture = BallTextures.tex_yellow_full_1
-		2:
-			texture = BallTextures.tex_blue_full_2
-		3:
-			texture = BallTextures.tex_red_full_3
-		4:
-			texture = BallTextures.tex_purple_full_4
-		5:
-			texture = BallTextures.tex_orange_full_5
-		6:
-			texture = BallTextures.tex_green_full_6
-		7:
-			texture = BallTextures.tex_brown_full_7
-		8:
-			texture = BallTextures.tex_black_full_8
-		9:
-			texture = BallTextures.tex_yellow_half_9
-		10:
-			texture = BallTextures.tex_blue_half_10
-		11:
-			texture = BallTextures.tex_red_half_11
-		12:
-			texture = BallTextures.tex_purple_half_12
-		13:
-			texture = BallTextures.tex_orange_half_13
-		14:
-			texture = BallTextures.tex_green_half_14
-		15:
-			texture = BallTextures.tex_brown_half_15
-		_:
-			push_error("invalid ball number!")
-	$Sprite.texture = texture
+	$Sprite.texture = BallTextures.get_texture(number)
 
 
 func _set_type():
