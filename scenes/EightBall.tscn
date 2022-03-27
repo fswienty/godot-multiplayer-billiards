@@ -1,0 +1,283 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/images/balls/cue_ball.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Table.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/pool/game_manager_8_ball.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=6]
+[ext_resource path="res://scripts/pool/ball_in_hand.gd" type="Script" id=7]
+[ext_resource path="res://scripts/pool/ball_placer.gd" type="Script" id=8]
+[ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=9]
+[ext_resource path="res://scripts/pool/queue_controller.gd" type="Script" id=10]
+[ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=11]
+[ext_resource path="res://assets/images/queue.png" type="Texture" id=12]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+border_width_bottom = 2
+border_color = Color( 0, 0.647059, 0, 1 )
+shadow_size = 5
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+outline_color = Color( 0, 0.647059, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.14902, 0.14902, 0.14902, 1 )
+border_width_top = 2
+border_color = Color( 0, 0.647059, 0, 1 )
+shadow_size = 5
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 116.364
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.431373, 1, 0.988235, 0.482353, 0.439216, 1, 0.960784, 0 )
+
+[node name="EightBall" type="Node"]
+script = ExtResource( 4 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hud_8Ball" type="VBoxContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBarContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
+margin_right = 1024.0
+margin_bottom = 44.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Hud_8Ball/TopBarContainer"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 1024.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+margin_right = 233.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Team 1"
+align = 2
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+margin_left = 253.0
+margin_right = 257.0
+margin_bottom = 34.0
+
+[node name="NameLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+margin_left = 277.0
+margin_right = 743.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 2.0
+custom_fonts/font = SubResource( 2 )
+text = "test 123 name"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+margin_left = 763.0
+margin_right = 767.0
+margin_bottom = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BallTypesContainer" type="HBoxContainer" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+margin_left = 787.0
+margin_right = 1021.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+
+[node name="BallTypeLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer/BallTypesContainer"]
+margin_right = 87.0
+margin_bottom = 34.0
+size_flags_vertical = 1
+text = "Ball Type: "
+valign = 1
+
+[node name="BallTypeText" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer/BallTypesContainer"]
+margin_left = 91.0
+margin_right = 234.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Solilds"
+valign = 1
+
+[node name="BottomBarContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
+margin_top = 556.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 44 )
+size_flags_vertical = 10
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 1024.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+margin_left = 145.0
+margin_top = 17.0
+margin_right = 145.0
+margin_bottom = 17.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+custom_constants/separation = 35
+
+[node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+margin_left = 311.0
+margin_right = 315.0
+margin_bottom = 34.0
+
+[node name="NextPlayerContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+margin_left = 422.0
+margin_right = 598.0
+margin_bottom = 34.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
+
+[node name="Label" type="Label" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/NextPlayerContainer"]
+margin_right = 49.0
+margin_bottom = 34.0
+size_flags_horizontal = 10
+size_flags_vertical = 1
+text = "Next: "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/NextPlayerContainer"]
+margin_left = 53.0
+margin_right = 176.0
+margin_bottom = 34.0
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "test 123 name"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+margin_left = 705.0
+margin_right = 709.0
+margin_bottom = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T2BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+margin_left = 875.0
+margin_top = 17.0
+margin_right = 875.0
+margin_bottom = 17.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_constants/separation = 35
+
+[node name="Table" parent="." instance=ExtResource( 3 )]
+position = Vector2( 512, 300 )
+
+[node name="BallManager" type="Node2D" parent="."]
+position = Vector2( 512, 300 )
+z_index = 20
+z_as_relative = false
+script = ExtResource( 11 )
+
+[node name="BallHolder" type="Node2D" parent="BallManager"]
+
+[node name="BallPlacer" type="Node2D" parent="BallManager"]
+script = ExtResource( 8 )
+ball_scn = ExtResource( 2 )
+table_np = NodePath("../../Table")
+
+[node name="BallInHand" type="Area2D" parent="BallManager"]
+scale = Vector2( 0.0859375, 0.0859375 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallManager/BallInHand"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="BallManager/BallInHand"]
+texture = ExtResource( 1 )
+
+[node name="QueueController" type="Node2D" parent="."]
+position = Vector2( 512, 300 )
+script = ExtResource( 10 )
+distance_at_rest = 15.0
+max_distance = 70.0
+force_mult = 1000.0
+
+[node name="LineMask" type="Control" parent="QueueController"]
+margin_left = -360.0
+margin_top = -200.0
+margin_right = 360.0
+margin_bottom = 200.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="QueueController/LineMask"]
+position = Vector2( 368, -24 )
+rotation = 1.5708
+z_index = 5
+z_as_relative = false
+points = PoolVector2Array( 0, 0, 0, -1500 )
+width = 2.0
+default_color = Color( 0.294118, 0.835294, 1, 0.376471 )
+gradient = SubResource( 5 )
+antialiased = true
+
+[node name="QueueSprite" type="Sprite" parent="QueueController"]
+position = Vector2( 181, -223 )
+scale = Vector2( 0.35, 0.45 )
+z_index = 30
+z_as_relative = false
+texture = ExtResource( 12 )
+offset = Vector2( -512, 0 )

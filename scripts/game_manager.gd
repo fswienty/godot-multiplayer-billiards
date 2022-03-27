@@ -31,7 +31,7 @@ func _ready():
 
 func _on_entered_lobby():
 	connect_menu.hide()
-	lobby_8_ball.enter()
+	lobby_8_ball.initialize()
 	lobby_8_ball.show()
 	DEBUG_hud_8_ball.hide()
 	hud_8_ball.hide()
@@ -45,7 +45,7 @@ func _on_game_started(player_infos: Dictionary):
 
 	# load game scene
 	game_8_ball.show()
-	game_8_ball.initialize(player_infos)
+	game_8_ball.initialize()
 	game_8_ball.processing = true
 
 	# init hud

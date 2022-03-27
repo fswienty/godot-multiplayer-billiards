@@ -1,10 +1,7 @@
 class_name GameManager8Ball
-extends Node2D
+extends Node
 
 signal ball_pocketed
-
-export(NodePath) var ball_manager_np
-export(NodePath) var queue_controller_np
 
 var processing: bool = false
 var game_state = Enums.GameState.QUEUE
@@ -30,17 +27,21 @@ var t2_pocketed_balls: Array = []
 
 var _err
 
-onready var ball_manager: BallManager8Ball = get_node(ball_manager_np)
-onready var queue_controller: QueueController = get_node(queue_controller_np)
+onready var ball_manager: BallManager8Ball = $BallManager
+onready var queue_controller: QueueController = $QueueController
 
 
-func initialize(player_infos: Dictionary):
-	print(player_infos)
+func _ready():
+	initialize()
+
+
+func initialize():
+	print(Lobby.player_infos)
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
 		randomize()
 		var seed_ = randi()
-		rpc("initialize_synced", player_infos, seed_)
+		rpc("initialize_synced", Lobby.player_infos, seed_)
 
 
 remotesync func initialize_synced(player_infos: Dictionary, seed_: int):

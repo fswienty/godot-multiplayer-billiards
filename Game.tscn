@@ -809,8 +809,6 @@ custom_constants/separation = 35
 [node name="Game_8Ball" type="Node2D" parent="."]
 position = Vector2( 512, 300 )
 script = ExtResource( 6 )
-ball_manager_np = NodePath("BallManager")
-queue_controller_np = NodePath("QueueController")
 
 [node name="Table" parent="Game_8Ball" instance=ExtResource( 5 )]
 

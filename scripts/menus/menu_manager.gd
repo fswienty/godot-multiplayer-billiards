@@ -1,0 +1,40 @@
+extends Node
+
+export var DEBUG: bool = false
+export var DEBUG_HUD: bool = false
+
+var _err
+
+onready var connect_menu = $ConnectMenu
+onready var lobby_menu = $LobbyMenu
+
+
+func _ready():
+	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
+	_err = lobby_menu.connect("game_started", self, "_on_game_started")
+	if DEBUG:
+		connect_menu.player_name = "debug_host"
+		connect_menu._on_HostButton_pressed()
+		Lobby.player_infos = {
+			1: {name = "debug_host", team = 1}, 1337: {name = "debug_client", team = 2}
+		}
+		connect_menu.hide()
+		lobby_menu.initialize()
+		lobby_menu.show()
+		# _on_game_started()
+	else:
+		connect_menu.show()
+		lobby_menu.hide()
+
+
+func _on_entered_lobby():
+	connect_menu.hide()
+	lobby_menu.initialize()
+	lobby_menu.show()
+
+
+func _on_game_started():
+	print("game will be started with: ", Lobby.player_infos)
+
+	# load game scene
+	_err = get_tree().change_scene("res://scenes/EightBall.tscn")

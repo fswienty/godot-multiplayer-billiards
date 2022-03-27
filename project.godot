@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/pool/ball_manager_8_ball.gd"
 }, {
-"base": "Node2D",
+"base": "Node",
 "class": "GameManager8Ball",
 "language": "GDScript",
 "path": "res://scripts/pool/game_manager_8_ball.gd"
@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MultiplayerBilliards"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

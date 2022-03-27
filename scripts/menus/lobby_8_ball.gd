@@ -1,5 +1,7 @@
 extends Control
 
+signal game_started
+
 onready var t0_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T0/PlayerContainer/VBoxContainer
 onready var t1_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T1/PlayerContainer/VBoxContainer
 onready var t2_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T2/PlayerContainer/VBoxContainer
@@ -21,7 +23,7 @@ func _ready():
 	_err = start_button.connect("pressed", self, "_on_StartButton_pressed")
 
 
-func enter():
+func initialize():
 	if get_tree().is_network_server():
 		randomize_button.show()
 		start_button.show()
@@ -71,7 +73,13 @@ func _on_RandomizeButton_pressed():
 
 
 func _on_StartButton_pressed():
-	Lobby.host_started_game()
+	if Lobby.can_start_game():
+		rpc("_start_game")
+
+
+remotesync func _start_game():
+	get_tree().refuse_new_network_connections = true
+	emit_signal("game_started")
 
 
 remotesync func _set_team(team):

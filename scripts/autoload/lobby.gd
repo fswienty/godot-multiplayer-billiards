@@ -11,7 +11,6 @@ var peer: NetworkedMultiplayerENet
 var _err: int = 0
 
 signal player_infos_updated
-signal game_started
 
 
 func _ready():
@@ -101,7 +100,7 @@ func randomize_players():
 	rpc("update_player_infos", player_infos)
 
 
-func host_started_game():
+func can_start_game():
 	var t1_count = 0
 	var t2_count = 0
 
@@ -113,11 +112,6 @@ func host_started_game():
 
 	if t1_count < 1 or t2_count < 1:
 		print("Needs at least 1 player per team!")
-		return
+		return false
 
-	rpc("start_game")
-
-
-remotesync func start_game():
-	get_tree().refuse_new_network_connections = true
-	emit_signal("game_started", player_infos)
+	return true
