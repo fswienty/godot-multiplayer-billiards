@@ -36,7 +36,8 @@ func _ready():
 
 
 func initialize():
-	print(Lobby.player_infos)
+	# if Globals.DEBUG_MODE:
+	# 	game_state = Enums.GameState.BALLINHAND
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
 		randomize()
@@ -69,8 +70,6 @@ remotesync func initialize_synced(player_infos: Dictionary, seed_: int):
 
 
 func _physics_process(_delta):
-	if not processing:
-		return
 	if game_state == Enums.GameState.WAITING:
 		pass
 	elif game_state == Enums.GameState.QUEUE:
@@ -123,7 +122,6 @@ func _hud_set_next_player():
 		var next_player = t1_temp.front()
 		if next_player != null:
 			next_player_id = next_player
-	print(next_player_id)
 
 
 # called only on peer that takes the shot

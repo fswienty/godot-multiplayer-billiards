@@ -90,12 +90,10 @@ func set_team(player_id, team):
 
 func randomize_players():
 	var player_ids: Array = player_infos.keys()
-	print(player_ids)
 	player_ids.shuffle()
 	var team: int = randi() % 2
 	for id in player_ids:
 		player_infos[id].team = team + 1
-		print("added ", id, " to ", player_infos[id].team)
 		team = (team + 1) % 2
 	rpc("update_player_infos", player_infos)
 

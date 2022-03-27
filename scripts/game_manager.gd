@@ -1,6 +1,6 @@
 extends Node
 
-export var DEBUG: bool = false
+export var DEBUG_MODE: bool = false
 export var DEBUG_HUD: bool = false
 
 var _err
@@ -13,7 +13,7 @@ onready var game_8_ball = $Game_8Ball
 
 
 func _ready():
-	if DEBUG:
+	if DEBUG_MODE:
 		connect_menu.player_name = "debug_host"
 		connect_menu._on_HostButton_pressed()
 		_on_game_started({1: {name = "debug_host", team = 1}})

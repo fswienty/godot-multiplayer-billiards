@@ -1,7 +1,6 @@
 extends Node
 
-export var DEBUG: bool = false
-export var DEBUG_HUD: bool = false
+export var DEBUG_MODE: bool = false
 
 var _err
 
@@ -12,16 +11,16 @@ onready var lobby_menu = $LobbyMenu
 func _ready():
 	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
 	_err = lobby_menu.connect("game_started", self, "_on_game_started")
-	if DEBUG:
+
+	if DEBUG_MODE:
+		Globals.DEBUG_MODE = true
 		connect_menu.player_name = "debug_host"
 		connect_menu._on_HostButton_pressed()
-		Lobby.player_infos = {
-			1: {name = "debug_host", team = 1}, 1337: {name = "debug_client", team = 2}
-		}
+		Lobby.player_infos = {1: {name = "debug_host", team = 1}}
 		connect_menu.hide()
 		lobby_menu.initialize()
 		lobby_menu.show()
-		# _on_game_started()
+		_on_game_started()
 	else:
 		connect_menu.show()
 		lobby_menu.hide()

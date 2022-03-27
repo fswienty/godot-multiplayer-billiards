@@ -62,11 +62,11 @@ func _on_ball_pocketed():
 		t2_pocketed.remove_child(child)
 		child.queue_free()
 	# add current balls
-	for ball in manager.t1_pocketed_balls:
+	for ball_number in manager.t1_pocketed_balls:
 		var ball_container = ball_container_scn.instance()
-		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball)
+		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
 		t1_pocketed.add_child(ball_container)
-	for ball in manager.t2_pocketed_balls:
+	for ball_number in manager.t2_pocketed_balls:
 		var ball_container = ball_container_scn.instance()
-		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball)
+		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
 		t2_pocketed.add_child(ball_container)

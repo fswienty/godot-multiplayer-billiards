@@ -46,13 +46,13 @@ func hit_cue_ball(impulse: Vector2):
 
 
 func hide_cue_ball():
-	cue_ball.global_position = Constants.cue_ball_inactive_pos
+	cue_ball.global_position = Globals.cue_ball_inactive_pos
 	rpc_unreliable("_set_ball_states", _get_ball_states())
 
 
 func update_ball_in_hand() -> bool:
-	if cue_ball.global_position != Constants.cue_ball_inactive_pos:
-		cue_ball.global_position = Constants.cue_ball_inactive_pos
+	if cue_ball.global_position != Globals.cue_ball_inactive_pos:
+		cue_ball.global_position = Globals.cue_ball_inactive_pos
 		rpc_unreliable("_set_ball_states", _get_ball_states())
 	var res = ball_in_hand.run()
 	if res.placed:

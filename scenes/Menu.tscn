@@ -2,13 +2,13 @@
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
-[ext_resource path="res://scripts/menus/lobby_8_ball.gd" type="Script" id=3]
+[ext_resource path="res://scripts/menus/lobby_menu.gd" type="Script" id=3]
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=4]
 [ext_resource path="res://scripts/menus/menu_manager.gd" type="Script" id=5]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
-DEBUG = true
+DEBUG_MODE = true
 
 [node name="ConnectMenu" type="Control" parent="."]
 anchor_right = 1.0

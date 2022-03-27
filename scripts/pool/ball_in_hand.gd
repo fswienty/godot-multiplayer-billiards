@@ -3,7 +3,7 @@ extends Area2D
 
 
 func initialize():
-	global_position = Constants.ball_in_hand_inactive_pos
+	global_position = Globals.ball_in_hand_inactive_pos
 
 
 func run() -> Dictionary:
@@ -14,7 +14,7 @@ func run() -> Dictionary:
 	var area_free: bool = body_count + area_count == 0
 	if Input.is_action_just_released("lmb") && area_free:
 		var clicked_global_pos = global_position
-		rpc("_set_global_position", Constants.ball_in_hand_inactive_pos)
+		rpc("_set_global_position", Globals.ball_in_hand_inactive_pos)
 		return {"placed": true, "pos": clicked_global_pos}
 	return {"placed": false, "pos": Vector2.ZERO}
 
