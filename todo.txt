@@ -1,7 +1,6 @@
     first hit of other player -> no sound
     ball movement interpolation?
 
-    bottom hud bar with players and pocketed balls
     bug when pockting 8 ball first
     mark 8 hole at the end
     background
