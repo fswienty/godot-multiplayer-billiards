@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=1]
 [ext_resource path="res://scripts/game_manager.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=15]
 [ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=16]
 [ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://scenes/ui_scenes/BallContainer.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 3.0
@@ -746,29 +747,57 @@ __meta__ = {
 }
 
 [node name="T1BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
-margin_left = 189.0
+margin_left = 40.0
 margin_top = 17.0
-margin_right = 189.0
+margin_right = 250.0
 margin_bottom = 17.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
 custom_constants/separation = 35
 
+[node name="BallContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+
+[node name="BallContainer2" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 35.0
+margin_right = 35.0
+
+[node name="BallContainer3" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 70.0
+margin_right = 70.0
+
+[node name="BallContainer4" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 105.0
+margin_right = 105.0
+
+[node name="BallContainer5" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 140.0
+margin_right = 140.0
+
+[node name="BallContainer6" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 175.0
+margin_right = 175.0
+
+[node name="BallContainer7" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/T1BallContainer" instance=ExtResource( 18 )]
+margin_left = 210.0
+margin_right = 210.0
+
 [node name="VSeparator" type="VSeparator" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
-margin_left = 398.0
-margin_right = 402.0
+margin_left = 311.0
+margin_right = 315.0
 margin_bottom = 34.0
 
 [node name="NextPlayerContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
 margin_left = 422.0
 margin_right = 598.0
 margin_bottom = 34.0
+size_flags_horizontal = 6
 size_flags_vertical = 3
+size_flags_stretch_ratio = 1.2
 
 [node name="Label" type="Label" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer/NextPlayerContainer"]
 margin_right = 49.0
 margin_bottom = 34.0
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 size_flags_vertical = 1
 text = "Next: "
 align = 1
@@ -781,24 +810,24 @@ __meta__ = {
 margin_left = 53.0
 margin_right = 176.0
 margin_bottom = 34.0
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 size_flags_vertical = 1
 text = "test 123 name"
 align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
-margin_left = 618.0
-margin_right = 622.0
+margin_left = 705.0
+margin_right = 709.0
 margin_bottom = 34.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="T2BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
-margin_left = 831.0
+margin_left = 875.0
 margin_top = 17.0
-margin_right = 831.0
+margin_right = 875.0
 margin_bottom = 17.0
 size_flags_horizontal = 6
 size_flags_vertical = 6

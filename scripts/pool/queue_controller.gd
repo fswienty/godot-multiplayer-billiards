@@ -35,7 +35,7 @@ func run():
 	if Input.is_action_pressed("lmb"):
 		dragged_distance = ball_to_mouse.length() - start_hold_distance
 		dragged_distance = clamp(dragged_distance, 0, max_distance)
-	if Input.is_action_just_released("lmb") and dragged_distance > 0:
+	if Input.is_action_just_released("lmb"):
 		var impulse: Vector2 = (
 			force_mult
 			* (dragged_distance / max_distance)
@@ -43,7 +43,8 @@ func run():
 		)
 		dragged_distance = 0
 		visible_ = false
-		emit_signal("queue_hit", impulse)
+		if impulse != Vector2.ZERO:
+			emit_signal("queue_hit", impulse)
 
 	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
 	var line_pos = ball_pos

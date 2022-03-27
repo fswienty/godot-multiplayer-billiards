@@ -17,6 +17,7 @@ var has_lost = false
 var first_hit_type = Enums.BallType.NONE
 
 var current_player_id: int = -1
+var next_player_id: int = -1
 var t1_turn = true
 var t1_player_ids: Array = []
 var t2_player_ids: Array = []
@@ -59,6 +60,7 @@ remotesync func initialize_synced(player_infos: Dictionary, seed_: int):
 			print("Invalid team for player ", info.name, ", team ", info.team)
 
 	current_player_id = t1_player_ids.front()
+	_hud_set_next_player()
 	if self_id == current_player_id:
 		game_state = Enums.GameState.QUEUE
 	else:
@@ -103,7 +105,24 @@ func _set_next_player():
 		var next_player = t1_player_ids.front()
 		if next_player != null:
 			current_player_id = next_player
-	t1_turn = !t1_turn
+
+
+func _hud_set_next_player():
+	var t1_temp = [] + t1_player_ids
+	var t2_temp = [] + t2_player_ids
+	if t1_turn:
+		t1_temp.pop_front()
+		t1_temp.push_back(current_player_id)
+		var next_player = t2_temp.front()
+		if next_player != null:
+			next_player_id = next_player
+	else:
+		t2_temp.pop_front()
+		t2_temp.push_back(current_player_id)
+		var next_player = t1_temp.front()
+		if next_player != null:
+			next_player_id = next_player
+	print(next_player_id)
 
 
 # called only on peer that takes the shot
@@ -116,6 +135,8 @@ func _on_queue_hit(impulse: Vector2):
 # called on all peers including last active when their turn is over
 remotesync func _on_turn_ended(legal_play: bool):
 	_set_next_player()
+	t1_turn = !t1_turn
+	_hud_set_next_player()
 	if self_id == current_player_id:
 		if legal_play:
 			game_state = Enums.GameState.QUEUE

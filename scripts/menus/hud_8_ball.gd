@@ -32,7 +32,10 @@ func _physics_process(_delta):
 		current_team.text = "Team 2"
 		ball_type.text = _get_ball_type_text(manager.t2_ball_type, manager.t2_8_ball_target)
 
-	current_player.text = Lobby.player_infos[manager.current_player_id].name
+	if manager.current_player_id >= 0:
+		current_player.text = Lobby.player_infos[manager.current_player_id].name
+	if manager.next_player_id >= 0:
+		next_player.text = Lobby.player_infos[manager.next_player_id].name
 
 
 func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String:
