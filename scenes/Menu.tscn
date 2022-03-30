@@ -9,8 +9,9 @@
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
 DEBUG_MODE = true
+DEBUG_HUD = true
 
-[node name="ConnectMenu" type="Control" parent="."]
+[node name="ConnectMenu" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -19,14 +20,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="ConnectMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
 margin_left = 362.0
 margin_top = 211.0
 margin_right = 662.0
@@ -37,7 +31,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerName" type="LineEdit" parent="ConnectMenu/CenterContainer/VBoxContainer"]
+[node name="PlayerName" type="LineEdit" parent="ConnectMenu/VBoxContainer"]
 margin_right = 300.0
 margin_bottom = 46.0
 theme = ExtResource( 4 )
@@ -46,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostButton" type="Button" parent="ConnectMenu/CenterContainer/VBoxContainer"]
+[node name="HostButton" type="Button" parent="ConnectMenu/VBoxContainer"]
 margin_top = 66.0
 margin_right = 300.0
 margin_bottom = 112.0
@@ -56,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="ConnectMenu/CenterContainer/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="ConnectMenu/VBoxContainer"]
 margin_top = 132.0
 margin_right = 300.0
 margin_bottom = 178.0
@@ -66,28 +60,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LobbyMenu" type="Control" parent="."]
+[node name="LobbyMenu" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )
+custom_constants/margin_right = 60
+custom_constants/margin_top = 60
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 60
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="LobbyMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 60
-custom_constants/margin_top = 60
-custom_constants/margin_left = 60
-custom_constants/margin_bottom = 60
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu"]
 margin_left = 60.0
 margin_top = 60.0
 margin_right = 964.0
@@ -97,9 +84,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TeamPanelContainer" type="HBoxContainer" parent="LobbyMenu/MarginContainer/VBoxContainer"]
+[node name="TeamPanelContainer" type="HBoxContainer" parent="LobbyMenu/VBoxContainer"]
 margin_right = 904.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 60
@@ -107,15 +94,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1" type="VBoxContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer"]
+[node name="T1" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
 margin_right = 261.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T1"]
+[node name="Label" type="Label" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T1"]
 margin_right = 261.0
 margin_bottom = 26.0
 text = "Team 1"
@@ -125,29 +112,29 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T1" instance=ExtResource( 1 )]
-margin_bottom = 252.0
+[node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T1" instance=ExtResource( 1 )]
+margin_bottom = 206.0
 
-[node name="JoinButton" type="Button" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T1"]
-margin_top = 262.0
+[node name="JoinButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T1"]
+margin_top = 216.0
 margin_right = 261.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_stretch_ratio = 2.43
 text = "Join Team 1"
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="T0" type="VBoxContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer"]
+[node name="T0" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
 margin_left = 321.0
 margin_right = 582.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T0"]
+[node name="Label" type="Label" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
 margin_right = 261.0
 margin_bottom = 26.0
 text = "New Players"
@@ -157,29 +144,29 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T0" instance=ExtResource( 1 )]
-margin_bottom = 252.0
+[node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0" instance=ExtResource( 1 )]
+margin_bottom = 206.0
 
-[node name="DummyButton" type="Button" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T0"]
-margin_top = 262.0
+[node name="DummyButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
+margin_top = 216.0
 margin_right = 261.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_stretch_ratio = 2.43
 flat = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="T2" type="VBoxContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer"]
+[node name="T2" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
 margin_left = 642.0
 margin_right = 904.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T2"]
+[node name="Label" type="Label" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T2"]
 margin_right = 262.0
 margin_bottom = 26.0
 text = "Team 2"
@@ -189,23 +176,23 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerContainer" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T2" instance=ExtResource( 1 )]
+[node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T2" instance=ExtResource( 1 )]
 margin_right = 262.0
-margin_bottom = 252.0
+margin_bottom = 206.0
 
-[node name="JoinButton" type="Button" parent="LobbyMenu/MarginContainer/VBoxContainer/TeamPanelContainer/T2"]
-margin_top = 262.0
+[node name="JoinButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T2"]
+margin_top = 216.0
 margin_right = 262.0
-margin_bottom = 308.0
+margin_bottom = 262.0
 size_flags_stretch_ratio = 2.43
 text = "Join Team 2"
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ControlsContainer" type="VBoxContainer" parent="LobbyMenu/MarginContainer/VBoxContainer"]
+[node name="ControlsContainer" type="VBoxContainer" parent="LobbyMenu/VBoxContainer"]
 margin_left = 302.0
-margin_top = 368.0
+margin_top = 322.0
 margin_right = 602.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 300, 0 )
@@ -213,8 +200,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 custom_constants/separation = 20
 
-[node name="WaitingLabel" type="Label" parent="LobbyMenu/MarginContainer/VBoxContainer/ControlsContainer"]
-visible = false
+[node name="WaitingLabel" type="Label" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
 margin_right = 300.0
 margin_bottom = 26.0
 size_flags_vertical = 1
@@ -225,20 +211,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RandomizeButton" type="Button" parent="LobbyMenu/MarginContainer/VBoxContainer/ControlsContainer"]
+[node name="RandomizeButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
+margin_top = 46.0
 margin_right = 300.0
-margin_bottom = 46.0
+margin_bottom = 92.0
 text = "Randomize Players"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="LobbyMenu/MarginContainer/VBoxContainer/ControlsContainer"]
-margin_top = 66.0
+[node name="StartButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
+margin_top = 112.0
 margin_right = 300.0
-margin_bottom = 112.0
+margin_bottom = 158.0
 text = "Start Game"
-
-[connection signal="text_changed" from="ConnectMenu/CenterContainer/VBoxContainer/PlayerName" to="ConnectMenu" method="_on_PlayerName_text_changed"]
-[connection signal="pressed" from="ConnectMenu/CenterContainer/VBoxContainer/HostButton" to="ConnectMenu" method="_on_HostButton_pressed"]
-[connection signal="pressed" from="ConnectMenu/CenterContainer/VBoxContainer/JoinButton" to="ConnectMenu" method="_on_JoinButton_pressed"]

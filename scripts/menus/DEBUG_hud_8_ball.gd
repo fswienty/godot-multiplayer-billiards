@@ -24,6 +24,7 @@ onready var lost: Label = $Inset/TurnInfo/LostLabel/Lost
 
 func initialize(manager_: GameManager8Ball):
 	manager = manager_
+	processing = true
 
 
 func _physics_process(_delta):

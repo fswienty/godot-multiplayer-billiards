@@ -1,6 +1,10 @@
-    first hit of other player -> no sound
-    ball movement interpolation?
+first hit of other player -> no sound
+ball movement interpolation?
 
-    bug when pockting 8 ball first
-    mark 8 hole at the end
-    background
+bug when pockting 8 ball first
+mark 8 hole at the end
+background
+    steal shader stuff from snek game?
+game over screen
+    text which team won
+    button to go back to lobby or wait label for non host

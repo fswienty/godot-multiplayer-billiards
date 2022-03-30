@@ -2,15 +2,15 @@ extends Control
 
 signal game_started
 
-onready var t0_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T0/PlayerContainer/VBoxContainer
-onready var t1_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T1/PlayerContainer/VBoxContainer
-onready var t2_list: VBoxContainer = $MarginContainer/VBoxContainer/TeamPanelContainer/T2/PlayerContainer/VBoxContainer
-onready var t1_button: Button = $MarginContainer/VBoxContainer/TeamPanelContainer/T1/JoinButton
-onready var t2_button: Button = $MarginContainer/VBoxContainer/TeamPanelContainer/T2/JoinButton
+onready var t0_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T0/PlayerContainer/VBoxContainer
+onready var t1_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T1/PlayerContainer/VBoxContainer
+onready var t2_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T2/PlayerContainer/VBoxContainer
+onready var t1_button: Button = $VBoxContainer/TeamPanelContainer/T1/JoinButton
+onready var t2_button: Button = $VBoxContainer/TeamPanelContainer/T2/JoinButton
 
-onready var waiting_label = $MarginContainer/VBoxContainer/ControlsContainer/WaitingLabel
-onready var randomize_button: Button = $MarginContainer/VBoxContainer/ControlsContainer/RandomizeButton
-onready var start_button = $MarginContainer/VBoxContainer/ControlsContainer/StartButton
+onready var waiting_label = $VBoxContainer/ControlsContainer/WaitingLabel
+onready var randomize_button: Button = $VBoxContainer/ControlsContainer/RandomizeButton
+onready var start_button = $VBoxContainer/ControlsContainer/StartButton
 
 var _err
 

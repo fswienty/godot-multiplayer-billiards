@@ -1,6 +1,7 @@
 extends Node
 
 export var DEBUG_MODE: bool = false
+export var DEBUG_HUD: bool = false
 
 var _err
 
@@ -12,8 +13,9 @@ func _ready():
 	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
 	_err = lobby_menu.connect("game_started", self, "_on_game_started")
 
+	Globals.DEBUG_MODE = DEBUG_MODE
+	Globals.DEBUG_HUD = DEBUG_HUD
 	if DEBUG_MODE:
-		Globals.DEBUG_MODE = true
 		connect_menu.player_name = "debug_host"
 		connect_menu._on_HostButton_pressed()
 		Lobby.player_infos = {1: {name = "debug_host", team = 1}}

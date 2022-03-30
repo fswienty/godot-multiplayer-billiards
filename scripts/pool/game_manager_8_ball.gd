@@ -30,6 +30,7 @@ var _err
 onready var ball_manager: BallManager8Ball = $BallManager
 onready var queue_controller: QueueController = $QueueController
 onready var hud = $UI/Hud_8Ball
+onready var debug_hud = $UI/DEBUG_Hud_8Ball
 
 
 func _ready():
@@ -38,7 +39,8 @@ func _ready():
 
 func initialize():
 	if Globals.DEBUG_MODE:
-		# game_state = Enums.GameState.BALLINHAND
+		game_state = Enums.GameState.BALLINHAND
+
 		pass
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
@@ -55,6 +57,8 @@ remotesync func initialize_synced(seed_: int):
 	ball_manager.initialize()
 	queue_controller.initialize(ball_manager.cue_ball)
 	hud.initialize(self)
+	if Globals.DEBUG_HUD:
+		debug_hud.initialize(self)
 
 	for key in Lobby.player_infos.keys():
 		var info = Lobby.player_infos[key]
@@ -74,26 +78,48 @@ remotesync func initialize_synced(seed_: int):
 
 
 func _physics_process(_delta):
-	if game_state == Enums.GameState.WAITING:
-		pass
-	elif game_state == Enums.GameState.QUEUE:
-		queue_controller.run()
-	elif game_state == Enums.GameState.ROLLING:
-		if ball_manager.are_balls_still():
-			ball_manager.balls_active = false
-			var legal_play = _get_first_hit_legality() && !has_fouled
-			var go_again = legal_pocketing && legal_play
-			rpc("_on_balls_stopped", has_won, has_lost, legal_play)
-			if go_again:
-				print("Go again!")
+	match game_state:
+		Enums.GameState.WAITING:
+			pass
+		Enums.GameState.QUEUE:
+			queue_controller.run()
+		Enums.GameState.ROLLING:
+			if ball_manager.are_balls_still():
+				ball_manager.balls_active = false
+				var legal_play = _get_first_hit_legality() && !has_fouled
+				var go_again = legal_pocketing && legal_play
+				rpc("_on_balls_stopped", has_won, has_lost, legal_play)
+				if go_again:
+					print("Go again!")
+					game_state = Enums.GameState.QUEUE
+				else:
+					game_state = Enums.GameState.WAITING
+					rpc("_on_turn_ended", legal_play)
+		Enums.GameState.BALLINHAND:
+			var placed: bool = ball_manager.update_ball_in_hand()
+			if placed:
 				game_state = Enums.GameState.QUEUE
-			else:
-				game_state = Enums.GameState.WAITING
-				rpc("_on_turn_ended", legal_play)
-	elif game_state == Enums.GameState.BALLINHAND:
-		var placed: bool = ball_manager.update_ball_in_hand()
-		if placed:
-			game_state = Enums.GameState.QUEUE
+
+	# if game_state == Enums.GameState.WAITING:
+	# 	pass
+	# elif game_state == Enums.GameState.QUEUE:
+	# 	queue_controller.run()
+	# elif game_state == Enums.GameState.ROLLING:
+	# 	if ball_manager.are_balls_still():
+	# 		ball_manager.balls_active = false
+	# 		var legal_play = _get_first_hit_legality() && !has_fouled
+	# 		var go_again = legal_pocketing && legal_play
+	# 		rpc("_on_balls_stopped", has_won, has_lost, legal_play)
+	# 		if go_again:
+	# 			print("Go again!")
+	# 			game_state = Enums.GameState.QUEUE
+	# 		else:
+	# 			game_state = Enums.GameState.WAITING
+	# 			rpc("_on_turn_ended", legal_play)
+	# elif game_state == Enums.GameState.BALLINHAND:
+	# 	var placed: bool = ball_manager.update_ball_in_hand()
+	# 	if placed:
+	# 		game_state = Enums.GameState.QUEUE
 
 
 func _set_next_player():
