@@ -1,16 +1,12 @@
 extends Node
 
-# Player info, associate ID to data
-var player_infos: Dictionary = {}
+signal player_infos_updated
 
-# Info we send to other players
-var self_info: Dictionary = {name = "", team = 0}
-
+var player_infos: Dictionary = {}  # Player info, associate ID to data
+var self_info: Dictionary = {name = "", team = 0}  # Info we send to other players
 var peer: NetworkedMultiplayerENet
 
-var _err: int = 0
-
-signal player_infos_updated
+var _err
 
 
 func _ready():

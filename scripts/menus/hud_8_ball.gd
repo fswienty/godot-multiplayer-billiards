@@ -19,6 +19,7 @@ var _err
 func initialize(manager_: GameManager8Ball):
 	manager = manager_
 	_err = manager.connect("ball_pocketed", self, "_on_ball_pocketed")
+	processing = true
 
 
 func _physics_process(_delta):

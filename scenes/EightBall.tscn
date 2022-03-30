@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/images/balls/cue_ball.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Table.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game_scenes/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game_scenes/Table.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/pool/game_manager_8_ball.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=6]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scripts/pool/queue_controller.gd" type="Script" id=10]
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=11]
 [ext_resource path="res://assets/images/queue.png" type="Texture" id=12]
+[ext_resource path="res://scripts/menus/DEBUG_hud_8_ball.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 3.0
@@ -219,6 +220,355 @@ margin_bottom = 17.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_constants/separation = 35
+
+[node name="DEBUG_Hud_8Ball" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Inset" type="Control" parent="UI/DEBUG_Hud_8Ball"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentPlayer" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -131.5
+margin_right = 131.5
+margin_bottom = 39.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeamLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
+margin_right = 263.0
+margin_bottom = 14.0
+text = "Current Team:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Team" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/TeamLabel"]
+margin_left = 135.0
+margin_right = 262.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
+margin_top = 18.0
+margin_right = 263.0
+margin_bottom = 32.0
+text = "Current Player:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/NameLabel"]
+margin_left = 135.0
+margin_right = 262.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameStateLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
+margin_top = 36.0
+margin_right = 263.0
+margin_bottom = 50.0
+text = "Game State:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameState" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/GameStateLabel"]
+margin_left = 135.0
+margin_right = 262.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GeneralInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
+margin_right = 130.0
+margin_bottom = 111.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_right = 130.0
+margin_bottom = 14.0
+text = "Team 1 Ball Type:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1TypeLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="T1PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 18.0
+margin_right = 130.0
+margin_bottom = 32.0
+text = "Team 1 Pocketed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1PocketedLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="T1EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 36.0
+margin_right = 130.0
+margin_bottom = 50.0
+text = "Team 1 Eight Target:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T1EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1EightTargetLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HSeparator" type="HSeparator" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 54.0
+margin_right = 130.0
+margin_bottom = 58.0
+
+[node name="T2TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 62.0
+margin_right = 130.0
+margin_bottom = 76.0
+text = "Team 2 Ball Type:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T2Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2TypeLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.10236
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="T2PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 80.0
+margin_right = 130.0
+margin_bottom = 94.0
+text = "Team 2 Pocketed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T2Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2PocketedLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="T2EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+margin_top = 98.0
+margin_right = 130.0
+margin_bottom = 112.0
+text = "Team 2 Eight Target:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T2EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2EightTargetLabel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -7.0
+margin_right = 48.0
+margin_bottom = 7.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TurnInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -263.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirstHitLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_right = 263.0
+margin_bottom = 14.0
+text = "First Hit:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirstHit" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LegalPocketingLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_top = 18.0
+margin_right = 263.0
+margin_bottom = 32.0
+text = "Legal Pocketing:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LegalPocketing" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LegalPocketingLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="FouledLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_top = 36.0
+margin_right = 263.0
+margin_bottom = 50.0
+text = "Fouled:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fouled" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FouledLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirstHitLegalLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_top = 54.0
+margin_right = 263.0
+margin_bottom = 68.0
+text = "First Hit Legal:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirstHitLegal" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLegalLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WonLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_top = 72.0
+margin_right = 263.0
+margin_bottom = 86.0
+text = "Won:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Won" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/WonLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LostLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
+margin_top = 90.0
+margin_right = 263.0
+margin_bottom = 104.0
+text = "Lost:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lost" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LostLabel"]
+margin_left = 133.0
+margin_right = 260.0
+margin_bottom = 14.0
+text = "aaaaaa"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Table" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 300 )

@@ -4,7 +4,7 @@ extends Node
 signal ball_pocketed
 
 var processing: bool = false
-var game_state = Enums.GameState.QUEUE
+var game_state = Enums.GameState.NONE
 var self_id: int = 0
 
 var has_fouled: bool = false
@@ -29,6 +29,7 @@ var _err
 
 onready var ball_manager: BallManager8Ball = $BallManager
 onready var queue_controller: QueueController = $QueueController
+onready var hud = $UI/Hud_8Ball
 
 
 func _ready():
@@ -36,24 +37,27 @@ func _ready():
 
 
 func initialize():
-	# if Globals.DEBUG_MODE:
-	# 	game_state = Enums.GameState.BALLINHAND
+	if Globals.DEBUG_MODE:
+		# game_state = Enums.GameState.BALLINHAND
+		pass
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
 		randomize()
 		var seed_ = randi()
-		rpc("initialize_synced", Lobby.player_infos, seed_)
+		rpc("initialize_synced", seed_)
 
 
-remotesync func initialize_synced(player_infos: Dictionary, seed_: int):
+remotesync func initialize_synced(seed_: int):
 	seed(seed_)
 
+	_err = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")
 	_err = queue_controller.connect("queue_hit", self, "_on_queue_hit")
 	ball_manager.initialize()
 	queue_controller.initialize(ball_manager.cue_ball)
+	hud.initialize(self)
 
-	for key in player_infos.keys():
-		var info = player_infos[key]
+	for key in Lobby.player_infos.keys():
+		var info = Lobby.player_infos[key]
 		if info.team == 1:
 			t1_player_ids.append(key)
 		elif info.team == 2:

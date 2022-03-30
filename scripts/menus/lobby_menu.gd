@@ -12,7 +12,7 @@ onready var waiting_label = $MarginContainer/VBoxContainer/ControlsContainer/Wai
 onready var randomize_button: Button = $MarginContainer/VBoxContainer/ControlsContainer/RandomizeButton
 onready var start_button = $MarginContainer/VBoxContainer/ControlsContainer/StartButton
 
-var _err = 0
+var _err
 
 
 func _ready():
