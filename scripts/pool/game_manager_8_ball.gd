@@ -100,27 +100,6 @@ func _physics_process(_delta):
 			if placed:
 				game_state = Enums.GameState.QUEUE
 
-	# if game_state == Enums.GameState.WAITING:
-	# 	pass
-	# elif game_state == Enums.GameState.QUEUE:
-	# 	queue_controller.run()
-	# elif game_state == Enums.GameState.ROLLING:
-	# 	if ball_manager.are_balls_still():
-	# 		ball_manager.balls_active = false
-	# 		var legal_play = _get_first_hit_legality() && !has_fouled
-	# 		var go_again = legal_pocketing && legal_play
-	# 		rpc("_on_balls_stopped", has_won, has_lost, legal_play)
-	# 		if go_again:
-	# 			print("Go again!")
-	# 			game_state = Enums.GameState.QUEUE
-	# 		else:
-	# 			game_state = Enums.GameState.WAITING
-	# 			rpc("_on_turn_ended", legal_play)
-	# elif game_state == Enums.GameState.BALLINHAND:
-	# 	var placed: bool = ball_manager.update_ball_in_hand()
-	# 	if placed:
-	# 		game_state = Enums.GameState.QUEUE
-
 
 func _set_next_player():
 	if t1_turn:
