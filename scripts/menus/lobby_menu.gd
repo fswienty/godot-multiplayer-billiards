@@ -32,7 +32,14 @@ func initialize():
 		randomize_button.hide()
 		start_button.hide()
 		waiting_label.show()
+	var anim = Globals.get_anim("../LobbyMenu:rect_scale", 0, Vector2(1, 0), 0.2, Vector2(1, 1))
+	_err = $OpenAnim.add_animation("open", anim)
+
+
+func open():
 	update()
+	$OpenAnim.play("open")
+	show()
 
 
 func _on_player_infos_updated(player_infos: Dictionary):
@@ -78,7 +85,6 @@ func _on_StartButton_pressed():
 
 
 remotesync func _start_game():
-	get_tree().refuse_new_network_connections = true
 	emit_signal("game_started")
 
 

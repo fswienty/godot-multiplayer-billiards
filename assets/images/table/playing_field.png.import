@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playing_field_pockets.png-ebc9b8afd76dd92aeafba3a163c408f1.stex"
+path="res://.import/playing_field.png-8e07f1fa29de26d19057b271bb83c21a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/playing_field_pockets.png"
-dest_files=[ "res://.import/playing_field_pockets.png-ebc9b8afd76dd92aeafba3a163c408f1.stex" ]
+source_file="res://assets/images/table/playing_field.png"
+dest_files=[ "res://.import/playing_field.png-8e07f1fa29de26d19057b271bb83c21a.stex" ]
 
 [params]
 

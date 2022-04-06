@@ -12,6 +12,7 @@ onready var lobby_menu = $LobbyMenu
 func _ready():
 	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
 	_err = lobby_menu.connect("game_started", self, "_on_game_started")
+	lobby_menu.initialize()
 
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
@@ -30,11 +31,11 @@ func _ready():
 
 func _on_entered_lobby():
 	connect_menu.hide()
-	lobby_menu.initialize()
-	lobby_menu.show()
+	lobby_menu.open()
 
 
 func _on_game_started():
+	get_tree().refuse_new_network_connections = true
 	print("game will be started with: ", Lobby.player_infos)
 
 	# load game scene

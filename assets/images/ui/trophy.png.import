@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playing_field_border.png-d94b423969b9b8dd61910c505e371261.stex"
+path="res://.import/trophy.png-e81af1ea055f708aa2c2c9b2108a2f1d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/playing_field_border.png"
-dest_files=[ "res://.import/playing_field_border.png-d94b423969b9b8dd61910c505e371261.stex" ]
+source_file="res://assets/images/ui/trophy.png"
+dest_files=[ "res://.import/trophy.png-e81af1ea055f708aa2c2c9b2108a2f1d.stex" ]
 
 [params]
 

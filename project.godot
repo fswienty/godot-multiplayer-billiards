@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/pool/ball_manager_8_ball.gd"
 }, {
+"base": "HBoxContainer",
+"class": "GameFinishedTeamLabel",
+"language": "GDScript",
+"path": "res://scripts/menus/GameFinishedTeamLabel.gd"
+}, {
 "base": "Node",
 "class": "GameManager8Ball",
 "language": "GDScript",
@@ -43,6 +48,7 @@ _global_script_class_icons={
 "Ball": "",
 "BallInHand": "",
 "BallManager8Ball": "",
+"GameFinishedTeamLabel": "",
 "GameManager8Ball": "",
 "Pocket": "",
 "QueueController": ""

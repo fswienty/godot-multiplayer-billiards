@@ -11,10 +11,10 @@
 [ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=9]
 [ext_resource path="res://scripts/pool/queue_controller.gd" type="Script" id=10]
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=11]
-[ext_resource path="res://assets/images/queue.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/table/queue.png" type="Texture" id=12]
 [ext_resource path="res://scripts/menus/DEBUG_hud_8_ball.gd" type="Script" id=13]
-[ext_resource path="res://assets/fonts/ui_font_24.tres" type="DynamicFont" id=14]
-[ext_resource path="res://icon.png" type="Texture" id=15]
+[ext_resource path="res://scripts/menus/game_finished_panel.gd" type="Script" id=16]
+[ext_resource path="res://scenes/ui_scenes/GameFinishedTeamLabel.tscn" type="PackedScene" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 3.0
@@ -105,7 +105,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
 custom_fonts/font = SubResource( 6 )
-text = "test 123 name"
+text = "fwgfwerg"
 align = 1
 valign = 1
 
@@ -580,6 +580,7 @@ margin_top = 150.0
 margin_right = -200.0
 margin_bottom = -150.0
 theme = ExtResource( 6 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -588,52 +589,31 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 604.0
-margin_bottom = 290.0
+margin_bottom = 296.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/GameFinished/VBoxContainer"]
 margin_right = 584.0
-margin_bottom = 208.0
+margin_bottom = 194.0
 
 [node name="T1Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
-margin_right = 584.0
-margin_bottom = 208.0
+margin_right = 290.0
+margin_bottom = 194.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Team" type="HBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container"]
-margin_left = 182.0
-margin_right = 401.0
-margin_bottom = 64.0
-size_flags_horizontal = 6
-
-[node name="TextureRect" type="TextureRect" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Team"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 15 )
-
-[node name="Label" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Team"]
-margin_left = 68.0
-margin_top = 15.0
-margin_right = 151.0
-margin_bottom = 49.0
-size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 14 )
-text = "Team 1"
-
-[node name="TextureRect2" type="TextureRect" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Team"]
-margin_left = 155.0
-margin_right = 219.0
-margin_bottom = 64.0
-texture = ExtResource( 15 )
+[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container" instance=ExtResource( 17 )]
+margin_left = 29.0
+margin_right = 261.0
+margin_bottom = 50.0
 
 [node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container"]
-margin_top = 74.0
-margin_right = 584.0
-margin_bottom = 208.0
+margin_top = 60.0
+margin_right = 290.0
+margin_bottom = 194.0
 
 [node name="Label2" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Players"]
-margin_left = 253.0
-margin_right = 330.0
+margin_left = 106.0
+margin_right = 183.0
 margin_bottom = 26.0
 size_flags_horizontal = 4
 text = "player lol"
@@ -642,34 +622,92 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Players"]
-margin_left = 232.0
+margin_left = 85.0
 margin_top = 36.0
-margin_right = 351.0
+margin_right = 204.0
 margin_bottom = 62.0
 size_flags_horizontal = 4
 text = "player lolfdsef"
 
 [node name="Label4" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Players"]
-margin_left = 253.0
+margin_left = 106.0
 margin_top = 72.0
-margin_right = 330.0
+margin_right = 183.0
 margin_bottom = 98.0
 size_flags_horizontal = 4
 text = "player lol"
 
 [node name="Label5" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container/Players"]
-margin_left = 253.0
+margin_left = 106.0
 margin_top = 108.0
-margin_right = 330.0
+margin_right = 183.0
 margin_bottom = 134.0
 size_flags_horizontal = 4
 text = "player lol"
 
+[node name="T2Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
+margin_left = 294.0
+margin_right = 584.0
+margin_bottom = 194.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container" instance=ExtResource( 17 )]
+margin_left = 29.0
+margin_right = 261.0
+margin_bottom = 50.0
+
+[node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container"]
+margin_top = 60.0
+margin_right = 290.0
+margin_bottom = 194.0
+
+[node name="Label2" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container/Players"]
+margin_left = 106.0
+margin_right = 183.0
+margin_bottom = 26.0
+size_flags_horizontal = 4
+text = "player lol"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container/Players"]
+margin_left = 145.0
+margin_top = 36.0
+margin_right = 145.0
+margin_bottom = 62.0
+size_flags_horizontal = 4
+
+[node name="Label4" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container/Players"]
+margin_left = 106.0
+margin_top = 72.0
+margin_right = 183.0
+margin_bottom = 98.0
+size_flags_horizontal = 4
+text = "player lol"
+
+[node name="Label5" type="Label" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container/Players"]
+margin_left = 106.0
+margin_top = 108.0
+margin_right = 183.0
+margin_bottom = 134.0
+size_flags_horizontal = 4
+text = "player lol"
+
+[node name="WaitingLabel" type="Label" parent="UI/GameFinished/VBoxContainer"]
+margin_left = 216.0
+margin_top = 204.0
+margin_right = 367.0
+margin_bottom = 230.0
+size_flags_horizontal = 4
+text = "Waiting for host..."
+
 [node name="LobbyButton" type="Button" parent="UI/GameFinished/VBoxContainer"]
 margin_left = 212.0
-margin_top = 234.0
+margin_top = 240.0
 margin_right = 371.0
-margin_bottom = 280.0
+margin_bottom = 286.0
 size_flags_horizontal = 6
 size_flags_vertical = 10
 text = "Back to Lobby"

@@ -31,6 +31,7 @@ onready var ball_manager: BallManager8Ball = $BallManager
 onready var queue_controller: QueueController = $QueueController
 onready var hud = $UI/Hud_8Ball
 onready var debug_hud = $UI/DEBUG_Hud_8Ball
+onready var game_finished_panel = $UI/GameFinished
 
 
 func _ready():
@@ -52,13 +53,17 @@ func initialize():
 remotesync func initialize_synced(seed_: int):
 	seed(seed_)
 
+	# connect signals
 	_err = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")
 	_err = queue_controller.connect("queue_hit", self, "_on_queue_hit")
+
+	# initialize nodes
 	ball_manager.initialize()
 	queue_controller.initialize(ball_manager.cue_ball)
 	hud.initialize(self)
 	if Globals.DEBUG_HUD:
 		debug_hud.initialize(self)
+	game_finished_panel.initialize()
 
 	for key in Lobby.player_infos.keys():
 		var info = Lobby.player_infos[key]
