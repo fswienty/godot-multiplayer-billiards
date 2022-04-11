@@ -2,6 +2,8 @@ extends Control
 
 signal game_started
 
+var menu_open_anim: AnimationPlayer
+
 onready var t0_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T0/PlayerContainer/VBoxContainer
 onready var t1_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T1/PlayerContainer/VBoxContainer
 onready var t2_list: VBoxContainer = $VBoxContainer/TeamPanelContainer/T2/PlayerContainer/VBoxContainer
@@ -22,8 +24,11 @@ func _ready():
 	_err = randomize_button.connect("pressed", self, "_on_RandomizeButton_pressed")
 	_err = start_button.connect("pressed", self, "_on_StartButton_pressed")
 
+	modulate = Color.transparent
+	menu_open_anim = Animations.fade_in_anim(self, "../LobbyMenu", Globals.menu_transition_time)
 
-func initialize():
+
+func open():
 	if get_tree().is_network_server():
 		randomize_button.show()
 		start_button.show()
@@ -32,13 +37,8 @@ func initialize():
 		randomize_button.hide()
 		start_button.hide()
 		waiting_label.show()
-	var anim = Globals.get_anim("../LobbyMenu:rect_scale", 0, Vector2(1, 0), 0.2, Vector2(1, 1))
-	_err = $OpenAnim.add_animation("open", anim)
-
-
-func open():
 	update()
-	$OpenAnim.play("open")
+	menu_open_anim.play("anim")
 	show()
 
 
@@ -80,11 +80,14 @@ func _on_RandomizeButton_pressed():
 
 
 func _on_StartButton_pressed():
+	rpc("_start_game")
 	if Lobby.can_start_game():
 		rpc("_start_game")
 
 
 remotesync func _start_game():
+	menu_open_anim.play_backwards("anim")
+	yield(menu_open_anim, "animation_finished")
 	emit_signal("game_started")
 
 

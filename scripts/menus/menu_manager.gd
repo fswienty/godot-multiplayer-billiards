@@ -12,7 +12,6 @@ onready var lobby_menu = $LobbyMenu
 func _ready():
 	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
 	_err = lobby_menu.connect("game_started", self, "_on_game_started")
-	lobby_menu.initialize()
 
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
@@ -21,7 +20,6 @@ func _ready():
 		connect_menu._on_HostButton_pressed()
 		Lobby.player_infos = {1: {name = "debug_host", team = 1}}
 		connect_menu.hide()
-		lobby_menu.initialize()
 		lobby_menu.show()
 		_on_game_started()
 	else:
