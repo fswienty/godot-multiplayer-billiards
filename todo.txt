@@ -1,7 +1,7 @@
 first hit of other player -> no sound
 ball movement interpolation?
 
-limit player name length to 14
+limit player name length to 14 aaaaahhh
 bug when pockting 8 ball first
 mark 8 hole at the end
 background

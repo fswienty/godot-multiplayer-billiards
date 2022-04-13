@@ -34,6 +34,7 @@ __meta__ = {
 margin_right = 300.0
 margin_bottom = 46.0
 theme = ExtResource( 4 )
+max_length = 12
 placeholder_text = "Enter name"
 __meta__ = {
 "_edit_use_anchors_": false

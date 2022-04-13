@@ -68,18 +68,22 @@ func _on_player_infos_updated(player_infos: Dictionary):
 
 
 func _on_T1Button_pressed():
+	SoundManager.click()
 	rpc_id(1, "_set_team", 1)
 
 
 func _on_T2Button_pressed():
+	SoundManager.click()
 	rpc_id(1, "_set_team", 2)
 
 
 func _on_RandomizeButton_pressed():
+	SoundManager.click()
 	Lobby.randomize_players()
 
 
 func _on_StartButton_pressed():
+	SoundManager.click()
 	rpc("_start_game")
 	if Lobby.can_start_game():
 		rpc("_start_game")
