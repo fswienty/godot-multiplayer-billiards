@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/menus/player_container.gd" type="Script" id=2]
 
 [node name="PlayerContainer" type="PanelContainer"]
 margin_top = 36.0
@@ -9,6 +10,7 @@ margin_bottom = 338.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -24,7 +26,27 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 221.0
+margin_bottom = 26.0
+text = "Team 1"
+align = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 221.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="List" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 221.0
+margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="VBoxContainer/List"]
 margin_right = 221.0
 margin_bottom = 26.0
 text = "WWWWWWWWWWWWWW"

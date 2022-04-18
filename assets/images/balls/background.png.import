@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/background.png-65ed2bce63b71aee7273a9d974a77af5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
+source_file="res://assets/images/balls/background.png"
+dest_files=[ "res://.import/background.png-65ed2bce63b71aee7273a9d974a77af5.stex" ]
 
 [params]
 

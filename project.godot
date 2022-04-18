@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/pool/game_manager_8_ball.gd"
 }, {
+"base": "PanelContainer",
+"class": "PlayerContainer",
+"language": "GDScript",
+"path": "res://scripts/menus/player_container.gd"
+}, {
 "base": "Area2D",
 "class": "Pocket",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "BallManager8Ball": "",
 "GameFinishedTeamLabel": "",
 "GameManager8Ball": "",
+"PlayerContainer": "",
 "Pocket": "",
 "QueueController": ""
 }
