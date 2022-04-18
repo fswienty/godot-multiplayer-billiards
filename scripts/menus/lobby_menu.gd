@@ -37,7 +37,7 @@ func open():
 		randomize_button.hide()
 		start_button.hide()
 		waiting_label.show()
-	update()
+	_on_player_infos_updated()
 	menu_open_anim.play("anim")
 	show()
 

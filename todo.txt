@@ -1,12 +1,6 @@
 first hit of other player -> no sound
 ball movement interpolation?
 
-bug when pockting 8 ball first
 mark 8 hole at the end
 background
     steal shader stuff from snek game?
-game over screen
-    trophy
-        wrong team is shown winning
-		button sound (set pause false?)
-		rpc fro back to lobby

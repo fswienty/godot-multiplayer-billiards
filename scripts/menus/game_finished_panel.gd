@@ -36,8 +36,8 @@ func initialize():
 		waiting_label.show()
 
 
-func display(t1_won: bool, delay: float = 0.5):
-	yield(get_tree().create_timer(delay), "timeout")
+func display(t1_won: bool):
+	get_tree().paused = true
 	show()
 	# show win animation
 	if t1_won:

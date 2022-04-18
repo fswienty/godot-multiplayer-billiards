@@ -8,6 +8,7 @@
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
+DEBUG_HUD = true
 
 [node name="ConnectMenu" type="CenterContainer" parent="."]
 anchor_right = 1.0

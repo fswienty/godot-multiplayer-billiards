@@ -39,9 +39,6 @@ func _ready():
 
 
 func initialize():
-	if Globals.DEBUG_MODE:
-		game_state = Enums.GameState.BALLINHAND
-
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
 		randomize()
@@ -60,7 +57,10 @@ remotesync func initialize_synced(seed_: int):
 	ball_manager.initialize()
 	queue_controller.initialize(ball_manager.cue_ball)
 	hud.initialize(self)
+	debug_hud.hide()
 	if Globals.DEBUG_HUD:
+		debug_hud.show()
+		hud.hide()
 		debug_hud.initialize(self)
 	game_finished_panel.initialize()
 
@@ -79,6 +79,9 @@ remotesync func initialize_synced(seed_: int):
 		game_state = Enums.GameState.QUEUE
 	else:
 		game_state = Enums.GameState.WAITING
+
+	if Globals.DEBUG_MODE:
+		game_state = Enums.GameState.BALLINHAND
 
 
 func _physics_process(_delta):
