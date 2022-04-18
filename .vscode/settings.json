@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        ".import": true,
+        "builds": true,
+        "scenes": true,
+        "ui_theme": true
+    }
+}

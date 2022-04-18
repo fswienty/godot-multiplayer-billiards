@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "HBoxContainer",
 "class": "GameFinishedTeamLabel",
 "language": "GDScript",
-"path": "res://scripts/menus/GameFinishedTeamLabel.gd"
+"path": "res://scripts/menus/game_finished_team_label.gd"
 }, {
 "base": "Node",
 "class": "GameManager8Ball",

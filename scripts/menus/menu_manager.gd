@@ -13,11 +13,13 @@ func _ready():
 	_err = connect_menu.connect("entered_lobby", self, "_on_entered_lobby")
 	_err = lobby_menu.connect("game_started", self, "_on_game_started")
 
+	var is_returning: bool = get_tree().get_network_unique_id() != 0
+
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
 	if DEBUG_MODE:
 		connect_menu.player_name = "debug_host"
-		connect_menu._on_HostButton_pressed()
+		connect_menu._on_Button_pressed("host")
 		Lobby.player_infos = {1: {name = "debug_host", team = 1}}
 		connect_menu.hide()
 		lobby_menu.show()
@@ -25,6 +27,8 @@ func _ready():
 	else:
 		connect_menu.show()
 		lobby_menu.hide()
+		if is_returning:
+			_on_entered_lobby()
 
 
 func _on_entered_lobby():

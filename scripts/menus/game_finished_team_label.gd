@@ -4,6 +4,7 @@ class_name GameFinishedTeamLabel
 onready var trophy_left: TextureRect = $TrophyLeft
 onready var trophy_right: TextureRect = $TrophyRight
 onready var team_label: Label = $Label
+onready var win_animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func initialize(team_name: String):
@@ -15,3 +16,4 @@ func initialize(team_name: String):
 func show_as_winner():
 	trophy_left.show()
 	trophy_right.show()
+	win_animation_player.play("win")

@@ -42,7 +42,7 @@ func open():
 	show()
 
 
-func _on_player_infos_updated(player_infos: Dictionary):
+func _on_player_infos_updated():
 	# clear lists
 	for label in t0_list.get_children():
 		t0_list.remove_child(label)
@@ -54,10 +54,11 @@ func _on_player_infos_updated(player_infos: Dictionary):
 		t2_list.remove_child(label)
 		label.queue_free()
 	# sort players into appropriate lists
-	for info in player_infos.values():
+	for info in Lobby.player_infos.values():
 		var player_name = info.name
 		var player_team = info.team
 		var label = Label.new()
+		label.clip_text = true
 		label.text = str(player_name)
 		if player_team == 1:
 			t1_list.add_child(label)
@@ -84,7 +85,8 @@ func _on_RandomizeButton_pressed():
 
 func _on_StartButton_pressed():
 	SoundManager.click()
-	rpc("_start_game")
+	if Globals.DEBUG_MODE:
+		rpc("_start_game")
 	if Lobby.can_start_game():
 		rpc("_start_game")
 

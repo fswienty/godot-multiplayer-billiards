@@ -1,10 +1,38 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/fonts/ui_font_24.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/images/ui/trophy.png" type="Texture" id=2]
-[ext_resource path="res://scripts/menus/GameFinishedTeamLabel.gd" type="Script" id=3]
+[ext_resource path="res://scripts/menus/game_finished_team_label.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TrophyLeft:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TrophyRight:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ 0.0, -720.0 ]
+}
 
 [node name="Team" type="HBoxContainer"]
+pause_mode = 2
 size_flags_horizontal = 6
 script = ExtResource( 3 )
 __meta__ = {
@@ -15,21 +43,29 @@ __meta__ = {
 self_modulate = Color( 1, 0.854902, 0.188235, 1 )
 margin_right = 50.0
 margin_bottom = 50.0
+rect_pivot_offset = Vector2( 25, 25 )
 texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 54.0
 margin_top = 16.0
-margin_right = 178.0
+margin_right = 194.0
 margin_bottom = 50.0
+rect_min_size = Vector2( 140, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 12
 custom_fonts/font = ExtResource( 1 )
 text = "team name"
+align = 1
+clip_text = true
 
 [node name="TrophyRight" type="TextureRect" parent="."]
 self_modulate = Color( 1, 0.854902, 0.188235, 1 )
-margin_left = 182.0
-margin_right = 232.0
+margin_left = 198.0
+margin_right = 248.0
 margin_bottom = 50.0
+rect_pivot_offset = Vector2( 25, 25 )
 texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/win = SubResource( 1 )

@@ -17,6 +17,8 @@ onready var _pocket_sound = preload("res://assets/audio/sfx/pocket.wav")
 
 
 func _ready():
+	self.pause_mode = Node.PAUSE_MODE_PROCESS
+
 	_click_player = AudioStreamPlayer.new()
 	_click_player.stream = _click_sound
 	add_child(_click_player)

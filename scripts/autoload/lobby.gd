@@ -10,6 +10,8 @@ var _err
 
 
 func _ready():
+	self.pause_mode = Node.PAUSE_MODE_PROCESS
+
 	peer = NetworkedMultiplayerENet.new()
 
 	_err = get_tree().connect("network_peer_connected", self, "_peer_connected")
@@ -61,7 +63,7 @@ remote func register_player(info: Dictionary):
 remotesync func update_player_infos(player_infos_: Dictionary):
 	player_infos = player_infos_
 	# Call function to update lobby UI here
-	emit_signal("player_infos_updated", player_infos)
+	emit_signal("player_infos_updated")
 
 
 func host(player_name: String):

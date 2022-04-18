@@ -23,7 +23,7 @@ func _on_PlayerName_text_changed(name: String):
 	player_name = name
 
 
-func _on_Button_pressed(type):
+func _on_Button_pressed(type: String):
 	SoundManager.click()
 	if player_name == "":
 		print("please enter a name")

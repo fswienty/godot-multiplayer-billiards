@@ -38,10 +38,10 @@ func place_balls(ball_holder_: Node2D):
 		_place_in_rack(half_ball_number, "11")
 
 	# add other balls randomly
-	while balls_to_place.size() > 0:
-		var rand_number = balls_to_place[randi() % balls_to_place.size()]
-		var rand_pos = _get_random_key(positions)
-		_place_in_rack(rand_number, rand_pos)
+	# while balls_to_place.size() > 0:
+	# 	var rand_number = balls_to_place[randi() % balls_to_place.size()]
+	# 	var rand_pos = _get_random_key(positions)
+	# 	_place_in_rack(rand_number, rand_pos)
 
 	# order balls alphabetically
 	_order_balls()

@@ -9,7 +9,7 @@ onready var current_team: Label = $TopBarContainer/HBoxContainer/TeamLabel
 onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
 onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
 
-onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerContainer/Text
+onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLabel
 onready var t1_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T1BallContainer
 onready var t2_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T2BallContainer
 
@@ -36,7 +36,7 @@ func _physics_process(_delta):
 	if manager.current_player_id >= 0:
 		current_player.text = Lobby.player_infos[manager.current_player_id].name
 	if manager.next_player_id >= 0:
-		next_player.text = Lobby.player_infos[manager.next_player_id].name
+		next_player.text = "Next: " + Lobby.player_infos[manager.next_player_id].name
 
 
 func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String:

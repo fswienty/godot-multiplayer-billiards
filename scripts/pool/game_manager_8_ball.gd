@@ -42,7 +42,6 @@ func initialize():
 	if Globals.DEBUG_MODE:
 		game_state = Enums.GameState.BALLINHAND
 
-		pass
 	self_id = get_tree().get_network_unique_id()
 	if self_id == 1:
 		randomize()
@@ -160,12 +159,17 @@ remotesync func _on_turn_ended(legal_play: bool):
 remotesync func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):
 	# check for game over
 	if has_won_ and legal_play:
-		print("WON!")
+		if t1_turn:
+			game_finished_panel.display(true)
+		else:
+			game_finished_panel.display(false)
 		return
 	if (has_won_ and not legal_play) or has_lost_:
-		print("LOST!")
+		if t1_turn:
+			game_finished_panel.display(false)
+		else:
+			game_finished_panel.display(true)
 		return
-	# TODO: turn of processing, do stuff to show winnig or losing team, go back to lobby
 
 	# reset for next turn
 	has_fouled = false
