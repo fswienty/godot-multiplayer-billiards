@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/images/balls/cue_ball.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game_scenes/Ball.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/pool/ball_manager_8_ball.gd" type="Script" id=11]
 [ext_resource path="res://assets/images/table/queue.png" type="Texture" id=12]
 [ext_resource path="res://scripts/menus/DEBUG_hud_8_ball.gd" type="Script" id=13]
+[ext_resource path="res://scenes/background/Background.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scripts/menus/game_finished_panel.gd" type="Script" id=16]
 [ext_resource path="res://scenes/ui_scenes/GameFinishedTeamLabel.tscn" type="PackedScene" id=17]
 
@@ -637,6 +638,8 @@ margin_bottom = 280.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Back to Lobby"
+
+[node name="Background" parent="." instance=ExtResource( 14 )]
 
 [node name="Table" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 300 )

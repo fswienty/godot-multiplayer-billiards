@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game_scenes/Pocket.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/pool/table.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/table/playing_field.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/table/playing_field_border.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/table/playing_field_pockets.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/table/playing_field_border_shadow.png" type="Texture" id=6]
 
 [node name="Table" type="Node2D"]
 scale = Vector2( 1.5, 1.5 )
@@ -30,6 +31,12 @@ scale = Vector2( 0.277778, 0.277778 )
 z_index = 10
 z_as_relative = false
 texture = ExtResource( 4 )
+
+[node name="Border" type="Sprite" parent="Graphics/Border"]
+self_modulate = Color( 0.192157, 0.192157, 0.192157, 1 )
+z_index = -30
+z_as_relative = false
+texture = ExtResource( 6 )
 
 [node name="Rails" type="StaticBody2D" parent="." groups=["rail"]]
 visible = false

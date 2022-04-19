@@ -5,7 +5,7 @@
 [sub_resource type="VisualShaderNodeVectorCompose" id=5]
 
 [sub_resource type="VisualShaderNodeScalarOp" id=6]
-default_input_values = [ 0, 0.0, 1, -0.5 ]
+default_input_values = [ 0, 0.0, 1, -0.2 ]
 operator = 2
 
 [sub_resource type="VisualShaderNodeColorFunc" id=10]
@@ -15,7 +15,7 @@ output_port_for_preview = 0
 output_port_for_preview = 0
 
 [sub_resource type="VisualShaderNodeColorConstant" id=12]
-constant = Color( 0.453013, 0.453013, 0.453013, 1 )
+constant = Color( 0.532336, 0.532336, 0.532336, 1 )
 
 [sub_resource type="VisualShaderNodeColorOp" id=13]
 output_port_for_preview = 0
@@ -135,7 +135,7 @@ void fragment() {
 	float n_out7p0 = TIME;
 
 // ScalarOp:12
-	float n_in12p1 = -0.50000;
+	float n_in12p1 = -0.20000;
 	float n_out12p0 = n_out7p0 * n_in12p1;
 
 // VectorCompose:11
@@ -160,7 +160,7 @@ void fragment() {
 	}
 
 // Color:16
-	vec3 n_out16p0 = vec3(0.453013, 0.453013, 0.453013);
+	vec3 n_out16p0 = vec3(0.532336, 0.532336, 0.532336);
 	float n_out16p1 = 1.000000;
 
 // ColorOp:15
@@ -245,7 +245,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -977.967, -39.9714 )
+graph_offset = Vector2( -188.201, 10.7219 )
 mode = 1
 modes/blend = 5
 flags/light_only = false

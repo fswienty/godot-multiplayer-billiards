@@ -2,5 +2,4 @@ first hit of other player -> no sound
 ball movement interpolation?
 
 mark 8 hole at the end
-background
-    steal shader stuff from snek game?
+bug with fouls?

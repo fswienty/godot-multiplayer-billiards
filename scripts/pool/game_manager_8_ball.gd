@@ -59,6 +59,7 @@ remotesync func initialize_synced(seed_: int):
 	hud.initialize(self)
 	debug_hud.hide()
 	if Globals.DEBUG_HUD:
+		$Background.hide()
 		debug_hud.show()
 		hud.hide()
 		debug_hud.initialize(self)
