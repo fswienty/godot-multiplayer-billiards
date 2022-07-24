@@ -27,6 +27,7 @@ var t2_pocketed_balls: Array = []
 
 var _err
 
+onready var table = $Table
 onready var ball_manager: BallManager8Ball = $BallManager
 onready var queue_controller: QueueController = $QueueController
 onready var hud = $UI/Hud_8Ball
@@ -99,6 +100,10 @@ func _physics_process(_delta):
 				rpc("_on_balls_stopped", has_won, has_lost, legal_play)
 				if go_again:
 					print("Go again!")
+					if t1_turn:
+						table.indiate_8_ball_target(t1_8_ball_target)
+					else:
+						table.indiate_8_ball_target(t2_8_ball_target)
 					game_state = Enums.GameState.QUEUE
 				else:
 					game_state = Enums.GameState.WAITING
@@ -133,12 +138,14 @@ func _hud_set_next_player():
 		var next_player = t2_temp.front()
 		if next_player != null:
 			next_player_id = next_player
+		table.indiate_8_ball_target(t1_8_ball_target)
 	else:
 		t2_temp.pop_front()
 		t2_temp.push_back(current_player_id)
 		var next_player = t1_temp.front()
 		if next_player != null:
 			next_player_id = next_player
+		table.indiate_8_ball_target(t2_8_ball_target)
 
 
 # called only on peer that takes the shot
