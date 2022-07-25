@@ -50,13 +50,21 @@ func _set_type():
 func _on_Ball_body_entered(body: Node):
 	if body.is_in_group("ball"):
 		var intensity = (current_velocity - linear_velocity).length()
-		SoundManager.ball_hit(intensity)
+		rpc("play_ball_hit_sound", intensity)
 		emit_signal("ball_hit", type, body.type)
 	elif body.is_in_group("rail"):
 		var intensity = (current_velocity - linear_velocity).length()
-		SoundManager.rail_hit(intensity)
+		rpc("play_rail_hit_sound", intensity)
 	else:
 		print("Unhandled _on_Ball_body_entered() collision: ", body.name)
+
+
+remotesync func play_ball_hit_sound(intensity: float):
+	SoundManager.ball_hit(intensity)
+
+
+remotesync func play_rail_hit_sound(intensity: float):
+	SoundManager.rail_hit(intensity)
 
 
 func _on_PocketDetector_area_entered(area: Area2D):

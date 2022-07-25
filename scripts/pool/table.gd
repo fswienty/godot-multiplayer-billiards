@@ -20,7 +20,6 @@ func get_foot_spot() -> Vector2:
 
 
 func indiate_8_ball_target(pocketLocation):
-	print("indicator for ", pocketLocation, Enums.PocketLocation.UP_LEFT)
 	match pocketLocation:
 		Enums.PocketLocation.UP_LEFT:
 			ul_pocket.indicate()

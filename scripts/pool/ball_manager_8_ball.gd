@@ -24,7 +24,7 @@ func _physics_process(_delta):
 
 remote func _set_ball_states(states: Array):
 	var balls: Array = ball_holder.get_children()
-	print("balls size: ", balls.size(), " states size: ", states.size())
+	# print("balls size: ", balls.size(), " states size: ", states.size())
 	if balls.size() != states.size():
 		printerr("balls array is not the same size as states array!")
 		return
