@@ -1,8 +1,6 @@
 class_name GameManager8Ball
 extends Node
 
-signal ball_pocketed
-
 var processing: bool = false
 var game_state = Enums.GameState.NONE
 var self_id: int = 0
@@ -94,6 +92,7 @@ func _physics_process(_delta):
 			queue_controller.run()
 		Enums.GameState.ROLLING:
 			if ball_manager.are_balls_still():
+				print("balls are still!")
 				ball_manager.balls_active = false
 				var legal_play = _get_first_hit_legality() && !has_fouled
 				var go_again = legal_pocketing && legal_play
@@ -221,7 +220,7 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 	# handle cue ball pocketed
 	if ball.type == Enums.BallType.CUE:
-		ball_manager.hide_cue_ball()
+		ball_manager.hide_cue_ball = true
 		has_fouled = true
 		return
 
@@ -235,7 +234,7 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 	# handle pocketing
 	_handle_pocketing(ball)
-	emit_signal("ball_pocketed")
+	hud.update_pocketed_balls()
 	ball_manager.remove(ball)
 
 	# check if the pocketed ball was the last non-8-ball for some team

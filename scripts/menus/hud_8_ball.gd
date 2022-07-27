@@ -18,7 +18,6 @@ var _err
 
 func initialize(manager_: GameManager8Ball):
 	manager = manager_
-	_err = manager.connect("ball_pocketed", self, "_on_ball_pocketed")
 	processing = true
 
 
@@ -54,7 +53,7 @@ func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String
 		return "Eight Ball " + Enums.PocketLocation.keys()[team_8_ball_target]
 
 
-func _on_ball_pocketed():
+func update_pocketed_balls():
 	# clear old balls
 	for child in t1_pocketed.get_children():
 		t1_pocketed.remove_child(child)

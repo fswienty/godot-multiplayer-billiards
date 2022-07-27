@@ -3,6 +3,7 @@ extends Node2D
 
 var cue_ball: Ball
 var balls_active: bool = false
+var hide_cue_ball: bool = false
 
 onready var ball_placer: Node2D = $BallPlacer
 onready var ball_holder: Node2D = $BallHolder
@@ -18,13 +19,16 @@ func initialize():
 
 
 func _physics_process(_delta):
+	if hide_cue_ball:
+		hide_cue_ball = false
+		cue_ball.global_position = Globals.cue_ball_inactive_pos
+		cue_ball.linear_velocity = Vector2.ZERO
 	if balls_active:
 		rpc_unreliable("_set_ball_states", _get_ball_states())
 
 
 remote func _set_ball_states(states: Array):
 	var balls: Array = ball_holder.get_children()
-	# print("balls size: ", balls.size(), " states size: ", states.size())
 	if balls.size() != states.size():
 		printerr("balls array is not the same size as states array!")
 		return
@@ -43,11 +47,6 @@ func check_all_pocketed(type) -> bool:
 
 func hit_cue_ball(impulse: Vector2):
 	cue_ball.impulse = impulse
-
-
-func hide_cue_ball():
-	cue_ball.global_position = Globals.cue_ball_inactive_pos
-	rpc_unreliable("_set_ball_states", _get_ball_states())
 
 
 func update_ball_in_hand() -> bool:
