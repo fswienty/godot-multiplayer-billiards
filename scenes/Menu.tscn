@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
@@ -6,6 +6,15 @@
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=4]
 [ext_resource path="res://scripts/menus/menu_manager.gd" type="Script" id=5]
 [ext_resource path="res://scenes/background/Background.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 34
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
@@ -13,7 +22,6 @@ script = ExtResource( 5 )
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
 [node name="ConnectMenu" type="CenterContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 300 )
@@ -25,18 +33,27 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
 margin_left = 362.0
-margin_top = 211.0
+margin_top = 177.0
 margin_right = 662.0
-margin_bottom = 389.0
+margin_bottom = 422.0
 rect_min_size = Vector2( 300, 0 )
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerName" type="LineEdit" parent="ConnectMenu/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
 margin_right = 300.0
-margin_bottom = 46.0
+margin_bottom = 47.0
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+text = "Multiplayer Billiard"
+align = 1
+
+[node name="PlayerName" type="LineEdit" parent="ConnectMenu/VBoxContainer"]
+margin_top = 67.0
+margin_right = 300.0
+margin_bottom = 113.0
 theme = ExtResource( 4 )
 max_length = 16
 placeholder_text = "Enter name"
@@ -46,9 +63,9 @@ __meta__ = {
 }
 
 [node name="HostButton" type="Button" parent="ConnectMenu/VBoxContainer"]
-margin_top = 66.0
+margin_top = 133.0
 margin_right = 300.0
-margin_bottom = 112.0
+margin_bottom = 179.0
 theme = ExtResource( 4 )
 text = "Host"
 __meta__ = {
@@ -56,9 +73,9 @@ __meta__ = {
 }
 
 [node name="JoinButton" type="Button" parent="ConnectMenu/VBoxContainer"]
-margin_top = 132.0
+margin_top = 199.0
 margin_right = 300.0
-margin_bottom = 178.0
+margin_bottom = 245.0
 theme = ExtResource( 4 )
 text = "Join"
 __meta__ = {
@@ -66,6 +83,7 @@ __meta__ = {
 }
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
