@@ -50,7 +50,7 @@ func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String
 			_:
 				return "error, this should never be shown"
 	else:
-		return "Eight Ball " + Enums.PocketLocation.keys()[team_8_ball_target]
+		return "Eight Ball "  #+ Enums.PocketLocation.keys()[team_8_ball_target]
 
 
 func update_pocketed_balls():

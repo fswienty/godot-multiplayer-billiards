@@ -44,20 +44,32 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../CollisionShape2D:one_way_collision")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "indicate"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 0.466517, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.9 ),
+"transitions": PoolRealArray( 0.466517, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 360.0 ]
+"values": [ 0.0, -35.4, 360.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:self_modulate")
@@ -97,5 +109,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator"]
+playback_speed = 0.7
 anims/RESET = SubResource( 3 )
 anims/indicate = SubResource( 2 )

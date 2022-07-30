@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scripts/menus/menu_manager.gd" type="Script" id=5]
 [ext_resource path="res://scenes/background/Background.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scripts/menus/mute_button.gd" type="Script" id=8]
+[ext_resource path="res://assets/images/ui/audioOn.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/ui/audioOff.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 34
@@ -228,3 +231,20 @@ margin_top = 112.0
 margin_right = 300.0
 margin_bottom = 158.0
 text = "Start Game"
+
+[node name="MuteButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -108.0
+margin_top = -87.0
+margin_right = -18.0
+margin_bottom = -17.0
+theme = ExtResource( 4 )
+icon = ExtResource( 9 )
+script = ExtResource( 8 )
+sound_on_icon = ExtResource( 9 )
+sound_off_icon = ExtResource( 10 )
+
+[connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]

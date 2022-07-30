@@ -13,6 +13,7 @@ var first_hit_type = Enums.BallType.NONE
 
 var current_player_id: int = -1
 var next_player_id: int = -1
+var rounds_first_pocketing: bool = false
 var t1_turn = true
 var t1_player_ids: Array = []
 var t2_player_ids: Array = []
@@ -187,9 +188,13 @@ remotesync func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: b
 	has_won = false
 	has_lost = false
 	first_hit_type = Enums.BallType.NONE
+	rounds_first_pocketing = false
 
 
 func _get_first_hit_legality() -> bool:
+	if rounds_first_pocketing:
+		rounds_first_pocketing = false
+		return true
 	var hit_nothing: bool = first_hit_type == Enums.BallType.NONE
 	var hit_eight: bool = first_hit_type == Enums.BallType.EIGHT
 	var hit_wrong_type: bool = false
@@ -230,6 +235,7 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 	# handle first ball pocketed
 	if t1_ball_type == Enums.BallType.NONE:
+		rounds_first_pocketing = true
 		_assign_ball_types(ball)
 
 	# handle pocketing

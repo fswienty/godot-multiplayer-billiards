@@ -35,9 +35,6 @@ tracks/1/keys = {
 pause_mode = 2
 size_flags_horizontal = 6
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TrophyLeft" type="TextureRect" parent="."]
 self_modulate = Color( 1, 0.854902, 0.188235, 1 )
@@ -48,15 +45,15 @@ texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 54.0
-margin_top = 16.0
 margin_right = 194.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 140, 0 )
+rect_min_size = Vector2( 140, 50 )
 size_flags_horizontal = 4
 size_flags_vertical = 12
 custom_fonts/font = ExtResource( 1 )
 text = "team name"
 align = 1
+valign = 1
 clip_text = true
 
 [node name="TrophyRight" type="TextureRect" parent="."]

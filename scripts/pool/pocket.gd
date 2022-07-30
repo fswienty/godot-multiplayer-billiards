@@ -6,7 +6,7 @@ enum PocketLocation { NONE, UP_LEFT, UP, UP_RIGHT, DOWN_LEFT, DOWN, DOWN_RIGHT }
 export(PocketLocation) var location
 
 onready var indicator = $Indicator
-onready var indicator_anim = $Indicator/AnimationPlayer
+onready var indicator_anim: AnimationPlayer = $Indicator/AnimationPlayer
 
 
 func _ready():
