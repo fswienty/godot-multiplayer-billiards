@@ -35,9 +35,9 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
-margin_left = 362.0
+margin_left = 356.0
 margin_top = 177.0
-margin_right = 662.0
+margin_right = 667.0
 margin_bottom = 422.0
 rect_min_size = Vector2( 300, 0 )
 custom_constants/separation = 20
@@ -46,16 +46,16 @@ __meta__ = {
 }
 
 [node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
-margin_right = 300.0
+margin_right = 311.0
 margin_bottom = 47.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
-text = "Multiplayer Billiard"
+text = "Multiplayer Billiards"
 align = 1
 
 [node name="PlayerName" type="LineEdit" parent="ConnectMenu/VBoxContainer"]
 margin_top = 67.0
-margin_right = 300.0
+margin_right = 311.0
 margin_bottom = 113.0
 theme = ExtResource( 4 )
 max_length = 16
@@ -67,7 +67,7 @@ __meta__ = {
 
 [node name="HostButton" type="Button" parent="ConnectMenu/VBoxContainer"]
 margin_top = 133.0
-margin_right = 300.0
+margin_right = 311.0
 margin_bottom = 179.0
 theme = ExtResource( 4 )
 text = "Host"
@@ -77,7 +77,7 @@ __meta__ = {
 
 [node name="JoinButton" type="Button" parent="ConnectMenu/VBoxContainer"]
 margin_top = 199.0
-margin_right = 300.0
+margin_right = 311.0
 margin_bottom = 245.0
 theme = ExtResource( 4 )
 text = "Join"
