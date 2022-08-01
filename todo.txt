@@ -1,1 +1,2 @@
 switch to lobbies with invitation code
+    check if it works, check if balls are still the same for everyone

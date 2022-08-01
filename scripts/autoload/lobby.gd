@@ -65,7 +65,8 @@ remotesync func update_player_infos(player_infos_: Dictionary):
 func host(player_name: String):
 	# start gotm lobby
 	_err = Gotm.host_lobby(false)
-	Gotm.lobby.name = "ABCU"
+	var lobby_code = Random.generate_word(4).to_upper()
+	Gotm.lobby.name = lobby_code
 	Gotm.lobby.hidden = false
 
 	# start godot server
@@ -115,7 +116,7 @@ func randomize_players():
 	rpc("update_player_infos", player_infos)
 
 
-func can_start_game():
+func can_start_game() -> int:
 	var t1_count = 0
 	var t2_count = 0
 
@@ -125,8 +126,12 @@ func can_start_game():
 		elif info.team == 2:
 			t2_count += 1
 
-	if t1_count < 1 or t2_count < 1:
-		print("Needs at least 1 player per team!")
-		return false
+	if t1_count < 1:
+		print("Needs at least 1 player in t1!")
+		return 1
 
-	return true
+	if t2_count < 1:
+		print("Needs at least 1 player in t2!")
+		return 2
+
+	return -1

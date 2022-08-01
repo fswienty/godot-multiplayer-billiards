@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
@@ -31,12 +31,21 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="DynamicFont" id=3]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
+
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
 [node name="ConnectMenu" type="CenterContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 300 )
@@ -105,7 +114,7 @@ margin_bottom = 46.0
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
 max_length = 4
-placeholder_text = "Lobby Code"
+placeholder_text = "Invite Code"
 caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,7 +132,6 @@ __meta__ = {
 }
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -199,15 +207,19 @@ __meta__ = {
 margin_top = 0.0
 margin_bottom = 206.0
 
-[node name="DummyButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
+[node name="LobbyCodeButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
 margin_top = 216.0
 margin_right = 261.0
 margin_bottom = 262.0
 size_flags_stretch_ratio = 2.43
-flat = true
+text = "Invite Code: XXXX"
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Timer" type="Timer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0/LobbyCodeButton"]
+wait_time = 2.0
+one_shot = true
 
 [node name="T2" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
 margin_left = 642.0
@@ -247,6 +259,7 @@ custom_constants/separation = 20
 margin_right = 300.0
 margin_bottom = 26.0
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
 text = "Waiting for host to start..."
 align = 1
 valign = 1

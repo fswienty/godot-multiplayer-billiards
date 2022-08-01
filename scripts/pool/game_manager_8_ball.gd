@@ -47,6 +47,7 @@ func initialize():
 
 
 remotesync func initialize_synced(seed_: int):
+	print("setting common random seed")
 	seed(seed_)
 
 	# connect signals
