@@ -4,16 +4,12 @@ signal player_infos_updated
 
 var player_infos: Dictionary = {}  # Player info, associate ID to data
 var self_info: Dictionary = {name = "", team = 0}  # Info we send to other players
-var peer: NetworkedMultiplayerENet
 
 var _err
 
 
 func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
-
-	peer = NetworkedMultiplayerENet.new()
-
 	_err = get_tree().connect("network_peer_connected", self, "_peer_connected")
 	_err = get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
 	_err = get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -67,18 +63,41 @@ remotesync func update_player_infos(player_infos_: Dictionary):
 
 
 func host(player_name: String):
+	# start gotm lobby
+	_err = Gotm.host_lobby(false)
+	Gotm.lobby.name = "ABCU"
+	Gotm.lobby.hidden = false
+
+	# start godot server
+	var peer = NetworkedMultiplayerENet.new()
 	_err = peer.create_server(8070)
 	get_tree().network_peer = peer
 	player_infos[1] = {name = player_name, team = 0}  # manually add server to player_infos
 	rpc("update_player_infos", player_infos)  # just to update self basically
-	print("hosting...")
+	print("hosting lobby ", Gotm.lobby.name)
 
 
-func join(player_name: String):
-	_err = peer.create_client("127.0.0.1", 8070)
+func join(player_name: String, lobby_name: String) -> bool:
+	# join gotm lobby
+	var fetch = GotmLobbyFetch.new()
+	fetch.filter_name = lobby_name
+	var lobbies = yield(fetch.first(), "completed")
+	print("found lobbies: ", lobbies)
+	if lobbies.size() == 0:
+		print("lobby ", lobby_name, " not found")
+		return false
+	var success = yield(lobbies[0].join(), "completed")
+	if not success:
+		print("could not join lobby ", lobby_name)
+		return false
+
+	# join godot server
+	var peer = NetworkedMultiplayerENet.new()
+	_err = peer.create_client(Gotm.lobby.host.address, 8070)
 	get_tree().network_peer = peer
 	self_info.name = player_name
-	print("joining...")
+	print("joined lobby ", lobbies[0].name)
+	return true
 
 
 func set_team(player_id, team):
