@@ -7,7 +7,7 @@ signal entered_lobby
 
 var menu_open_anim: AnimationPlayer
 var name_error_anim: AnimationPlayer
-var lobby_code_error: AnimationPlayer
+var lobby_code_error_anim: AnimationPlayer
 
 onready var player_input: LineEdit = $VBoxContainer/PlayerName
 onready var lobby_input: LineEdit = $VBoxContainer/HBoxContainer/LobbyCode
@@ -23,10 +23,9 @@ func _ready():
 	host_button.connect("pressed", self, "_on_HostButton_pressed")
 	join_button.connect("pressed", self, "_on_JoinButton_pressed")
 
-	menu_open_anim = Animations.fade_in_anim(self, "../ConnectMenu", Globals.menu_transition_time)
-	name_error_anim = Animations.indicate_error_anim(
-		player_input, "../ConnectMenu/VBoxContainer/PlayerName"
-	)
+	menu_open_anim = Animations.fade_in_anim(self, Globals.menu_transition_time)
+	name_error_anim = Animations.indicate_error_anim(player_input)
+	lobby_code_error_anim = Animations.indicate_error_anim(lobby_input)
 
 
 func _on_PlayerName_text_changed(text: String):
@@ -51,15 +50,17 @@ func _on_JoinButton_pressed():
 	SoundManager.click()
 	if player_name == "":
 		print("please enter a name")
+		name_error_anim.play("anim")
 		return
 	if lobby_code.length() != 4:
 		print("please enter a valid lobby code")
+		lobby_code_error_anim.play("anim")
 		return
 	var success = yield(Lobby.join(player_name, lobby_code), "completed")
 	if success:
 		_transition_to_lobby()
 	else:
-		# TODO show error to user
+		lobby_code_error_anim.play("anim")
 		print("could not join lobby ", lobby_code)
 
 

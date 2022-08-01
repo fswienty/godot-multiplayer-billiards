@@ -30,7 +30,7 @@ func _ready():
 	t2_panel.title.text = "Team 2"
 
 	modulate = Color.transparent
-	menu_open_anim = Animations.fade_in_anim(self, "../LobbyMenu", Globals.menu_transition_time)
+	menu_open_anim = Animations.fade_in_anim(self, Globals.menu_transition_time)
 
 
 func open():

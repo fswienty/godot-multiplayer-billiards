@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
@@ -30,9 +30,6 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-
-[sub_resource type="Animation" id=3]
-resource_name = "New Anim"
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
@@ -124,9 +121,6 @@ text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ConnectMenu"]
-"anims/New Anim" = SubResource( 3 )
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
 visible = false
