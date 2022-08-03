@@ -22,10 +22,10 @@ func _peer_connected(id):
 	print("_peer_connected, id: ", id)
 
 
-func _player_disconnected(id):
-	print("_player_disconnected")
+func _peer_disconnected(id):
+	print("_peer_disconnected")
 	_err = player_infos.erase(id)  # Erase player from info.
-	emit_signal("players_updated")
+	emit_signal("player_infos_updated")
 
 
 # Only called on clients, not server.
@@ -45,6 +45,7 @@ func _connected_fail():
 	print("_connected_fail")
 
 
+# called by a newly joined player on the server
 remote func register_player(info: Dictionary):
 	if get_tree().get_network_unique_id() == 1:
 		# Get the id of the RPC sender.
@@ -56,6 +57,7 @@ remote func register_player(info: Dictionary):
 		print("This is a client, register_player() should never be called.")
 
 
+# called by the server on all peers
 remotesync func update_player_infos(player_infos_: Dictionary):
 	player_infos = player_infos_
 	# Call function to update lobby UI here
