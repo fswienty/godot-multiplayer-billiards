@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/ui_scenes/PlayerContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/menus/connect_menu.gd" type="Script" id=2]
@@ -35,6 +35,13 @@ corner_radius_bottom_left = 2
 size = 18
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+outline_size = 2
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 7 )
@@ -142,10 +149,10 @@ margin_right = 512.0
 margin_bottom = 300.0
 rect_pivot_offset = Vector2( 0, 300 )
 theme = ExtResource( 4 )
-custom_constants/margin_right = 60
-custom_constants/margin_top = 60
-custom_constants/margin_left = 60
-custom_constants/margin_bottom = 60
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true,
@@ -153,18 +160,18 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LobbyMenu"]
-margin_left = 60.0
-margin_top = 60.0
-margin_right = 964.0
-margin_bottom = 540.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 560.0
 custom_constants/separation = 60
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TeamPanelContainer" type="HBoxContainer" parent="LobbyMenu/VBoxContainer"]
-margin_right = 904.0
-margin_bottom = 262.0
+margin_right = 944.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 60
@@ -173,8 +180,8 @@ __meta__ = {
 }
 
 [node name="T1" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
-margin_right = 261.0
-margin_bottom = 262.0
+margin_right = 274.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
@@ -182,12 +189,13 @@ __meta__ = {
 
 [node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T1" instance=ExtResource( 1 )]
 margin_top = 0.0
-margin_bottom = 206.0
+margin_right = 274.0
+margin_bottom = 180.0
 
 [node name="JoinButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T1"]
-margin_top = 216.0
-margin_right = 261.0
-margin_bottom = 262.0
+margin_top = 190.0
+margin_right = 274.0
+margin_bottom = 236.0
 size_flags_stretch_ratio = 2.43
 text = "Join Team 1"
 __meta__ = {
@@ -195,9 +203,9 @@ __meta__ = {
 }
 
 [node name="T0" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
-margin_left = 321.0
-margin_right = 582.0
-margin_bottom = 262.0
+margin_left = 334.0
+margin_right = 609.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
@@ -205,26 +213,22 @@ __meta__ = {
 
 [node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0" instance=ExtResource( 1 )]
 margin_top = 0.0
-margin_bottom = 206.0
+margin_right = 275.0
+margin_bottom = 180.0
 
-[node name="LobbyCodeButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
-margin_top = 216.0
-margin_right = 261.0
-margin_bottom = 262.0
-size_flags_stretch_ratio = 2.43
-text = "Invite Code: XXXX"
+[node name="RandomizeButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
+margin_top = 190.0
+margin_right = 275.0
+margin_bottom = 236.0
+text = "Randomize Teams"
 __meta__ = {
-"_edit_lock_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0/LobbyCodeButton"]
-wait_time = 2.0
-one_shot = true
-
 [node name="T2" type="VBoxContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer"]
-margin_left = 642.0
-margin_right = 904.0
-margin_bottom = 262.0
+margin_left = 669.0
+margin_right = 944.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
@@ -232,13 +236,13 @@ __meta__ = {
 
 [node name="PlayerContainer" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T2" instance=ExtResource( 1 )]
 margin_top = 0.0
-margin_right = 262.0
-margin_bottom = 206.0
+margin_right = 275.0
+margin_bottom = 180.0
 
 [node name="JoinButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T2"]
-margin_top = 216.0
-margin_right = 262.0
-margin_bottom = 262.0
+margin_top = 190.0
+margin_right = 275.0
+margin_bottom = 236.0
 size_flags_stretch_ratio = 2.43
 text = "Join Team 2"
 __meta__ = {
@@ -246,10 +250,10 @@ __meta__ = {
 }
 
 [node name="ControlsContainer" type="VBoxContainer" parent="LobbyMenu/VBoxContainer"]
-margin_left = 302.0
-margin_top = 322.0
-margin_right = 602.0
-margin_bottom = 480.0
+margin_left = 322.0
+margin_top = 296.0
+margin_right = 622.0
+margin_bottom = 520.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -267,20 +271,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RandomizeButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
+[node name="LobbyCodeButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
 margin_top = 46.0
 margin_right = 300.0
 margin_bottom = 92.0
-text = "Randomize Players"
+size_flags_stretch_ratio = 2.43
+text = "Invite Code: XXXX"
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
+
+[node name="Timer" type="Timer" parent="LobbyMenu/VBoxContainer/ControlsContainer/LobbyCodeButton"]
+wait_time = 2.0
+one_shot = true
 
 [node name="StartButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
 margin_top = 112.0
 margin_right = 300.0
 margin_bottom = 158.0
 text = "Start Game"
+
+[node name="BackButton" type="Button" parent="LobbyMenu/VBoxContainer/ControlsContainer"]
+margin_top = 178.0
+margin_right = 300.0
+margin_bottom = 224.0
+text = "Back"
 
 [node name="MuteButton" type="Button" parent="."]
 anchor_left = 1.0
@@ -296,5 +311,23 @@ icon = ExtResource( 9 )
 script = ExtResource( 8 )
 sound_on_icon = ExtResource( 9 )
 sound_off_icon = ExtResource( 10 )
+
+[node name="ErrorLabel" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 130.0
+margin_top = 30.0
+margin_right = -130.0
+margin_bottom = 130.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0.192157, 0.192157, 1 )
+custom_colors/font_outline_modulate = Color( 0.141176, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Please enter a name"
+align = 1
+valign = 1
+
+[node name="Timer" type="Timer" parent="ErrorLabel"]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]

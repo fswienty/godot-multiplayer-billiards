@@ -1,2 +1,8 @@
-switch to lobbies with invitation code
-    check if it works, check if balls are still the same for everyone
+add panel when a player disconnects, also a back button
+    go back to lobby as option for host
+    go back to main menu as option of host is gone
+
+update to 3.5:
+    check out tween stuff
+    check scene unique names
+    check theme variation

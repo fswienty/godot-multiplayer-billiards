@@ -46,6 +46,20 @@ func fade_in_anim(target_node: Node, t: float = 1) -> AnimationPlayer:
 	return get_animation_player(target_node, "modulate", [0, t], [v1, v2])
 
 
+func slide_in_anim(target_node: Control, axis: String = "y", distance: float = 100, t: float = 1):
+	var initial_x = target_node.rect_position.x
+	var initial_y = target_node.rect_position.y
+	var v1: Vector2
+	var v2: Vector2 = target_node.rect_position
+	match axis:
+		"x":
+			v1 = v2 - Vector2(distance, 0)
+		"y":
+			v1 = v2 - Vector2(0, distance)
+
+	return get_animation_player(target_node, "rect_position", [0, t], [v1, v2])
+
+
 func indicate_error_anim(target_node: Control, amplitude: float = 10, wiggle_count: int = 3) -> AnimationPlayer:
 	var initial_x = target_node.rect_position.x
 	var initial_y = target_node.rect_position.y
