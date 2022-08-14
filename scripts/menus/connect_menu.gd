@@ -61,7 +61,7 @@ func _on_JoinButton_pressed():
 	else:
 		emit_signal("error_occurred", "Lobby not found")
 		lobby_code_error_anim.play("anim")
-		lobby_code_input.clear()
+		lobby_code_input.caret_position = 999
 		lobby_code_input.grab_focus()
 
 
