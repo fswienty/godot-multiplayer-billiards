@@ -13,7 +13,7 @@ onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLab
 onready var t1_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T1BallContainer
 onready var t2_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T2BallContainer
 
-var _err
+var __
 
 
 func initialize(manager_: GameManager8Ball):

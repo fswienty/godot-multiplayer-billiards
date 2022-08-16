@@ -1,6 +1,8 @@
 extends Node
 
-var _err
+var active_tweens: Dictionary = {}
+
+var __
 
 
 func get_animation_player(target_node: Node, animated_property: String, times: Array, values: Array) -> AnimationPlayer:
@@ -19,7 +21,7 @@ func get_animation_player(target_node: Node, animated_property: String, times: A
 	var player: AnimationPlayer = AnimationPlayer.new()
 	player.name = target_node.name + "_" + animated_property + "_" + "AnimationPlayer"
 	target_node.add_child(player)
-	_err = player.add_animation("anim", animation)
+	__ = player.add_animation("anim", animation)
 
 	return player
 
@@ -73,3 +75,14 @@ func indicate_error_anim(target_node: Control, amplitude: float = 10, wiggle_cou
 		values.append(Vector2(initial_x + amplitude, initial_y))
 	values.append(Vector2(initial_x, initial_y))
 	return get_animation_player(target_node, "rect_position", times, values)
+
+
+func error_tween(target_node: Control, amplitude: float = 10, wiggle_count: int = 3) -> SceneTreeTween:
+	var initial_x = target_node.rect_position.x
+	var t = Globals.menu_transition_time / wiggle_count / 2
+	var tw: SceneTreeTween = target_node.create_tween()
+	for i in range(wiggle_count):
+		__ = tw.tween_property(target_node, "rect_position:x", initial_x + amplitude, t)
+		__ = tw.tween_property(target_node, "rect_position:x", initial_x - amplitude, t)
+	__ = tw.tween_property(target_node, "rect_position:x", initial_x, t)
+	return tw

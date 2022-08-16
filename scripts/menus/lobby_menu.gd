@@ -10,32 +10,32 @@ var t2_empty_anim: AnimationPlayer
 
 var lobby_code_button_text: String
 
-onready var t0_panel: PlayerContainer = $VBoxContainer/TeamPanelContainer/T0/PlayerContainer
-onready var t1_panel: PlayerContainer = $VBoxContainer/TeamPanelContainer/T1/PlayerContainer
-onready var t2_panel: PlayerContainer = $VBoxContainer/TeamPanelContainer/T2/PlayerContainer
+onready var t0_panel: PlayerContainer = get_node("%T0PlayerContainer")
+onready var t1_panel: PlayerContainer = get_node("%T1PlayerContainer")
+onready var t2_panel: PlayerContainer = get_node("%T2PlayerContainer")
 
-onready var t1_button: Button = $VBoxContainer/TeamPanelContainer/T1/JoinButton
-onready var t2_button: Button = $VBoxContainer/TeamPanelContainer/T2/JoinButton
-onready var lobby_code_button: Button = $VBoxContainer/ControlsContainer/LobbyCodeButton
-onready var lobby_code_button_timer: Timer = $VBoxContainer/ControlsContainer/LobbyCodeButton/Timer
+onready var t1_button: Button = get_node("%T1JoinButton")
+onready var t2_button: Button = get_node("%T2JoinButton")
+onready var lobby_code_button: Button = get_node("%LobbyCodeButton")
+onready var lobby_code_button_timer: Timer = lobby_code_button.get_node("Timer")
 
-onready var waiting_label: Label = $VBoxContainer/ControlsContainer/WaitingLabel
-onready var start_button: Button = $VBoxContainer/ControlsContainer/StartButton
-onready var randomize_button: Button = $VBoxContainer/TeamPanelContainer/T0/RandomizeButton
-onready var back_button: Button = $VBoxContainer/ControlsContainer/BackButton
+onready var waiting_label: Label = get_node("%WaitingLabel")
+onready var start_button: Button = get_node("%StartButton")
+onready var randomize_button: Button = get_node("%RandomizeButton")
+onready var back_button: Button = get_node("%BackButton")
 
-var _err
+var __
 
 
 func _ready():
-	_err = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
-	_err = t1_button.connect("pressed", self, "_on_T1Button_pressed")
-	_err = t2_button.connect("pressed", self, "_on_T2Button_pressed")
-	_err = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
-	_err = lobby_code_button_timer.connect("timeout", self, "_reset_lobby_code_button_text")
-	_err = start_button.connect("pressed", self, "_on_StartButton_pressed")
-	_err = randomize_button.connect("pressed", self, "_on_RandomizeButton_pressed")
-	_err = back_button.connect("pressed", self, "_on_BackButton_pressed")
+	__ = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
+	__ = t1_button.connect("pressed", self, "_on_T1Button_pressed")
+	__ = t2_button.connect("pressed", self, "_on_T2Button_pressed")
+	__ = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
+	__ = lobby_code_button_timer.connect("timeout", self, "_reset_lobby_code_button_text")
+	__ = start_button.connect("pressed", self, "_on_StartButton_pressed")
+	__ = randomize_button.connect("pressed", self, "_on_RandomizeButton_pressed")
+	__ = back_button.connect("pressed", self, "_on_BackButton_pressed")
 
 	t0_panel.title.text = "New Players"
 	t1_panel.title.text = "Team 1"

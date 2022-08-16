@@ -24,7 +24,7 @@ var t2_8_ball_target: int = Enums.PocketLocation.NONE
 var t1_pocketed_balls: Array = []
 var t2_pocketed_balls: Array = []
 
-var _err
+var __
 
 onready var table = $Table
 onready var ball_manager: BallManager8Ball = $BallManager
@@ -51,8 +51,8 @@ remotesync func initialize_synced(seed_: int):
 	seed(seed_)
 
 	# connect signals
-	_err = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")
-	_err = queue_controller.connect("queue_hit", self, "_on_queue_hit")
+	__ = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")
+	__ = queue_controller.connect("queue_hit", self, "_on_queue_hit")
 
 	# initialize nodes
 	ball_manager.initialize()
@@ -325,5 +325,5 @@ func _check_last_non_8_ball(pocket: Pocket):
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):
-	_err = ball.connect("ball_pocketed", self, "_on_ball_pocketed")
-	_err = ball.connect("ball_hit", self, "_on_ball_hit")
+	__ = ball.connect("ball_pocketed", self, "_on_ball_pocketed")
+	__ = ball.connect("ball_hit", self, "_on_ball_hit")

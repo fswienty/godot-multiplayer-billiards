@@ -14,14 +14,14 @@
 default_font = ExtResource( 1 )
 Button/colors/font_color_pressed = Color( 0.0745098, 0.698039, 0.113725, 1 )
 Button/constants/hseparation = 2
-Button/fonts/font = null
+Button/fonts/font = ExtResource( 1 )
 Button/styles/disabled = ExtResource( 2 )
 Button/styles/focus = SubResource( 5 )
 Button/styles/hover = ExtResource( 4 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 5 )
 LineEdit/constants/minimum_spaces = 12
-LineEdit/fonts/font = null
+LineEdit/fonts/font = ExtResource( 1 )
 LineEdit/icons/clear = null
 LineEdit/styles/focus = ExtResource( 5 )
 LineEdit/styles/normal = ExtResource( 3 )

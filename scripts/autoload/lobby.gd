@@ -5,16 +5,16 @@ signal player_infos_updated
 var player_infos: Dictionary = {}  # Player info, associate ID to data
 var self_info: Dictionary = {name = "", team = 0}  # Info we send to other players
 
-var _err
+var __
 
 
 func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
-	_err = get_tree().connect("network_peer_connected", self, "_peer_connected")
-	_err = get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
-	_err = get_tree().connect("connected_to_server", self, "_connected_ok")
-	_err = get_tree().connect("connection_failed", self, "_connected_fail")
-	_err = get_tree().connect("server_disconnected", self, "_server_disconnected")
+	__ = get_tree().connect("network_peer_connected", self, "_peer_connected")
+	__ = get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
+	__ = get_tree().connect("connected_to_server", self, "_connected_ok")
+	__ = get_tree().connect("connection_failed", self, "_connected_fail")
+	__ = get_tree().connect("server_disconnected", self, "_server_disconnected")
 
 
 # Called on both clients and server when a peer connects.
@@ -24,7 +24,7 @@ func _peer_connected(id):
 
 func _peer_disconnected(id):
 	print("_peer_disconnected")
-	_err = player_infos.erase(id)  # Erase player from info.
+	__ = player_infos.erase(id)  # Erase player from info.
 	emit_signal("player_infos_updated")
 
 
@@ -66,14 +66,14 @@ remotesync func update_player_infos(player_infos_: Dictionary):
 
 func host(player_name: String):
 	# start gotm lobby
-	_err = Gotm.host_lobby(false)
+	__ = Gotm.host_lobby(false)
 	var lobby_code = Random.generate_word(4).to_upper()
 	Gotm.lobby.name = lobby_code
 	Gotm.lobby.hidden = false
 
 	# start godot server
 	var peer = NetworkedMultiplayerENet.new()
-	_err = peer.create_server(8070)
+	__ = peer.create_server(8070)
 	get_tree().network_peer = peer
 	player_infos[1] = {name = player_name, team = 0}  # manually add server to player_infos
 	rpc("update_player_infos", player_infos)  # just to update self basically
@@ -96,7 +96,7 @@ func join(player_name: String, lobby_name: String) -> bool:
 
 	# join godot server
 	var peer = NetworkedMultiplayerENet.new()
-	_err = peer.create_client(Gotm.lobby.host.address, 8070)
+	__ = peer.create_client(Gotm.lobby.host.address, 8070)
 	get_tree().network_peer = peer
 	self_info.name = player_name
 	print("joined lobby ", lobbies[0].name)

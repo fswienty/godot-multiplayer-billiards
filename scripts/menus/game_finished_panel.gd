@@ -7,12 +7,12 @@ onready var t2_list: VBoxContainer = $VBoxContainer/HBoxContainer/T2Container/Pl
 onready var lobby_button: Button = $VBoxContainer/LobbyButton
 onready var waiting_label: Label = $VBoxContainer/WaitingLabel
 
-var _err
+var __
 
 
 func initialize():
 	hide()
-	_err = lobby_button.connect("pressed", self, "_on_LobbyButton_pressed")
+	__ = lobby_button.connect("pressed", self, "_on_LobbyButton_pressed")
 	t1_team_label.initialize("Team 1")
 	t2_team_label.initialize("Team 2")
 	# add players to lidsts
@@ -56,4 +56,4 @@ func _on_LobbyButton_pressed():
 
 remotesync func _back_to_lobby():
 	get_tree().paused = false
-	_err = get_tree().change_scene("res://scenes/Menu.tscn")
+	__ = get_tree().change_scene("res://scenes/Menu.tscn")
