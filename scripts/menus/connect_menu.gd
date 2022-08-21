@@ -7,8 +7,6 @@ var menu_open_anim: AnimationPlayer
 var player_name_error_anim: AnimationPlayer
 var lobby_code_error_anim: AnimationPlayer
 
-var player_name_error_tw: SceneTreeTween
-
 onready var player_name_input: LineEdit = get_node("%PlayerNameLineEdit")
 onready var lobby_code_input: LineEdit = get_node("%LobbyCodeLineEdit")
 onready var host_button: Button = get_node("%HostButton")
@@ -37,8 +35,7 @@ func _on_HostButton_pressed():
 	SoundManager.click()
 	if player_name_input.text == "":
 		emit_signal("error_occurred", "Please enter a name")
-		if not (player_name_error_tw and player_name_error_tw.is_valid()):
-			player_name_error_tw = Animations.error_tween(player_name_input)
+		player_name_error_anim.play("anim")
 		player_name_input.grab_focus()
 		return
 	Lobby.host(player_name_input.text)

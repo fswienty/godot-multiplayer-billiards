@@ -1,6 +1,8 @@
 extends Node
 
 signal player_infos_updated
+signal client_disconnected(name)
+signal host_disconnected(name)
 
 var player_infos: Dictionary = {}  # Player info, associate ID to data
 var self_info: Dictionary = {name = "", team = 0}  # Info we send to other players
@@ -23,7 +25,8 @@ func _peer_connected(id):
 
 
 func _peer_disconnected(id):
-	print("_peer_disconnected")
+	print("_peer_disconnected, id:", id)
+	emit_signal("client_disconnected", player_infos[id].name)
 	__ = player_infos.erase(id)  # Erase player from info.
 	emit_signal("player_infos_updated")
 
@@ -38,6 +41,10 @@ func _connected_ok():
 # Server kicked us; show error and abort.
 func _server_disconnected():
 	print("_server_disconnected")
+	player_infos = {}
+	self_info = {name = "", team = 0}
+	emit_signal("player_infos_updated")
+	emit_signal("host_disconnected", player_infos[1].name)
 
 
 # Could not even connect to server; abort.

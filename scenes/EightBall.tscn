@@ -673,9 +673,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
-distance_at_rest = 15.0
-max_distance = 70.0
-force_mult = 1000.0
+mode = 2
 
 [node name="LineMask" type="Control" parent="QueueController"]
 margin_left = -360.0

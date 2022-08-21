@@ -30,8 +30,8 @@ func _ready():
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
 	if DEBUG_MODE:
-		connect_menu.player_name = "debug_host"
-		connect_menu._on_Button_pressed("host")
+		connect_menu.player_name_input.text = "debug_host"
+		connect_menu._on_HostButton_pressed()
 		Lobby.player_infos = {1: {name = "debug_host", team = 1}}
 		connect_menu.hide()
 		lobby_menu.show()
@@ -51,6 +51,7 @@ func _on_entered_lobby():
 
 
 func _on_backed_out_of_lobby():
+	get_tree().network_peer = null
 	lobby_menu.hide()
 	connect_menu.open()
 
@@ -58,7 +59,6 @@ func _on_backed_out_of_lobby():
 func _on_game_started():
 	get_tree().refuse_new_network_connections = true
 	print("game will be started with: ", Lobby.player_infos)
-
 	# load game scene
 	__ = get_tree().change_scene("res://scenes/EightBall.tscn")
 

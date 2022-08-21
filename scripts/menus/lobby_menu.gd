@@ -16,12 +16,12 @@ onready var t2_panel: PlayerContainer = get_node("%T2PlayerContainer")
 
 onready var t1_button: Button = get_node("%T1JoinButton")
 onready var t2_button: Button = get_node("%T2JoinButton")
+onready var randomize_button: Button = get_node("%RandomizeButton")
+onready var dummy_button: Button = get_node("%DummyButton")
 onready var lobby_code_button: Button = get_node("%LobbyCodeButton")
 onready var lobby_code_button_timer: Timer = lobby_code_button.get_node("Timer")
-
 onready var waiting_label: Label = get_node("%WaitingLabel")
 onready var start_button: Button = get_node("%StartButton")
-onready var randomize_button: Button = get_node("%RandomizeButton")
 onready var back_button: Button = get_node("%BackButton")
 
 var __
@@ -53,10 +53,12 @@ func open():
 	lobby_code_button.text = lobby_code_button_text
 	if get_tree().is_network_server():
 		randomize_button.show()
+		dummy_button.hide()
 		start_button.show()
 		waiting_label.hide()
 	else:
 		randomize_button.hide()
+		dummy_button.show()
 		start_button.hide()
 		waiting_label.show()
 	_on_player_infos_updated()

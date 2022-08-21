@@ -2,8 +2,7 @@ add panel when a player disconnects, also a back button
     go back to lobby as option for host
     go back to main menu as option of host is gone
 
-add dummy button for clients again so that middle player list is correct size
+add selection for queue mode to connect menu
 
 update to 3.5:
-    check out tween stuff
     check theme variation

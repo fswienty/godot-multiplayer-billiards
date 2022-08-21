@@ -48,10 +48,12 @@ font_data = ExtResource( 7 )
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
+DEBUG_MODE = true
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
 [node name="ConnectMenu" type="CenterContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 300 )
@@ -139,7 +141,6 @@ __meta__ = {
 }
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -218,14 +219,24 @@ __meta__ = {
 unique_name_in_owner = true
 margin_top = 0.0
 margin_right = 275.0
-margin_bottom = 180.0
+margin_bottom = 124.0
 
 [node name="RandomizeButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
+unique_name_in_owner = true
+margin_top = 134.0
+margin_right = 275.0
+margin_bottom = 180.0
+text = "Randomize Teams"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DummyButton" type="Button" parent="LobbyMenu/VBoxContainer/TeamPanelContainer/T0"]
 unique_name_in_owner = true
 margin_top = 190.0
 margin_right = 275.0
 margin_bottom = 236.0
-text = "Randomize Teams"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
