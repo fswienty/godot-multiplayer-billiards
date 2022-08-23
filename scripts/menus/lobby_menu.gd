@@ -137,6 +137,7 @@ func _on_RandomizeButton_pressed():
 
 func _on_BackButton_pressed():
 	SoundManager.click()
+	Lobby.leave(get_tree().get_network_unique_id())
 	menu_open_anim.play_backwards("anim")
 	yield(menu_open_anim, "animation_finished")
 	emit_signal("went_back")

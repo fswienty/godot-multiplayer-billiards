@@ -44,7 +44,7 @@ func _set_type():
 		9, 10, 11, 12, 13, 14, 15:
 			type = Enums.BallType.HALF
 		_:
-			push_error("invalid ball number!")
+			push_error("invalid ball number:" + str(number))
 
 
 remotesync func play_ball_hit_sound(intensity: float):

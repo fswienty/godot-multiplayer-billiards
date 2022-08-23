@@ -4,5 +4,8 @@ add panel when a player disconnects, also a back button
 
 add selection for queue mode to connect menu
 
+try using remote on _on_backed_out_of_lobby and calling itself
+close gotm lobby after host disconnects
+
 update to 3.5:
     check theme variation

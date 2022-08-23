@@ -1,8 +1,8 @@
 extends Node
 
 signal player_infos_updated
-signal client_disconnected(name)
-signal host_disconnected(name)
+signal host_left(name)
+signal client_left(name)
 
 var player_infos: Dictionary = {}  # Player info, associate ID to data
 var self_info: Dictionary = {name = "", team = 0}  # Info we send to other players
@@ -12,44 +12,45 @@ var __
 
 func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
-	__ = get_tree().connect("network_peer_connected", self, "_peer_connected")
-	__ = get_tree().connect("network_peer_disconnected", self, "_peer_disconnected")
-	__ = get_tree().connect("connected_to_server", self, "_connected_ok")
-	__ = get_tree().connect("connection_failed", self, "_connected_fail")
+	__ = get_tree().connect("network_peer_connected", self, "_network_peer_connected")
+	__ = get_tree().connect("network_peer_disconnected", self, "_network_peer_disconnected")
+	__ = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	__ = get_tree().connect("server_disconnected", self, "_server_disconnected")
+	__ = get_tree().connect("connection_failed", self, "_connection_failed")
 
 
 # Called on both clients and server when a peer connects.
-func _peer_connected(id):
-	print("_peer_connected, id: ", id)
+func _network_peer_connected(id):
+	print("network_peer_connected, id: ", id)
 
 
-func _peer_disconnected(id):
-	print("_peer_disconnected, id:", id)
-	emit_signal("client_disconnected", player_infos[id].name)
-	__ = player_infos.erase(id)  # Erase player from info.
-	emit_signal("player_infos_updated")
+# Called on both clients and server when a peer disconnects.
+func _network_peer_disconnected(id):
+	print("network_peer_disconnected, id:", id)
+	# emit_signal("client_disconnected", player_infos[id].name)
+	# __ = player_infos.erase(id)  # Erase player from info.
+	# emit_signal("player_infos_updated")
 
 
 # Only called on clients, not server.
-func _connected_ok():
-	print("_connected_ok")
+func _connected_to_server():
+	print("connected_to_server")
 	# send the peer's info to the  server
 	rpc_id(1, "register_player", self_info)
 
 
-# Server kicked us; show error and abort.
+# Only called on clients. Server kicked us; show error and abort.
 func _server_disconnected():
-	print("_server_disconnected")
-	player_infos = {}
-	self_info = {name = "", team = 0}
-	emit_signal("player_infos_updated")
-	emit_signal("host_disconnected", player_infos[1].name)
+	print("server_disconnected")
+	# player_infos = {}
+	# self_info = {name = "", team = 0}
+	# emit_signal("player_infos_updated")
+	# emit_signal("host_disconnected", player_infos[1].name)
 
 
-# Could not even connect to server; abort.
-func _connected_fail():
-	print("_connected_fail")
+# Only called on clients. Could not even connect to server, abort.
+func _connection_failed():
+	print("connection_failed")
 
 
 # called by a newly joined player on the server
@@ -64,10 +65,9 @@ remote func register_player(info: Dictionary):
 		print("This is a client, register_player() should never be called.")
 
 
-# called by the server on all peers
+# called on all peers
 remotesync func update_player_infos(player_infos_: Dictionary):
 	player_infos = player_infos_
-	# Call function to update lobby UI here
 	emit_signal("player_infos_updated")
 
 
@@ -108,6 +108,28 @@ func join(player_name: String, lobby_name: String) -> bool:
 	self_info.name = player_name
 	print("joined lobby ", lobbies[0].name)
 	return true
+
+
+func leave(player_id):
+	if player_id == 1:
+		print("host left the game")
+		rpc("update_player_infos", {})
+		emit_signal("host_left", player_infos[1].name)
+	else:
+		var player_name = player_infos[player_id].name
+		if player_infos.erase(player_id):
+			print("player ", player_name, " left the game")
+			rpc("update_player_infos", player_infos)
+			emit_signal("client_left", player_name)
+		else:
+			push_error(
+				(
+					"Could not remove player with id: "
+					+ str(player_id)
+					+ " from player_infos: "
+					+ str(player_infos)
+				)
+			)
 
 
 func set_team(player_id, team):
