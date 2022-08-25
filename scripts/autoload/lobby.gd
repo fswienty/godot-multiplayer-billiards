@@ -113,8 +113,8 @@ func join(player_name: String, lobby_name: String) -> bool:
 func leave(player_id):
 	if player_id == 1:
 		print("host left the game")
-		rpc("update_player_infos", {})
 		emit_signal("host_left", player_infos[1].name)
+		rpc("update_player_infos", {})
 	else:
 		var player_name = player_infos[player_id].name
 		if player_infos.erase(player_id):

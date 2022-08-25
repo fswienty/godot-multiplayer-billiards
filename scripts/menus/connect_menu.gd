@@ -1,7 +1,6 @@
 extends Control
 
 signal entered_lobby
-signal error_occurred(error_text)
 
 var menu_open_anim: AnimationPlayer
 var player_name_error_anim: AnimationPlayer
@@ -34,7 +33,7 @@ func open():
 func _on_HostButton_pressed():
 	SoundManager.click()
 	if player_name_input.text == "":
-		emit_signal("error_occurred", "Please enter a name")
+		GlobalUi.show_error("Please enter a name")
 		player_name_error_anim.play("anim")
 		player_name_input.grab_focus()
 		return
@@ -45,12 +44,12 @@ func _on_HostButton_pressed():
 func _on_JoinButton_pressed():
 	SoundManager.click()
 	if player_name_input.text == "":
-		emit_signal("error_occurred", "Please enter a name")
+		GlobalUi.show_error("Please enter a name")
 		player_name_error_anim.play("anim")
 		player_name_input.grab_focus()
 		return
 	if lobby_code_input.text.length() != 4:
-		emit_signal("error_occurred", "Please enter a valid lobby code")
+		GlobalUi.show_error("Please enter a valid lobby code")
 		lobby_code_error_anim.play("anim")
 		lobby_code_input.grab_focus()
 		return
@@ -59,13 +58,14 @@ func _on_JoinButton_pressed():
 	if success:
 		_transition_to_lobby()
 	else:
-		emit_signal("error_occurred", "Lobby not found")
+		GlobalUi.show_error("Lobby not found")
 		lobby_code_error_anim.play("anim")
 		lobby_code_input.caret_position = 999
 		lobby_code_input.grab_focus()
 
 
 func _transition_to_lobby():
+	GlobalUi.hide_error()
 	menu_open_anim.play_backwards("anim")
 	yield(menu_open_anim, "animation_finished")
 	emit_signal("entered_lobby")

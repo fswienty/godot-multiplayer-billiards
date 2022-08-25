@@ -220,6 +220,7 @@ Globals="*res://scripts/autoload/globals.gd"
 Animations="*res://scripts/autoload/animations.gd"
 Gotm="*res://gotm/Gotm.gd"
 Random="*res://scripts/autoload/random.gd"
+GlobalUi="*res://scenes/autoload/GlobalUi.tscn"
 
 [debug]
 

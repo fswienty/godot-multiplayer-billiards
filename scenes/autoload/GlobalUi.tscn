@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=2]
+[ext_resource path="res://scripts/autoload/global_ui.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+outline_size = 2
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="GlobalUi" type="CanvasLayer"]
+layer = 2
+script = ExtResource( 3 )
+
+[node name="ErrorLabel" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 130.0
+margin_top = 30.0
+margin_right = -130.0
+margin_bottom = 130.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.192157, 0.192157, 1 )
+custom_colors/font_outline_modulate = Color( 0.141176, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Please enter a name"
+align = 1
+valign = 1
+
+[node name="Timer" type="Timer" parent="ErrorLabel"]
+wait_time = 3.0
+one_shot = true

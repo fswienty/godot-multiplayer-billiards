@@ -2,7 +2,6 @@ extends Control
 
 signal game_started
 signal went_back
-signal error_occurred(error_text)
 
 var menu_open_anim: AnimationPlayer
 var t1_empty_anim: AnimationPlayer
@@ -29,6 +28,8 @@ var __
 
 func _ready():
 	__ = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
+	__ = Lobby.connect("host_left", self, "_on_host_left")
+	__ = Lobby.connect("client_left", self, "_on_client_left")
 	__ = t1_button.connect("pressed", self, "_on_T1Button_pressed")
 	__ = t2_button.connect("pressed", self, "_on_T2Button_pressed")
 	__ = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
@@ -68,7 +69,6 @@ func open():
 
 func _on_player_infos_updated():
 	# clear lists
-	pass
 	for label in t0_panel.list.get_children():
 		t0_panel.list.remove_child(label)
 		label.queue_free()
@@ -124,10 +124,10 @@ func _on_StartButton_pressed():
 			rpc("_start_game")
 		1:
 			t1_empty_anim.play("anim")
-			emit_signal("error_occurred", "Team 1 is empty!")
+			GlobalUi.show_error("Team 1 is empty!")
 		2:
 			t2_empty_anim.play("anim")
-			emit_signal("error_occurred", "Team 2 is empty!")
+			GlobalUi.show_error("Team 2 is empty!")
 
 
 func _on_RandomizeButton_pressed():
@@ -138,12 +138,24 @@ func _on_RandomizeButton_pressed():
 func _on_BackButton_pressed():
 	SoundManager.click()
 	Lobby.leave(get_tree().get_network_unique_id())
+	GlobalUi.hide_error()
 	menu_open_anim.play_backwards("anim")
 	yield(menu_open_anim, "animation_finished")
 	emit_signal("went_back")
 
 
+func _on_host_left(_player_name: String):
+	var error_text = "The host has disconnected"
+	GlobalUi.show_error(error_text, false, true)
+
+
+func _on_client_left(player_name: String):
+	var error_text = player_name + " has left the game"
+	GlobalUi.show_error(error_text, false, true)
+
+
 remotesync func _start_game():
+	GlobalUi.hide_error()
 	menu_open_anim.play_backwards("anim")
 	yield(menu_open_anim, "animation_finished")
 	emit_signal("game_started")
