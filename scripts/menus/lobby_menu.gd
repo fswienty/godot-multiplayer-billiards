@@ -28,8 +28,8 @@ var __
 
 func _ready():
 	__ = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
-	__ = Lobby.connect("host_left", self, "_on_host_left")
-	__ = Lobby.connect("client_left", self, "_on_client_left")
+	# __ = Lobby.connect("host_left", self, "_on_host_left")
+	# __ = Lobby.connect("client_left", self, "_on_client_left")
 	__ = t1_button.connect("pressed", self, "_on_T1Button_pressed")
 	__ = t2_button.connect("pressed", self, "_on_T2Button_pressed")
 	__ = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
@@ -137,21 +137,29 @@ func _on_RandomizeButton_pressed():
 
 func _on_BackButton_pressed():
 	SoundManager.click()
-	Lobby.leave(get_tree().get_network_unique_id())
+	var network_id = get_tree().get_network_unique_id()
+	var player_name = Lobby.self_info.name
+	Lobby.leave(network_id)
+	if network_id == 1:
+		# do stuff when host leaves
+		pass
+	else:
+		# do stuff when client leaves
+		pass
+
 	GlobalUi.hide_error()
 	menu_open_anim.play_backwards("anim")
 	yield(menu_open_anim, "animation_finished")
 	emit_signal("went_back")
 
 
-func _on_host_left(_player_name: String):
-	var error_text = "The host has disconnected"
-	GlobalUi.show_error(error_text, false, true)
+# func _on_host_left(_player_name: String):
+# 	var error_text = "The host has disconnected"
+# 	GlobalUi.show_error(error_text, false, true)
 
-
-func _on_client_left(player_name: String):
-	var error_text = player_name + " has left the game"
-	GlobalUi.show_error(error_text, false, true)
+# func _on_client_left(player_name: String):
+# 	var error_text = player_name + " has left the game"
+# 	GlobalUi.show_error(error_text, false, true)
 
 
 remotesync func _start_game():

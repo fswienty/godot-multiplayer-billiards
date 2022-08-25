@@ -14,8 +14,11 @@ func _ready():
 	hide_error()
 
 
-func hide_error():
-	error_label.rect_position = Vector2(0, -1000)
+func hide_error(animated: bool = false):
+	if animated and error_label_timer.time_left > 0:
+		show_error_anim.play_backwards("anim")
+	else:
+		error_label.rect_position = Vector2(0, -1000)
 	error_label_timer.stop()
 
 

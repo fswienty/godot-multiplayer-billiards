@@ -111,12 +111,13 @@ func join(player_name: String, lobby_name: String) -> bool:
 
 
 func leave(player_id):
+	var player_name = self_info.name
+	self_info.team = 0
 	if player_id == 1:
 		print("host left the game")
-		emit_signal("host_left", player_infos[1].name)
+		emit_signal("host_left", player_name)
 		rpc("update_player_infos", {})
 	else:
-		var player_name = player_infos[player_id].name
 		if player_infos.erase(player_id):
 			print("player ", player_name, " left the game")
 			rpc("update_player_infos", player_infos)
@@ -158,11 +159,7 @@ func can_start_game() -> int:
 			t2_count += 1
 
 	if t1_count < 1:
-		print("Needs at least 1 player in t1!")
 		return 1
-
 	if t2_count < 1:
-		print("Needs at least 1 player in t2!")
 		return 2
-
 	return -1

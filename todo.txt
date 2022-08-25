@@ -7,5 +7,8 @@ add selection for queue mode to connect menu
 try using remote on _on_backed_out_of_lobby and calling itself
 close gotm lobby after host disconnects
 
+move anim stuff when switching menus to menu manager
+handle setting next player only from player_infos in lobby and current round integer
+
 update to 3.5:
     check theme variation
