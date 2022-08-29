@@ -3,7 +3,6 @@ extends Control
 signal game_started
 signal went_back
 
-var menu_open_anim: AnimationPlayer
 var t1_empty_anim: AnimationPlayer
 var t2_empty_anim: AnimationPlayer
 
@@ -28,8 +27,6 @@ var __
 
 func _ready():
 	__ = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
-	# __ = Lobby.connect("host_left", self, "_on_host_left")
-	# __ = Lobby.connect("client_left", self, "_on_client_left")
 	__ = t1_button.connect("pressed", self, "_on_T1Button_pressed")
 	__ = t2_button.connect("pressed", self, "_on_T2Button_pressed")
 	__ = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
@@ -44,12 +41,11 @@ func _ready():
 
 	modulate = Color.transparent
 
-	menu_open_anim = Animations.fade_in_anim(self, Globals.menu_transition_time)
 	t1_empty_anim = Animations.indicate_error_anim(t1_panel)
 	t2_empty_anim = Animations.indicate_error_anim(t2_panel)
 
 
-func open():
+func init():
 	lobby_code_button_text = "Invite Code: " + Gotm.lobby.name
 	lobby_code_button.text = lobby_code_button_text
 	if get_tree().is_network_server():
@@ -63,8 +59,6 @@ func open():
 		start_button.hide()
 		waiting_label.show()
 	_on_player_infos_updated()
-	show()
-	menu_open_anim.play("anim")
 
 
 func _on_player_infos_updated():
@@ -146,26 +140,10 @@ func _on_BackButton_pressed():
 	else:
 		# do stuff when client leaves
 		pass
-
-	GlobalUi.hide_error()
-	menu_open_anim.play_backwards("anim")
-	yield(menu_open_anim, "animation_finished")
 	emit_signal("went_back")
 
 
-# func _on_host_left(_player_name: String):
-# 	var error_text = "The host has disconnected"
-# 	GlobalUi.show_error(error_text, false, true)
-
-# func _on_client_left(player_name: String):
-# 	var error_text = player_name + " has left the game"
-# 	GlobalUi.show_error(error_text, false, true)
-
-
 remotesync func _start_game():
-	GlobalUi.hide_error()
-	menu_open_anim.play_backwards("anim")
-	yield(menu_open_anim, "animation_finished")
 	emit_signal("game_started")
 
 
