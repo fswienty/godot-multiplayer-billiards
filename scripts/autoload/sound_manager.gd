@@ -42,7 +42,7 @@ func click():
 func ball_hit(intensity: float):
 	if OS.get_ticks_msec() - _last_ball_hit < 30 or intensity == 0:
 		return
-	print("bonk! " + str(intensity))
+	# print("bonk! " + str(intensity))
 	_ball_player.volume_db = _intensity_to_db(intensity, 500)
 	_ball_player.pitch_scale = 1 + (2 * randf() - 1) / 100
 	_last_ball_hit = OS.get_ticks_msec()

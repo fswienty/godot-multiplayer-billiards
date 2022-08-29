@@ -24,14 +24,14 @@ var t2_8_ball_target: int = Enums.PocketLocation.NONE
 var t1_pocketed_balls: Array = []
 var t2_pocketed_balls: Array = []
 
-var __
-
 onready var table = $Table
 onready var ball_manager: BallManager8Ball = $BallManager
 onready var queue_controller: QueueController = $QueueController
 onready var hud = $UI/Hud_8Ball
 onready var debug_hud = $UI/DEBUG_Hud_8Ball
 onready var game_finished_panel = $UI/GameFinished
+
+var __
 
 
 func _ready():
@@ -83,7 +83,7 @@ remotesync func initialize_synced(seed_: int):
 		game_state = Enums.GameState.WAITING
 
 	if Globals.DEBUG_MODE:
-		game_state = Enums.GameState.BALLINHAND
+		game_state = Enums.GameState.BALL_IN_HAND
 
 
 func _physics_process(_delta):
@@ -109,7 +109,7 @@ func _physics_process(_delta):
 				else:
 					game_state = Enums.GameState.WAITING
 					rpc("_on_turn_ended", legal_play)
-		Enums.GameState.BALLINHAND:
+		Enums.GameState.BALL_IN_HAND:
 			var placed: bool = ball_manager.update_ball_in_hand()
 			if placed:
 				game_state = Enums.GameState.QUEUE
@@ -165,7 +165,7 @@ remotesync func _on_turn_ended(legal_play: bool):
 		if legal_play:
 			game_state = Enums.GameState.QUEUE
 		else:
-			game_state = Enums.GameState.BALLINHAND
+			game_state = Enums.GameState.BALL_IN_HAND
 
 
 remotesync func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):
