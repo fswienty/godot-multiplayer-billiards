@@ -36,16 +36,15 @@ func initialize():
 		waiting_label.show()
 
 
-func display(t1_won: bool):
+func display(winning_team: int):
 	get_tree().paused = true
 	show()
 	# show win animation
-	if t1_won:
-		print("t1 won!")
-		t1_team_label.show_as_winner()
-	else:
-		print("t2 won!")
-		t2_team_label.show_as_winner()
+	match winning_team:
+		1:
+			t1_team_label.show_as_winner()
+		2:
+			t2_team_label.show_as_winner()
 
 
 func _on_LobbyButton_pressed():

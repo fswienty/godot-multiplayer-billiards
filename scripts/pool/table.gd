@@ -19,7 +19,22 @@ func get_foot_spot() -> Vector2:
 	return foot_spot.position * self.scale
 
 
-func indiate_8_ball_target(pocketLocation):
+func get_opposite_pocket(pocket_location):
+	if pocket_location == Enums.PocketLocation.UP_LEFT:
+		return Enums.PocketLocation.DOWN_RIGHT
+	elif pocket_location == Enums.PocketLocation.UP:
+		return Enums.PocketLocation.DOWN
+	elif pocket_location == Enums.PocketLocation.UP_RIGHT:
+		return Enums.PocketLocation.DOWN_LEFT
+	elif pocket_location == Enums.PocketLocation.DOWN_LEFT:
+		return Enums.PocketLocation.UP_RIGHT
+	elif pocket_location == Enums.PocketLocation.DOWN:
+		return Enums.PocketLocation.UP
+	elif pocket_location == Enums.PocketLocation.DOWN_RIGHT:
+		return Enums.PocketLocation.UP_LEFT
+
+
+func indicate_8_ball_target(pocketLocation):
 	match pocketLocation:
 		Enums.PocketLocation.UP_LEFT:
 			ul_pocket.indicate()

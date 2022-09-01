@@ -1,6 +1,5 @@
 extends Node
 
-var processing: bool = false
 var manager: GameManager8Ball
 
 var ball_container_scn = preload("res://scenes/ui_scenes/BallContainer.tscn")
@@ -18,14 +17,15 @@ var __
 
 func initialize(manager_: GameManager8Ball):
 	manager = manager_
-	processing = true
 
 
-func _physics_process(_delta):
-	if not processing:
-		return
+func update():
+	update_players_and_ball_type()
+	update_pocketed_balls()
 
-	if manager.t1_turn:
+
+func update_players_and_ball_type():
+	if manager.is_t1_turn():
 		current_team.text = "Team 1"
 		ball_type.text = _get_ball_type_text(manager.t1_ball_type, manager.t1_8_ball_target)
 	else:

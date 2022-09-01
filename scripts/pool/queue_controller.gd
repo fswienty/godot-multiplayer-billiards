@@ -33,12 +33,14 @@ func run():
 		printerr("missing cue ball!")
 		return
 
-	var state = []
+	var state = []  # [visible, rot, queue_pos, line_pos]
 	match Globals.queue_mode:
 		Enums.QueueMode.DRAG:
 			state = _drag_mode()
 		Enums.QueueMode.MOUSE_WHEEL:
 			state = _mouse_wheel_mode()
+		Enums.QueueMode.KEYBOARD:
+			pass
 
 	if not state[0]:  # check if the queue has become invisible
 		rpc("_set_state", state)
@@ -71,7 +73,7 @@ func _drag_mode() -> Array:
 
 	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
 	var rot = ball_to_mouse.angle()
-	return [visible_, queue_pos, rot + PI, ball_pos, rot - PI / 2]
+	return [visible_, rot + PI, queue_pos, ball_pos]
 
 
 func _mouse_wheel_mode() -> Array:
@@ -97,15 +99,15 @@ func _mouse_wheel_mode() -> Array:
 		- (distance_at_rest + intensity * max_distance) * ball_to_mouse.normalized()
 	)
 	var rot = ball_to_mouse.angle()
-	return [visible_, queue_pos, rot, ball_pos, rot + PI / 2]
+	return [visible_, rot, queue_pos, ball_pos]
 
 
 remotesync func _set_state(state: Array):
 	# set visibility
 	self.visible = state[0]
 	# set queue sprite
-	queue.global_position = state[1]
-	queue.rotation = state[2]
+	queue.rotation = state[1]
+	queue.global_position = state[2]
 	# set line
+	line.rotation = state[1] + PI / 2
 	line.global_position = state[3]
-	line.rotation = state[4]

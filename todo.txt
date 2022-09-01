@@ -6,7 +6,7 @@ add selection for queue mode to connect menu
 
 close gotm lobby after host disconnects
 
-handle setting next player only from player_infos in lobby and current round integer
+check why hud.update.. has to be called not sooenr
 
 update to 3.5:
     check theme variation

@@ -23,11 +23,15 @@ func hide_error(animated: bool = false):
 
 
 func show_error(error_text: String, show_self: bool = true, show_others: bool = false):
-	print("yo", error_text)
 	if show_self:
 		_show_error(error_text)
 	if show_others:
 		rpc("_show_error", error_text)
+
+
+func show_persistent(error_text: String):
+	error_label.text = error_text
+	show_error_anim.play("anim")
 
 
 remote func _show_error(error_text: String):
