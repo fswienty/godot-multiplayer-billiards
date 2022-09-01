@@ -15,7 +15,7 @@ func initialize():
 	__ = lobby_button.connect("pressed", self, "_on_LobbyButton_pressed")
 	t1_team_label.initialize("Team 1")
 	t2_team_label.initialize("Team 2")
-	# add players to lidsts
+	# add players to lists
 	for info in Lobby.player_infos.values():
 		var player_name = info.name
 		var player_team = info.team
@@ -49,7 +49,6 @@ func display(winning_team: int):
 
 func _on_LobbyButton_pressed():
 	SoundManager.click()
-	# load lobby scene
 	rpc("_back_to_lobby")
 
 

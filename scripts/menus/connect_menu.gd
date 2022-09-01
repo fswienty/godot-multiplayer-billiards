@@ -25,10 +25,7 @@ func _ready():
 
 func _on_HostButton_pressed():
 	SoundManager.click()
-	if player_name_input.text == "":
-		GlobalUi.show_error("Please enter a name")
-		player_name_error_anim.play("anim")
-		player_name_input.grab_focus()
+	if not _handle_player_name():
 		return
 	Lobby.host(player_name_input.text)
 	emit_signal("entered_lobby")
@@ -36,10 +33,7 @@ func _on_HostButton_pressed():
 
 func _on_JoinButton_pressed():
 	SoundManager.click()
-	if player_name_input.text == "":
-		GlobalUi.show_error("Please enter a name")
-		player_name_error_anim.play("anim")
-		player_name_input.grab_focus()
+	if not _handle_player_name():
 		return
 	if lobby_code_input.text.length() != 4:
 		GlobalUi.show_error("Please enter a valid lobby code")
@@ -55,3 +49,15 @@ func _on_JoinButton_pressed():
 		lobby_code_error_anim.play("anim")
 		lobby_code_input.caret_position = 999
 		lobby_code_input.grab_focus()
+
+
+# Strips player name of white space and shows error if needed.
+# Return true if name is valid, otherwise false
+func _handle_player_name() -> bool:
+	player_name_input.text = player_name_input.text.strip_escapes().strip_edges()
+	if player_name_input.text == "":
+		GlobalUi.show_error("Please enter a valid name")
+		player_name_error_anim.play("anim")
+		player_name_input.grab_focus()
+		return false
+	return true

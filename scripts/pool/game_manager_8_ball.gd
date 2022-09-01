@@ -59,6 +59,7 @@ remotesync func initialize_synced(seed_: int):
 
 	current_player_id = _get_player_id_for_turn(current_turn_number)
 	next_player_id = _get_player_id_for_turn(current_turn_number + 1)
+	hud.update()
 
 	if get_tree().get_network_unique_id() == current_player_id:
 		game_state = Enums.GameState.QUEUE
@@ -67,8 +68,6 @@ remotesync func initialize_synced(seed_: int):
 
 	if Globals.DEBUG_MODE:
 		game_state = Enums.GameState.BALL_IN_HAND
-
-	hud.update()
 
 
 func _physics_process(_delta):
