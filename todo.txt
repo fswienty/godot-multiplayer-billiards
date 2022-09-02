@@ -6,7 +6,8 @@ add selection for queue mode to connect menu
 
 close gotm lobby after host disconnects
 
-check why hud.update.. has to be called not sooenr
+check out theme variation
+    fix panels in lobby menu
 
 update to 3.5:
     check theme variation

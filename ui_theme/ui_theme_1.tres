@@ -1,10 +1,13 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://assets/fonts/ui_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui_theme/general/inactive.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui_theme/general/normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui_theme/general/hover.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui_theme/general/pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui_theme/general/pressed_tab.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui_theme/general/flat_panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui_theme/general/normal_tab.tres" type="StyleBox" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -30,12 +33,14 @@ MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
 MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
-PanelContainer/styles/panel = ExtResource( 3 )
+Panel/styles/panel = ExtResource( 3 )
+PanelContainer/styles/panel = ExtResource( 7 )
 ProgressBar/styles/bg = ExtResource( 3 )
+TabContainer/colors/font_color_fg = Color( 0.94, 0.94, 0.94, 1 )
 TabContainer/styles/panel = ExtResource( 3 )
-TabContainer/styles/tab_bg = ExtResource( 3 )
-TabContainer/styles/tab_disabled = ExtResource( 2 )
-TabContainer/styles/tab_fg = ExtResource( 5 )
+TabContainer/styles/tab_bg = ExtResource( 8 )
+TabContainer/styles/tab_disabled = ExtResource( 8 )
+TabContainer/styles/tab_fg = ExtResource( 6 )
 TextEdit/styles/focus = SubResource( 4 )
 TextEdit/styles/normal = ExtResource( 3 )
 VBoxContainer/constants/separation = 10

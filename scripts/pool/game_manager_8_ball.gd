@@ -102,6 +102,8 @@ func _get_player_id_for_turn(turn_number: int) -> int:
 	for key in Lobby.player_infos.keys():
 		if Lobby.player_infos[key].team == current_team:
 			team_player_ids.append(key)
+	if team_player_ids.size() == 0:
+		return current_player_id
 	return team_player_ids[team_turn_number % team_player_ids.size()]
 
 

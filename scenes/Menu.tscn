@@ -12,8 +12,8 @@
 [ext_resource path="res://assets/images/ui/audioOff.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
-size = 34
-outline_size = 2
+size = 70
+outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
@@ -48,6 +48,7 @@ script = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 300 )
+theme = ExtResource( 4 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
@@ -55,39 +56,41 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
-margin_left = 356.0
-margin_top = 165.0
-margin_right = 667.0
-margin_bottom = 434.0
+margin_left = 162.0
+margin_top = 131.0
+margin_right = 862.0
+margin_bottom = 469.0
 rect_min_size = Vector2( 300, 0 )
-custom_constants/separation = 20
+custom_constants/separation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
-margin_right = 311.0
-margin_bottom = 47.0
+margin_right = 700.0
+margin_bottom = 96.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
 text = "Multiplayer Billiards"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer"]
-margin_top = 67.0
-margin_right = 311.0
-margin_bottom = 269.0
+margin_top = 136.0
+margin_right = 700.0
+margin_bottom = 338.0
+custom_constants/separation = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer"]
-margin_right = 311.0
+margin_right = 300.0
 margin_bottom = 202.0
+rect_min_size = Vector2( 300, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 
 [node name="PlayerNameLineEdit" type="LineEdit" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 311.0
+margin_right = 300.0
 margin_bottom = 46.0
 theme = ExtResource( 4 )
 max_length = 16
@@ -96,7 +99,7 @@ caret_blink = true
 
 [node name="HSeparator" type="HSeparator" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 66.0
-margin_right = 311.0
+margin_right = 300.0
 margin_bottom = 70.0
 theme = ExtResource( 4 )
 custom_styles/separator = SubResource( 2 )
@@ -104,7 +107,7 @@ custom_styles/separator = SubResource( 2 )
 [node name="HostButton" type="Button" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 90.0
-margin_right = 311.0
+margin_right = 300.0
 margin_bottom = 136.0
 theme = ExtResource( 4 )
 text = "Host"
@@ -114,12 +117,12 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 156.0
-margin_right = 311.0
+margin_right = 300.0
 margin_bottom = 202.0
 
 [node name="LobbyCodeLineEdit" type="LineEdit" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 153.0
+margin_right = 148.0
 margin_bottom = 46.0
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
@@ -132,8 +135,8 @@ __meta__ = {
 
 [node name="JoinButton" type="Button" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 157.0
-margin_right = 311.0
+margin_left = 152.0
+margin_right = 300.0
 margin_bottom = 46.0
 size_flags_horizontal = 3
 theme = ExtResource( 4 )
@@ -141,6 +144,50 @@ text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer"]
+margin_left = 400.0
+margin_right = 700.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 300.0
+margin_bottom = 30.0
+
+[node name="ControlSchemeLabel" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 298.0
+margin_bottom = 28.0
+text = "Control Scheme"
+align = 1
+
+[node name="TabContainer" type="TabContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 40.0
+margin_right = 300.0
+margin_bottom = 202.0
+size_flags_vertical = 3
+
+[node name="Drag" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer2/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 46.0
+margin_right = -20.0
+margin_bottom = -10.0
+
+[node name="Scroll Wheel" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/VBoxContainer2/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 56.0
+margin_right = -20.0
+margin_bottom = -10.0
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
 visible = false

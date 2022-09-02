@@ -234,6 +234,7 @@ window/stretch/aspect="keep"
 [global]
 
 mip=false
+scale=false
 
 [input]
 
