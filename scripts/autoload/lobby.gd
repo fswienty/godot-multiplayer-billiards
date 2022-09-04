@@ -70,7 +70,7 @@ remotesync func _update_player_infos(player_infos_: Dictionary):
 func host(player_name: String):
 	# start gotm lobby
 	__ = Gotm.host_lobby(false)
-	var lobby_code = Random.generate_word(4).to_upper()
+	var lobby_code = Utils.generate_word(4, Utils.characters_upper)
 	Gotm.lobby.name = lobby_code
 	Gotm.lobby.hidden = false
 
@@ -79,7 +79,7 @@ func host(player_name: String):
 	__ = network_peer.create_server(8070)
 	get_tree().network_peer = network_peer
 	player_infos[1] = {name = player_name, team = 0}  # manually add server to player_infos
-	rpc("_update_player_infos", player_infos)  # just to update self basically
+	_update_player_infos(player_infos)  # just to update self basically
 	print("hosting lobby ", Gotm.lobby.name)
 
 
@@ -122,11 +122,11 @@ func leave():
 					+ str(player_infos)
 				)
 			)
-		yield(get_tree().create_timer(0.1), "timeout")
-		_disconnect()
+	yield(get_tree().create_timer(0.2), "timeout")
+	_disconnect()
 
 
-remotesync func _disconnect():
+remote func _disconnect():
 	_update_player_infos({})
 	Gotm.lobby.leave()
 	network_peer.disconnect_peer(get_tree().get_network_unique_id())

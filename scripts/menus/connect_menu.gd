@@ -67,6 +67,12 @@ func _validate_player_name() -> bool:
 		player_name_error_anim.play("anim")
 		player_name_input.grab_focus()
 		return false
+	if Utils.contains_bad_word(player_name_input.text):
+		GlobalUi.show_error("Please use another name")
+		player_name_error_anim.play("anim")
+		player_name_input.grab_focus()
+		player_name_input.clear()
+		return false
 	return true
 
 
