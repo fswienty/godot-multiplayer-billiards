@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=2]
@@ -10,6 +10,17 @@ outline_size = 2
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 14
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.584314 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [node name="GlobalUi" type="CanvasLayer"]
 layer = 2
@@ -32,3 +43,23 @@ valign = 1
 [node name="Timer" type="Timer" parent="ErrorLabel"]
 wait_time = 3.0
 one_shot = true
+
+[node name="ConsoleTextEdit" type="TextEdit" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -187.0
+mouse_filter = 2
+custom_colors/line_number_color = Color( 0.552941, 0.552941, 0.552941, 1 )
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 5 )
+custom_styles/read_only = SubResource( 8 )
+custom_styles/normal = SubResource( 7 )
+text = "ewtrewr
+rwerewtrwet
+dfgfdffrr
+gregrrtrerrrrrrrrrrr"
+readonly = true
+show_line_numbers = true
+wrap_enabled = true

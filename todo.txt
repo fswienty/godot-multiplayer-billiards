@@ -1,13 +1,6 @@
 add panel when a player disconnects, also a back button
     go back to lobby as option for host
     go back to main menu as option of host is gone
-
-add selection for queue mode to connect menu
+    check why host is not worknig after server disconnected for client
 
 close gotm lobby after host disconnects
-
-check out theme variation
-    fix panels in lobby menu
-
-update to 3.5:
-    check theme variation

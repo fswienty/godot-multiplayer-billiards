@@ -8,21 +8,37 @@ var t2_empty_anim: AnimationPlayer
 
 var lobby_code_button_text: String
 
-onready var t0_panel: PlayerContainer = get_node("%T0PlayerContainer")
-onready var t1_panel: PlayerContainer = get_node("%T1PlayerContainer")
-onready var t2_panel: PlayerContainer = get_node("%T2PlayerContainer")
+onready var t0_panel: PlayerContainer = $"%T0PlayerContainer"
+onready var t1_panel: PlayerContainer = $"%T1PlayerContainer"
+onready var t2_panel: PlayerContainer = $"%T2PlayerContainer"
 
-onready var t1_button: Button = get_node("%T1JoinButton")
-onready var t2_button: Button = get_node("%T2JoinButton")
-onready var randomize_button: Button = get_node("%RandomizeButton")
-onready var dummy_button: Button = get_node("%DummyButton")
-onready var lobby_code_button: Button = get_node("%LobbyCodeButton")
+onready var t1_button: Button = $"%T1JoinButton"
+onready var t2_button: Button = $"%T2JoinButton"
+onready var randomize_button: Button = $"%RandomizeButton"
+onready var dummy_button: Button = $"%DummyButton"
+onready var lobby_code_button: Button = $"%LobbyCodeButton"
 onready var lobby_code_button_timer: Timer = lobby_code_button.get_node("Timer")
-onready var waiting_label: Label = get_node("%WaitingLabel")
-onready var start_button: Button = get_node("%StartButton")
-onready var back_button: Button = get_node("%BackButton")
+onready var waiting_label: Label = $"%WaitingLabel"
+onready var start_button: Button = $"%StartButton"
+onready var back_button: Button = $"%BackButton"
 
 var __
+
+
+func init():
+	lobby_code_button_text = "Invite Code: " + Gotm.lobby.name
+	lobby_code_button.text = lobby_code_button_text
+	if get_tree().is_network_server():
+		randomize_button.show()
+		dummy_button.hide()
+		start_button.show()
+		waiting_label.hide()
+	else:
+		randomize_button.hide()
+		dummy_button.show()
+		start_button.hide()
+		waiting_label.show()
+	_on_player_infos_updated()
 
 
 func _ready():
@@ -43,22 +59,6 @@ func _ready():
 
 	t1_empty_anim = Animations.indicate_error_anim(t1_panel)
 	t2_empty_anim = Animations.indicate_error_anim(t2_panel)
-
-
-func init():
-	lobby_code_button_text = "Invite Code: " + Gotm.lobby.name
-	lobby_code_button.text = lobby_code_button_text
-	if get_tree().is_network_server():
-		randomize_button.show()
-		dummy_button.hide()
-		start_button.show()
-		waiting_label.hide()
-	else:
-		randomize_button.hide()
-		dummy_button.show()
-		start_button.hide()
-		waiting_label.show()
-	_on_player_infos_updated()
 
 
 func _on_player_infos_updated():
@@ -114,7 +114,7 @@ func _on_StartButton_pressed():
 		rpc("_start_game")
 	var can_start = Lobby.can_start_game()
 	match can_start:
-		-1:
+		0:
 			rpc("_start_game")
 		1:
 			t1_empty_anim.play("anim")
@@ -131,15 +131,17 @@ func _on_RandomizeButton_pressed():
 
 func _on_BackButton_pressed():
 	SoundManager.click()
-	var network_id = get_tree().get_network_unique_id()
-	var player_name = Lobby.self_info.name
-	Lobby.leave(network_id)
-	if network_id == 1:
+	if get_tree().get_network_unique_id() == 1:
 		# do stuff when host leaves
-		pass
+		rpc("_go_back")
+		Lobby.host_leave()
 	else:
 		# do stuff when client leaves
-		pass
+		_go_back()
+		Lobby.client_leave()
+
+
+remotesync func _go_back():
 	emit_signal("went_back")
 
 

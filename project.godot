@@ -236,6 +236,10 @@ window/stretch/aspect="keep"
 mip=false
 scale=false
 
+[gui]
+
+theme/custom="res://ui_theme/ui_theme_1.tres"
+
 [input]
 
 lmb={

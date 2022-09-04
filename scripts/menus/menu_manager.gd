@@ -5,6 +5,7 @@ var lobby_menu_open_anim: AnimationPlayer
 
 export var DEBUG_MODE: bool = false
 export var DEBUG_HUD: bool = false
+export var DEBUG_CONSOLE: bool = false
 
 onready var connect_menu = $ConnectMenu
 onready var lobby_menu = $LobbyMenu
@@ -26,6 +27,7 @@ func _ready():
 
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
+	GlobalUi.set_console_visible(DEBUG_CONSOLE)
 	if DEBUG_MODE:
 		connect_menu.player_name_input.text = "debug_host"
 		connect_menu._on_HostButton_pressed()
@@ -59,7 +61,6 @@ func _on_entered_lobby():
 
 func _on_backed_out_of_lobby():
 	GlobalUi.hide_error()
-	get_tree().network_peer = null
 	lobby_menu_open_anim.play_backwards("anim")
 	yield(lobby_menu_open_anim, "animation_finished")
 	lobby_menu.hide()

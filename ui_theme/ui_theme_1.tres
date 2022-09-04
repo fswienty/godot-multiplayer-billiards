@@ -1,13 +1,13 @@
 [gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://assets/fonts/ui_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui_theme/general/inactive.tres" type="StyleBox" id=2]
-[ext_resource path="res://ui_theme/general/normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://ui_theme/general/hover.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui_theme/general/pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://ui_theme/general/pressed_tab.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui_theme/general/flat_panel.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui_theme/general/normal_tab.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui_theme/style_boxes/inactive.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui_theme/style_boxes/normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui_theme/style_boxes/flat_panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui_theme/style_boxes/pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui_theme/style_boxes/hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui_theme/style_boxes/pressed_tab.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui_theme/style_boxes/normal_tab.tres" type="StyleBox" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -20,7 +20,7 @@ Button/constants/hseparation = 2
 Button/fonts/font = ExtResource( 1 )
 Button/styles/disabled = ExtResource( 2 )
 Button/styles/focus = SubResource( 5 )
-Button/styles/hover = ExtResource( 4 )
+Button/styles/hover = ExtResource( 6 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 5 )
 LineEdit/constants/minimum_spaces = 12
@@ -33,14 +33,15 @@ MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
 MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
-Panel/styles/panel = ExtResource( 3 )
-PanelContainer/styles/panel = ExtResource( 7 )
+PanelContainer/styles/panel = ExtResource( 3 )
 ProgressBar/styles/bg = ExtResource( 3 )
+RoundedPanel/base_type = "PanelContainer"
+RoundedPanel/styles/panel = ExtResource( 4 )
 TabContainer/colors/font_color_fg = Color( 0.94, 0.94, 0.94, 1 )
 TabContainer/styles/panel = ExtResource( 3 )
 TabContainer/styles/tab_bg = ExtResource( 8 )
 TabContainer/styles/tab_disabled = ExtResource( 8 )
-TabContainer/styles/tab_fg = ExtResource( 6 )
+TabContainer/styles/tab_fg = ExtResource( 7 )
 TextEdit/styles/focus = SubResource( 4 )
 TextEdit/styles/normal = ExtResource( 3 )
 VBoxContainer/constants/separation = 10

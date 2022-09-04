@@ -12,7 +12,7 @@ var first_hit_type = Enums.BallType.NONE
 
 var current_player_id: int = -1
 var next_player_id: int = -1
-var current_turn_number = 1
+var turn_number = 1
 var t1_ball_type: int = Enums.BallType.NONE
 var t2_ball_type: int = Enums.BallType.NONE
 var t1_8_ball_target: int = Enums.PocketLocation.NONE
@@ -57,8 +57,8 @@ remotesync func initialize_synced(seed_: int):
 		debug_hud.initialize(self)
 	game_finished_panel.initialize()
 
-	current_player_id = _get_player_id_for_turn(current_turn_number)
-	next_player_id = _get_player_id_for_turn(current_turn_number + 1)
+	current_player_id = _get_player_id_for_turn(turn_number)
+	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
 
 	if get_tree().get_network_unique_id() == current_player_id:
@@ -95,9 +95,9 @@ func _physics_process(_delta):
 				game_state = Enums.GameState.QUEUE
 
 
-func _get_player_id_for_turn(turn_number: int) -> int:
-	var team_turn_number: int = int(ceil(turn_number as float / 2))
-	var current_team: int = 1 if is_t1_turn(turn_number) else 2
+func _get_player_id_for_turn(turn_number_: int) -> int:
+	var team_turn_number: int = int(ceil(turn_number_ as float / 2))
+	var current_team: int = 1 if is_t1_turn(turn_number_) else 2
 	var team_player_ids: Array = []
 	for key in Lobby.player_infos.keys():
 		if Lobby.player_infos[key].team == current_team:
@@ -107,11 +107,11 @@ func _get_player_id_for_turn(turn_number: int) -> int:
 	return team_player_ids[team_turn_number % team_player_ids.size()]
 
 
-func is_t1_turn(turn_number: int = -1) -> bool:
-	if turn_number == -1:
-		return current_turn_number % 2 != 0
-	else:
+func is_t1_turn(turn_number_: int = -1) -> bool:
+	if turn_number_ == -1:
 		return turn_number % 2 != 0
+	else:
+		return turn_number_ % 2 != 0
 
 
 # called only on peer that takes the shot
@@ -123,9 +123,9 @@ func _on_queue_hit(impulse: Vector2):
 
 # called on all peers including last active peer when their turn is over
 remotesync func _on_turn_ended(legal_play: bool):
-	current_turn_number += 1
-	current_player_id = _get_player_id_for_turn(current_turn_number)
-	next_player_id = _get_player_id_for_turn(current_turn_number + 1)
+	turn_number += 1
+	current_player_id = _get_player_id_for_turn(turn_number)
+	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
 	if get_tree().get_network_unique_id() == current_player_id:
 		if legal_play:

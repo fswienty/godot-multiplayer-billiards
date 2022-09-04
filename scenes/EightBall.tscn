@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/images/balls/cue_ball.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game_scenes/Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game_scenes/Table.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/pool/game_manager_8_ball.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Nunito-Bold.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=6]
 [ext_resource path="res://scripts/pool/ball_in_hand.gd" type="Script" id=7]
 [ext_resource path="res://scripts/pool/ball_placer.gd" type="Script" id=8]
 [ext_resource path="res://scripts/menus/hud_8_ball.gd" type="Script" id=9]
@@ -57,7 +56,6 @@ script = ExtResource( 4 )
 [node name="Hud_8Ball" type="VBoxContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 6 )
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true,
@@ -242,7 +240,7 @@ __meta__ = {
 
 [node name="TeamLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
 margin_right = 263.0
-margin_bottom = 14.0
+margin_bottom = 26.0
 text = "Current Team:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -258,9 +256,9 @@ __meta__ = {
 }
 
 [node name="NameLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 263.0
-margin_bottom = 32.0
+margin_bottom = 62.0
 text = "Current Player:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -276,9 +274,9 @@ __meta__ = {
 }
 
 [node name="GameStateLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
-margin_top = 36.0
+margin_top = 72.0
 margin_right = 263.0
-margin_bottom = 50.0
+margin_bottom = 98.0
 text = "Game State:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -301,8 +299,8 @@ __meta__ = {
 }
 
 [node name="T1TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_right = 130.0
-margin_bottom = 14.0
+margin_right = 178.0
+margin_bottom = 26.0
 text = "Team 1 Ball Type:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -323,9 +321,9 @@ __meta__ = {
 }
 
 [node name="T1PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 18.0
-margin_right = 130.0
-margin_bottom = 32.0
+margin_top = 36.0
+margin_right = 178.0
+margin_bottom = 62.0
 text = "Team 1 Pocketed:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -346,9 +344,9 @@ __meta__ = {
 }
 
 [node name="T1EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 36.0
-margin_right = 130.0
-margin_bottom = 50.0
+margin_top = 72.0
+margin_right = 178.0
+margin_bottom = 98.0
 text = "Team 1 Eight Target:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -369,14 +367,14 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 54.0
-margin_right = 130.0
-margin_bottom = 58.0
+margin_top = 108.0
+margin_right = 178.0
+margin_bottom = 112.0
 
 [node name="T2TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 62.0
-margin_right = 130.0
-margin_bottom = 76.0
+margin_top = 122.0
+margin_right = 178.0
+margin_bottom = 148.0
 text = "Team 2 Ball Type:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -397,9 +395,9 @@ __meta__ = {
 }
 
 [node name="T2PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 80.0
-margin_right = 130.0
-margin_bottom = 94.0
+margin_top = 158.0
+margin_right = 178.0
+margin_bottom = 184.0
 text = "Team 2 Pocketed:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -420,9 +418,9 @@ __meta__ = {
 }
 
 [node name="T2EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
-margin_top = 98.0
-margin_right = 130.0
-margin_bottom = 112.0
+margin_top = 194.0
+margin_right = 178.0
+margin_bottom = 220.0
 text = "Team 2 Eight Target:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -453,7 +451,7 @@ __meta__ = {
 
 [node name="FirstHitLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
 margin_right = 263.0
-margin_bottom = 14.0
+margin_bottom = 26.0
 text = "First Hit:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -469,9 +467,9 @@ __meta__ = {
 }
 
 [node name="LegalPocketingLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 263.0
-margin_bottom = 32.0
+margin_bottom = 62.0
 text = "Legal Pocketing:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -487,9 +485,9 @@ __meta__ = {
 }
 
 [node name="FouledLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
-margin_top = 36.0
+margin_top = 72.0
 margin_right = 263.0
-margin_bottom = 50.0
+margin_bottom = 98.0
 text = "Fouled:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -505,9 +503,9 @@ __meta__ = {
 }
 
 [node name="FirstHitLegalLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
-margin_top = 54.0
+margin_top = 108.0
 margin_right = 263.0
-margin_bottom = 68.0
+margin_bottom = 134.0
 text = "First Hit Legal:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -523,9 +521,9 @@ __meta__ = {
 }
 
 [node name="WonLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
-margin_top = 72.0
+margin_top = 144.0
 margin_right = 263.0
-margin_bottom = 86.0
+margin_bottom = 170.0
 text = "Won:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -541,9 +539,9 @@ __meta__ = {
 }
 
 [node name="LostLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
-margin_top = 90.0
+margin_top = 180.0
 margin_right = 263.0
-margin_bottom = 104.0
+margin_bottom = 206.0
 text = "Lost:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -566,7 +564,6 @@ margin_left = 200.0
 margin_top = 150.0
 margin_right = -200.0
 margin_bottom = -150.0
-theme = ExtResource( 6 )
 script = ExtResource( 16 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/GameFinished"]

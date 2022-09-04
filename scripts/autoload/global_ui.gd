@@ -4,14 +4,22 @@ var show_error_anim: AnimationPlayer
 
 onready var error_label: Label = $ErrorLabel
 onready var error_label_timer: Timer = error_label.get_node("Timer")
+onready var console: TextEdit = $ConsoleTextEdit
 
 var __
 
 
 func _ready():
 	__ = error_label_timer.connect("timeout", self, "_slide_out_error_label")
+
 	show_error_anim = Animations.slide_in_anim(error_label, "y", 100, Globals.menu_transition_time)
 	hide_error()
+
+	console.text = ""
+
+
+func set_console_visible(visible: bool):
+	console.visible = visible
 
 
 func hide_error(animated: bool = false):
@@ -29,15 +37,21 @@ func show_error(error_text: String, show_self: bool = true, show_others: bool = 
 		rpc("_show_error", error_text)
 
 
-func show_persistent(error_text: String):
-	error_label.text = error_text
-	show_error_anim.play("anim")
-
-
 remote func _show_error(error_text: String):
 	error_label.text = error_text
 	show_error_anim.play("anim")
 	error_label_timer.start()
+
+
+func show_persistent(text: String):
+	error_label.text = text
+	show_error_anim.play("anim")
+
+
+func print_console(text: String):
+	print(text)
+	console.text = console.text + text + "\n"
+	console.scroll_vertical = console.get_line_count()
 
 
 func _slide_out_error_label():
