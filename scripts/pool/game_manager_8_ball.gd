@@ -182,7 +182,9 @@ func _on_ball_hit(type1, type2):
 
 
 func _on_ball_pocketed(ball: Ball, pocket: Pocket):
-	print("Ball ", ball.number, " entered pocket ", Enums.PocketLocation.keys()[pocket.location])
+	GlobalUi.print_console(
+		str("Ball ", ball.number, " entered pocket ", Enums.PocketLocation.keys()[pocket.location])
+	)
 
 	# handle cue ball pocketed
 	if ball.type == Enums.BallType.CUE:
