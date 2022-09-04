@@ -1,6 +1,0 @@
-add panel when a player disconnects, also a back button
-    go back to lobby as option for host
-    go back to main menu as option of host is gone
-    check why host is not worknig after server disconnected for client
-
-close gotm lobby after host disconnects

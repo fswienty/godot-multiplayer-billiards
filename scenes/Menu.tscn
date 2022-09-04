@@ -41,7 +41,6 @@ font_data = ExtResource( 7 )
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
-DEBUG_CONSOLE = true
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 

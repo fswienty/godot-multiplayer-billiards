@@ -76,7 +76,8 @@ func _validate_player_name() -> bool:
 	return true
 
 
-func _on_ControlsTab_tab_changed(tab: int) -> void:
+func _on_ControlsTab_tab_changed(tab: int):
+	SoundManager.click()
 	var tab_title: String = controls_tab.get_tab_title(tab)
 	match tab_title:
 		drag_tab_title:
