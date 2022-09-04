@@ -49,12 +49,12 @@ func _connection_failed():
 
 
 # called by a newly joined player on the server
-remote func _register_player(info: Dictionary):
+remote func _register_player(name: String):
 	if get_tree().get_network_unique_id() == 1:
 		# Get the id of the RPC sender.
 		var id = get_tree().get_rpc_sender_id()
-		player_infos[id] = info
-		print("player joined with: ", info)
+		player_infos[id] = {name = name, team = 0}
+		print("player " + name + " joined")
 		rpc("_update_player_infos", player_infos)
 	else:
 		print("This is a client, _register_player() should never be called.")
@@ -106,27 +106,24 @@ func join(player_name: String, lobby_name: String) -> bool:
 	return true
 
 
-func client_leave():
+func leave():
 	var player_id: int = get_tree().get_network_unique_id()
-	if player_infos.erase(player_id):
-		rpc("_update_player_infos", player_infos)
+	if player_id == 1:
+		rpc("_disconnect")
 	else:
-		GlobalUi.print_console(
-			(
-				"Could not remove player with id: "
-				+ str(player_id)
-				+ " from player_infos: "
-				+ str(player_infos)
+		if player_infos.erase(player_id):
+			rpc("_update_player_infos", player_infos)
+		else:
+			GlobalUi.print_console(
+				(
+					"Could not remove player with id: "
+					+ str(player_id)
+					+ " from player_infos: "
+					+ str(player_infos)
+				)
 			)
-		)
-	yield(get_tree().create_timer(0.1), "timeout")
-	_disconnect()
-
-
-func host_leave():
-	rpc("_update_player_infos", {})
-	yield(get_tree().create_timer(0.1), "timeout")
-	rpc("_disconnect")
+		yield(get_tree().create_timer(0.1), "timeout")
+		_disconnect()
 
 
 remotesync func _disconnect():

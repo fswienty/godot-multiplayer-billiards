@@ -61,6 +61,7 @@ func _on_entered_lobby():
 
 func _on_backed_out_of_lobby():
 	GlobalUi.hide_error()
+	get_tree().refuse_new_network_connections = false
 	lobby_menu_open_anim.play_backwards("anim")
 	yield(lobby_menu_open_anim, "animation_finished")
 	lobby_menu.hide()

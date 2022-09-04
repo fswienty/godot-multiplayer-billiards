@@ -134,11 +134,11 @@ func _on_BackButton_pressed():
 	if get_tree().get_network_unique_id() == 1:
 		# do stuff when host leaves
 		rpc("_go_back")
-		Lobby.host_leave()
+		Lobby.leave()
 	else:
 		# do stuff when client leaves
 		_go_back()
-		Lobby.client_leave()
+		Lobby.leave()
 
 
 remotesync func _go_back():
