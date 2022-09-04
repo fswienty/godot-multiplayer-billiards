@@ -60,7 +60,6 @@ func _connected_to_server():
 func _server_disconnected():
 	GlobalUi.print_console("_server_disconnected")
 	_disconnect()
-	emit_signal("back_to_connect")
 
 
 # Only called on clients. Could not even connect to server, abort.
