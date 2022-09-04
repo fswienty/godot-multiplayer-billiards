@@ -18,6 +18,11 @@ func _ready():
 	console.text = ""
 
 
+func _input(event: InputEvent):
+	if event.is_action_pressed("console_toggle"):
+		console.visible = !console.visible
+
+
 func set_console_visible(visible: bool):
 	console.visible = visible
 
@@ -41,11 +46,6 @@ remote func _show_error(error_text: String):
 	error_label.text = error_text
 	show_error_anim.play("anim")
 	error_label_timer.start()
-
-
-func show_persistent(text: String):
-	error_label.text = text
-	show_error_anim.play("anim")
 
 
 func print_console(text: String):
