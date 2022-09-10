@@ -70,7 +70,7 @@ margin_right = 700.0
 margin_bottom = 96.0
 theme = ExtResource( 4 )
 custom_fonts/font = SubResource( 1 )
-text = "Multiplayer Billiards"
+text = "Pool Together"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer"]
