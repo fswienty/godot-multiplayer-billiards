@@ -10,14 +10,7 @@
 [ext_resource path="res://scripts/menus/mute_button.gd" type="Script" id=8]
 [ext_resource path="res://assets/images/ui/audioOn.png" type="Texture" id=9]
 [ext_resource path="res://assets/images/ui/audioOff.png" type="Texture" id=10]
-
-[sub_resource type="DynamicFont" id=1]
-size = 70
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 7 )
+[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=11]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -56,9 +49,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
 margin_left = 162.0
-margin_top = 126.0
+margin_top = 111.0
 margin_right = 862.0
-margin_bottom = 474.0
+margin_bottom = 488.0
 rect_min_size = Vector2( 300, 0 )
 custom_constants/separation = 50
 __meta__ = {
@@ -67,16 +60,20 @@ __meta__ = {
 
 [node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
 margin_right = 700.0
-margin_bottom = 96.0
-theme = ExtResource( 4 )
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 125.0
+custom_colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+custom_colors/font_outline_modulate = Color( 0.054902, 0.054902, 0.054902, 1 )
+custom_colors/font_color_shadow = Color( 0.054902, 0.054902, 0.054902, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = ExtResource( 11 )
 text = "Pool Together"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer"]
-margin_top = 146.0
+margin_top = 175.0
 margin_right = 700.0
-margin_bottom = 348.0
+margin_bottom = 377.0
 custom_constants/separation = 100
 
 [node name="ConnectionVBoxContainer" type="VBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer"]
