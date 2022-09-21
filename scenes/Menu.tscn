@@ -61,7 +61,7 @@ __meta__ = {
 [node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
 margin_right = 700.0
 margin_bottom = 125.0
-custom_colors/font_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+custom_colors/font_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 custom_colors/font_outline_modulate = Color( 0.054902, 0.054902, 0.054902, 1 )
 custom_colors/font_color_shadow = Color( 0.054902, 0.054902, 0.054902, 1 )
 custom_constants/shadow_offset_x = 2
