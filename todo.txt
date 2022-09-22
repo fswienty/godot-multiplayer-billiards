@@ -2,5 +2,3 @@ try and find out why peer disconnected signal is not working?
 
 design logo
     add to gotm as splashscreen and static logo
-	
-queue and ball shadows?

@@ -2,7 +2,6 @@ extends Node
 
 signal player_infos_updated
 
-var network_peer: NetworkedMultiplayerENet
 var player_infos: Dictionary = {}  # Player info, associate ID to data
 
 var _self_name: String = ""  # Name we send to other players
@@ -24,7 +23,7 @@ func _ready():
 func _notification(what: int):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		GlobalUi.print_console("_on_NOTIFICATION_WM_QUIT_REQUEST")
-		if network_peer != null:
+		if get_tree().network_peer != null:
 			leave()
 			yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().quit()
@@ -33,7 +32,7 @@ func _notification(what: int):
 # Called when the game is about to quit.
 func _on_tree_exiting():
 	GlobalUi.print_console("_on_tree_exiting")
-	if network_peer != null:
+	if get_tree().network_peer != null:
 		leave()
 
 
@@ -94,7 +93,7 @@ func host(player_name: String):
 	Gotm.lobby.hidden = false
 
 	# start godot server
-	network_peer = NetworkedMultiplayerENet.new()
+	var network_peer = NetworkedMultiplayerENet.new()
 	__ = network_peer.create_server(8070)
 	get_tree().network_peer = network_peer
 	_update_player_infos({1: {name = player_name, team = 0}})  # manually add server to player_infos
@@ -115,7 +114,7 @@ func join(player_name: String, lobby_name: String) -> bool:
 		return false
 
 	# join godot server
-	network_peer = NetworkedMultiplayerENet.new()
+	var network_peer = NetworkedMultiplayerENet.new()
 	__ = network_peer.create_client(Gotm.lobby.host.address, 8070)
 	get_tree().network_peer = network_peer
 	_self_name = player_name
@@ -146,9 +145,9 @@ func leave():
 remote func _disconnect():
 	_update_player_infos({})
 	Gotm.lobby.leave()
+	var network_peer = get_tree().network_peer as NetworkedMultiplayerENet
 	network_peer.disconnect_peer(get_tree().get_network_unique_id())
 	get_tree().network_peer = null
-	network_peer = null
 	GlobalUi.print_console("network peer reset")
 
 

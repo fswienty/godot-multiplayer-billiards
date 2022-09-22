@@ -32,6 +32,13 @@ __meta__ = {
 scale = Vector2( 0.0859375, 0.0859375 )
 texture = ExtResource( 1 )
 
+[node name="Shadow" type="Sprite" parent="Sprite"]
+self_modulate = Color( 0, 0, 0, 0.262745 )
+position = Vector2( 10, 10 )
+scale = Vector2( 1.05, 1.05 )
+z_index = -1
+texture = ExtResource( 1 )
+
 [node name="PocketDetector" type="Area2D" parent="."]
 scale = Vector2( 0.0859375, 0.0859375 )
 

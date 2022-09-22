@@ -4,5 +4,6 @@
         "builds": true,
         "scenes": true,
         "ui_theme": true
-    }
+    },
+    "godot_tools.editor_path": "d:\\UserData\\Misc\\dev\\Godot_v3.5-stable_win64.exe"
 }
