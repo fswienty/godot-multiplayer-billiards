@@ -34,7 +34,6 @@ func run():
 		return
 
 	var state = []  # [visible, rot, queue_pos, line_pos]
-	print(Enums.QueueMode.keys()[Globals.queue_mode])
 	match Globals.queue_mode:
 		Enums.QueueMode.DRAG:
 			state = _drag_mode()
