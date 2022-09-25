@@ -206,7 +206,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MultiplayerBilliards"
+config/name="Pool Together"
 run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
