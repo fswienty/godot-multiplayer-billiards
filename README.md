@@ -2,11 +2,11 @@
 
 This is a Godot 3.5 multiplayer pool game. I created it mostly because I wanted to try out a game with networking. Most of the art, excluding fonts and audio, was done by me.
 
-You can play it here: https://gotm.io/vrojak/pooltogether
+You can play it here: gotm.io does not exist anymore, so it's unavaiable sadly :(
 
 ## How does the multiplayer part work?
 
-This project uses the gotm plugin from https://gotm.io/. It facilitates lobby creation and and setting up peer-to-peer connections to other people without having to go through the hassle of setting up your own signaling server or dealing with NAT hole punching voodoo.
+This project uses the gotm plugin. It facilitates lobby creation and and setting up peer-to-peer connections to other people without having to go through the hassle of setting up your own signaling server or dealing with NAT hole punching voodoo.
 
 ## Running it yourself
 
